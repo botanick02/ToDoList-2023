@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ToDoList.Business.DTO_s;
+using ToDoList.Business.Models;
+using ToDoList.Business.Services;
 using ToDoList.Server.Models;
 
 namespace ToDoList.Server.Controllers
@@ -7,15 +10,23 @@ namespace ToDoList.Server.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ITaskService taskSerivce;
+        public HomeController(ILogger<HomeController> logger, ITaskService taskService)
         {
             _logger = logger;
+            this.taskSerivce = taskService;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddTask(NewTaskDTO newTask)
+        {
+            taskSerivce.AddTask(newTask);
+            return View("Index");
         }
 
         public IActionResult Privacy()

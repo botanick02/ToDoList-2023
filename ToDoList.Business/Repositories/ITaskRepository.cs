@@ -7,10 +7,9 @@ using ToDoList.Business.Models;
 
 namespace ToDoList.Business.Providers
 {
-    public interface ITaskProvider
+    public interface ITaskRepository
     {
-        public List<TaskEntity> AddTask(TaskEntity task);
-        public List<TaskEntity> GetTasks();
-        public List<TaskEntity> GetTaskById();
+        public TaskModel AddTask(TaskModel task);
+        public List<TaskModel> GetTasks();
     }
 }
