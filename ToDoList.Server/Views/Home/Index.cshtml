@@ -1,5 +1,4 @@
-﻿@using ToDoList.Business.DTO_s;
-@model NewTaskDTO;
+﻿@model IndexPageViewModel;
 @{
     ViewData["Title"] = "ToDoList";
 }
@@ -16,15 +15,15 @@
                 <form asp-action="AddTask" method="post">
                     <div>
                         <label for="title">Title:</label>
-                        <input type="text" id="title" name="Title" asp-for="Title" />
+                        <input type="text" id="title" asp-for="NewTask.Title" />
                     </div>
                     <div>
                         <label for="dueDate">Due Date:</label>
-                        <input type="date" id="dueDate" name="DueDate" asp-for="DueDate" />
+                        <input type="date" id="dueDate" asp-for="NewTask.DueDate" />
                     </div>
                     <div>
                         <label for="categoryId">Category:</label>
-                        <select id="categoryId" asp-for="CategoryId">
+                        <select id="categoryId" asp-for="NewTask.CategoryId">
                             <option value="1">Personal</option>
                             <option value="2">Work</option>
                             <option value="3">Other</option>
@@ -41,66 +40,18 @@
             </form>*@
 
             <ul class="list-group mb-0">
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                <div class="d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                  Cras justo odio
-                </div>
-                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                  <i class="fas fa-times text-primary"></i>
-                </a>
-              </li>
-              <li
-                class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                <div class="d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-                  <s>Dapibus ac facilisis in</s>
-                </div>
-                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                  <i class="fas fa-times text-primary"></i>
-                </a>
-              </li>
-              <li
-                class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                <div class="d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                  Morbi leo risus
-                </div>
-                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                  <i class="fas fa-times text-primary"></i>
-                </a>
-              </li>
-              <li
-                class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                <div class="d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                  Porta ac consectetur ac
-                </div>
-                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                  <i class="fas fa-times text-primary"></i>
-                </a>
-              </li>
-              <li
-                class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-0">
-                <div class="d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-                  Vestibulum at eros
-                </div>
-                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                  <i class="fas fa-times text-primary"></i>
-                </a>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                <div class="d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                  Morbi leo risus
-                </div>
-                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                  <i class="fas fa-times text-primary"></i>
-                </a>
-              </li>
+                    @foreach (var task in Model.TasksList)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                            <div class="d-flex align-items-center">
+                                <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                                @task.Title
+                            </div>
+                            <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                                <i class="fas fa-times text-primary"></i>
+                            </a>
+                        </li>
+                    }
             </ul>
         </div>
     </div>

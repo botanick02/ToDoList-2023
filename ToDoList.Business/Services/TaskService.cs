@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Threading.Tasks;
 using ToDoList.Business.DTO_s;
 using ToDoList.Business.Models;
 using ToDoList.Business.Providers;
@@ -24,7 +25,7 @@ namespace ToDoList.Business.Services
 
         public List<TaskDTO> GetTasks()
         {
-            throw new NotImplementedException();
+            return mapper.Map<List<TaskDTO>>(taskRepository.GetTasks());
         }
     }
 }

@@ -19,14 +19,17 @@ namespace ToDoList.Server.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new IndexPageViewModel();
+            model.TasksList = taskSerivce.GetTasks();
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult AddTask(NewTaskDTO newTask)
         {
+            Debug.WriteLine("task " + newTask.Title + " " + newTask.DueDate);
             taskSerivce.AddTask(newTask);
-            return View("Index");
+            return Index();
         }
 
         public IActionResult Privacy()

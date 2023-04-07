@@ -11,7 +11,6 @@ builder.Services.AddControllersWithViews();
 
 var config = AutoMapperConfig.Configure();
 IMapper mapper = config.CreateMapper();
-
 builder.Services.AddSingleton<IMapper>(mapper);
 
 DALConfiguration.ConfigureDALServices(builder.Services, builder.Configuration);

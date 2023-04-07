@@ -12,11 +12,8 @@ namespace ToDoList.DAL
         public static IServiceCollection ConfigureDALServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton(configuration);
-
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<ITaskRepository, TaskRepository>(provider => new TaskRepository(configuration.GetConnectionString("DefaultConnection")));
-
-           
 
             return services;
         }

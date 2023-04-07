@@ -9,7 +9,8 @@ namespace ToDoList.Business.Providers
 {
     public interface ITaskRepository
     {
-        public TaskModel AddTask(TaskModel task);
+        public TaskModel? AddTask(TaskModel task);
         public List<TaskModel> GetTasks();
+        public TaskModel? GetTaskById(int Id);
     }
 }
