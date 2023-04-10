@@ -1,6 +1,6 @@
-﻿namespace ToDoList.Business.Models
+﻿namespace ToDoList.Business.Entities
 {
-    public class TaskModel
+    public class TaskEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }

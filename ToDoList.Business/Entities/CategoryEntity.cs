@@ -1,6 +1,6 @@
-﻿namespace ToDoList.Business.Models
+﻿namespace ToDoList.Business.Entities
 {
-    internal class CategoryModel
+    public class CategoryEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

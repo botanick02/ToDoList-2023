@@ -10,42 +10,51 @@
 
     <div class="card shadow p-3 mb-5 bg-white rounded" style="border-radius: 10px;">
         <div class="card-body p-5">
-
             <h6 class="mb-3">Your To Do</h6>
-                <form asp-action="AddTask" method="post">
-                    <div>
+                <form asp-action="AddTask" method="post" class="d-flex justify-content-between">
+                    <div class="d-flex flex-column">
                         <label for="title">Title:</label>
                         <input type="text" id="title" asp-for="NewTask.Title" />
                     </div>
-                    <div>
+                    <div class="d-flex flex-column">
                         <label for="dueDate">Due Date:</label>
-                        <input type="date" id="dueDate" asp-for="NewTask.DueDate" />
+                        <input type="date" id="dueDate" asp-for="NewTask.DueDate" nullable />
                     </div>
-                    <div>
+                    <div class="d-flex flex-column">
                         <label for="categoryId">Category:</label>
                         <select id="categoryId" asp-for="NewTask.CategoryId">
-                            <option value="1">Personal</option>
-                            <option value="2">Work</option>
-                            <option value="3">Other</option>
+                            @foreach (var category in Model.CategoriesList){
+                                <option value="@category.Id">@category.Name</option>
+                            }
                         </select>
                     </div>
-                    <button type="submit">Create Task</button>
+                    <button type="submit" class="btn btn-primary">Create Task</button>
                 </form>
 
-            @*<form asp-action="AddTask" class="d-flex justify-content-center align-items-center mb-4">
-                <div class="form-outline flex-fill">
-                    <input asp-for="Title" type="text" class="form-control form-control-lg" />
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg m-2">Add</button>
-            </form>*@
-
-            <ul class="list-group mb-0">
+            <ul class="list-group mb-0 mt-5">
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom-4 rounded-0 mb-2">
+                        <div class="d-flex align-items-center w-100">
+                            <div class="d-flex w-100">
+                                <span class="w-50">Title</span>
+                                <span class="w-50 px-3">Daeadline</span>
+                                <span class="w-25">Category</span>
+                            </div>
+                        </div>
+                    </li>
                     @foreach (var task in Model.TasksList)
                     {
                         <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                            <div class="d-flex align-items-center">
-                                <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                @task.Title
+                            <div class="d-flex align-items-center w-100">
+                                <form method="post" asp-action="ToggleTask">
+                                    <input type="hidden" name="taskId" value="@task.Id" />
+                                    <input type="checkbox" name="isDone" onchange="this.form.submit()" class="form-check-input me-2" @(task.IsDone ? "checked" : "")/>
+                                </form>
+
+                                <div class="d-flex w-100 @(task.IsDone ? "strike" : "")">
+                                    <span class="w-50">@task.Title</span>
+                                    <span class="w-50">@(task.DueDate == null ? "no deadline" : task.DueDate)</span>
+                                    <span class="w-25">@task.CategoryName</span>
+                                </div>
                             </div>
                             <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
                                 <i class="fas fa-times text-primary"></i>

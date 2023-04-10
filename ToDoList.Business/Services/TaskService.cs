@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using System.Threading.Tasks;
 using ToDoList.Business.DTO_s;
-using ToDoList.Business.Models;
+using ToDoList.Business.Entities;
 using ToDoList.Business.Providers;
 
 namespace ToDoList.Business.Services
 {
     public class TaskService : ITaskService
     {
-        private ITaskRepository taskRepository;
-        private IMapper mapper;
+        private readonly ITaskRepository taskRepository;
+        private readonly IMapper mapper;
         public TaskService(ITaskRepository taskRepository, IMapper mapper) 
         {
             this.taskRepository = taskRepository;
@@ -18,7 +18,7 @@ namespace ToDoList.Business.Services
 
         public TaskDTO AddTask(NewTaskDTO newTask)
         {
-            var task = mapper.Map<TaskModel>(newTask);
+            var task = mapper.Map<TaskEntity>(newTask);
 
             return mapper.Map<TaskDTO>(taskRepository.AddTask(task));
         }
@@ -26,6 +26,15 @@ namespace ToDoList.Business.Services
         public List<TaskDTO> GetTasks()
         {
             return mapper.Map<List<TaskDTO>>(taskRepository.GetTasks());
+        }
+
+        public TaskDTO ToggleIsDone(int Id)
+        {
+            var task = taskRepository.GetTaskById(Id);
+
+            task.IsDone = !task.IsDone;
+
+            return mapper.Map<TaskDTO>(taskRepository.Update(task));
         }
     }
 }
