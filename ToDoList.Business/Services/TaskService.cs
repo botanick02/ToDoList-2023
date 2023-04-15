@@ -23,14 +23,21 @@ namespace ToDoList.Business.Services
             return mapper.Map<TaskDTO>(taskRepository.AddTask(task));
         }
 
-        public List<TaskDTO> GetTasks()
+        public void DeleteTask(int id)
         {
-            return mapper.Map<List<TaskDTO>>(taskRepository.GetTasks());
+            taskRepository.Delete(id);
         }
 
-        public TaskDTO ToggleIsDone(int Id)
+        public List<TaskDTO> GetTasks()
         {
-            var task = taskRepository.GetTaskById(Id);
+            var tasks = mapper.Map<List<TaskDTO>>(taskRepository.GetTasks());
+            tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate).ToList();
+            return tasks;
+        }
+
+        public TaskDTO ToggleIsDone(int id)
+        {
+            var task = taskRepository.GetTaskById(id);
 
             task.IsDone = !task.IsDone;
 

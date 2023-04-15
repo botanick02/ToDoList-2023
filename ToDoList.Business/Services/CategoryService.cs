@@ -26,6 +26,12 @@ namespace ToDoList.Business.Services
 
             return mapper.Map<CategoryDTO>(categoryRepository.AddCategory(category));
         }
+
+        public void DeleteCategory(int id)
+        {
+            categoryRepository.DeleteCategory(id);
+        }
+
         public List<CategoryDTO> GetCategories()
         {
             return mapper.Map<List<CategoryDTO>>(categoryRepository.GetCategories());

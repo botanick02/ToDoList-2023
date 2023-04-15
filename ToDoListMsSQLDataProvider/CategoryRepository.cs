@@ -83,5 +83,26 @@ namespace ToDoListMsSQLDataProvider
             }
             return new List<CategoryEntity>();
         }
+
+        public void DeleteCategory(int id)
+        {
+            try
+            {
+                var parameters = new
+                {
+                    Id = id,
+                };
+                var sqlQuery = "DELETE FROM Categories WHERE Id = @Id";
+
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    conn.Execute(sqlQuery, parameters);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+        }
     }
 }

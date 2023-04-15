@@ -8,5 +8,6 @@ namespace ToDoList.Business.Services
         public TaskDTO AddTask(NewTaskDTO newTask);
         public List<TaskDTO> GetTasks();
         public TaskDTO ToggleIsDone(int Id);
+        public void DeleteTask(int Id);
     }
 }

@@ -5,8 +5,9 @@ using ToDoList.Business.Entities;
 namespace ToDoList.Business.Services
 {
     public interface ICategoryService
-    {
+    { 
         public CategoryDTO AddCategory(NewCategoryDTO newTask);
         public List<CategoryDTO> GetCategories();
+        public void DeleteCategory(int id);
     }
 }

@@ -12,5 +12,6 @@ namespace ToDoList.Business.Repositories
         public CategoryEntity? AddCategory(CategoryEntity category);
         public List<CategoryEntity> GetCategories();
         public CategoryEntity? GetCategoryById(int id);
+        public void DeleteCategory(int id);
     }
 }

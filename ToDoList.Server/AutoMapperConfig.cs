@@ -16,6 +16,7 @@ namespace ToDoList
                 cfg.CreateMap<NewTaskDTO, TaskInputViewModel>().ReverseMap();
                 cfg.CreateMap<CategoryEntity, NewCategoryDTO>().ReverseMap();
                 cfg.CreateMap<CategoryDTO, CategoryEntity>().ReverseMap();
+                cfg.CreateMap<NewCategoryDTO, CategoryInputViewModel>().ReverseMap();
             });
 
             mapperConfiguration.CreateMapper();

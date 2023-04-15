@@ -1,6 +1,7 @@
-﻿@model IndexPageViewModel;
+﻿@model TaskIndexPageViewModel;
 @{
     ViewData["Title"] = "ToDoList";
+    var categoryMap = Model.Categories.ToDictionary(c => c.Id, c => c.Name);
 }
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -12,23 +13,29 @@
         <div class="card-body p-5">
             <h6 class="mb-3">Your To Do</h6>
                 <form asp-action="AddTask" method="post" class="d-flex justify-content-between">
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column w-25">
                         <label for="title">Title:</label>
                         <input type="text" id="title" asp-for="NewTask.Title" />
+                        <span asp-validation-for="NewTask.Title" class="text-danger"></span>
                     </div>
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column w-25">
                         <label for="dueDate">Due Date:</label>
-                        <input type="date" id="dueDate" asp-for="NewTask.DueDate" nullable />
+                        <input type="datetime-local" id="dueDate" asp-for="NewTask.DueDate" nullable />
+                        <span asp-validation-for="NewTask.DueDate" class="text-danger"></span>
                     </div>
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column w-25">
                         <label for="categoryId">Category:</label>
                         <select id="categoryId" asp-for="NewTask.CategoryId">
-                            @foreach (var category in Model.CategoriesList){
+                            @foreach (var category in Model.Categories){
                                 <option value="@category.Id">@category.Name</option>
                             }
                         </select>
+                        <a href="@Url.Action("Index", "Category")" class="elements">
+                            <span>Edit</span>
+                        </a>
+                        <span asp-validation-for="NewTask.CategoryId" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create Task</button>
+                    <button type="submit" class="btn btn-primary" style="max-height: 50px">Create Task</button>
                 </form>
 
             <ul class="list-group mb-0 mt-5">
@@ -46,19 +53,20 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
                             <div class="d-flex align-items-center w-100">
                                 <form method="post" asp-action="ToggleTask">
-                                    <input type="hidden" name="taskId" value="@task.Id" />
+                                    <input type="hidden" name="Id" value="@task.Id"/>
                                     <input type="checkbox" name="isDone" onchange="this.form.submit()" class="form-check-input me-2" @(task.IsDone ? "checked" : "")/>
                                 </form>
 
                                 <div class="d-flex w-100 @(task.IsDone ? "strike" : "")">
                                     <span class="w-50">@task.Title</span>
-                                    <span class="w-50">@(task.DueDate == null ? "no deadline" : task.DueDate)</span>
-                                    <span class="w-25">@task.CategoryName</span>
+                                    <span class="w-50">@task.DueDate</span>
+                                    <span class="w-25">@categoryMap[task.CategoryId]</span>
                                 </div>
                             </div>
-                            <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                <i class="fas fa-times text-primary"></i>
-                            </a>
+                            <form method="post" asp-action="DeleteTask">
+                                <input type="hidden" name="Id" value="@task.Id" />
+                                <input type="submit" value="&#10006;" class="btn btn-primary-outline shadow-none" />
+                            </form>
                         </li>
                     }
             </ul>
