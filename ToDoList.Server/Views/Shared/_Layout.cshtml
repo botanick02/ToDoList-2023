@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using ToDoList.Buisness.SourceChanger;
+@using ToDoList.Business.SourceChanger.Enums;
+@{
+    var currentSource = SourceStorage.CurrentSource;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,6 +15,17 @@
 </head>
 <body>
     <div class="vh-100 h-100" style="background-color: #D5F5E3;">
+        <form asp-action="ChangeCurrentSource" asp-controller="SourceSwitch" method="post">
+            <select name="source">
+                @foreach (string source in Enum.GetNames(typeof(StorageSources)))
+                {
+                    <option selected="@(Enum.GetName(currentSource) == source)" calue="@source">@(source)</option>
+                }
+            </select>
+            <input type="hidden" name="controller" value="@ViewContext.RouteData.Values["Controller"]" />
+            <input type="hidden" name="action" value="@ViewContext.RouteData.Values["Action"]" />
+            <input type="submit" value="Choose" />
+        </form>
             @RenderBody()
     </div>
 

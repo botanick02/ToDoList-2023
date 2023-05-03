@@ -5,6 +5,7 @@ using ToDoList.Business.DTO_s;
 using ToDoList.Business.DTO_s.Category;
 using ToDoList.Business.Services;
 using ToDoList.Server.Models;
+using ToDoList.Server.Models.Inputs;
 
 namespace ToDoList.Server.Controllers
 {

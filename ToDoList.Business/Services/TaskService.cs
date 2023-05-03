@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using System.Threading.Tasks;
+using ToDoList.Buisness.SourceChanger;
 using ToDoList.Business.DTO_s;
 using ToDoList.Business.Entities;
 using ToDoList.Business.Providers;
@@ -10,9 +10,9 @@ namespace ToDoList.Business.Services
     {
         private readonly ITaskRepository taskRepository;
         private readonly IMapper mapper;
-        public TaskService(ITaskRepository taskRepository, IMapper mapper) 
+        public TaskService(TaskRepositoryResolver taskRepository, IMapper mapper) 
         {
-            this.taskRepository = taskRepository;
+            this.taskRepository = taskRepository(SourceStorage.CurrentSource);
             this.mapper = mapper;
         }
 

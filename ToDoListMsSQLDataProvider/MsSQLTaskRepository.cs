@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ToDoListMsSQLDataProvider
 {
-    public class TaskRepository : ITaskRepository
+    public class MsSQLTaskRepository : ITaskRepository
     {
         private readonly string connectionString;
-        public TaskRepository(string connectionString)
+        public MsSQLTaskRepository(string connectionString)
         {
             this.connectionString = connectionString;
         }

@@ -8,10 +8,10 @@ using ToDoList.Business.Repositories;
 
 namespace ToDoListMsSQLDataProvider
 {
-    public class CategoryRepository : ICategoryRepository
+    public class MsSQLCategoryRepository : ICategoryRepository
     {
         private readonly string connectionString;
-        public CategoryRepository(string connectionString)
+        public MsSQLCategoryRepository(string connectionString)
         {
             this.connectionString = connectionString;
         }

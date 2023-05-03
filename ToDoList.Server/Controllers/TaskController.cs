@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ToDoList.Buisness.SourceChanger;
 using ToDoList.Business.DTO_s;
 using ToDoList.Business.Services;
 using ToDoList.Server.Models;
+using ToDoList.Server.Models.Inputs;
 
 namespace ToDoList.Server.Controllers
 {
@@ -12,12 +14,14 @@ namespace ToDoList.Server.Controllers
         private readonly ITaskService taskService;
         private readonly ICategoryService categoryService;
         private readonly IMapper mapper;
+        private readonly StorageSourcesProvider storageSourcesProvider;
 
         public TaskController(ILogger<TaskController> logger, ITaskService taskService, ICategoryService categoryService, IMapper mapper)
         {
             this.taskService = taskService;
             this.categoryService = categoryService;
             this.mapper = mapper;
+            this.storageSourcesProvider = storageSourcesProvider;
         }
 
         public IActionResult Index()

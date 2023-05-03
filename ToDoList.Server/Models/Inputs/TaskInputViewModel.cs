@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using ToDoList.Server.Models.Attributes;
 
-namespace ToDoList.Server.Models
+namespace ToDoList.Server.Models.Inputs
 {
     public class TaskInputViewModel
     {

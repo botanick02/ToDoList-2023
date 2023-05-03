@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ToDoList.Server.Models
+namespace ToDoList.Server.Models.Inputs
 {
     public class CategoryInputViewModel
     {
