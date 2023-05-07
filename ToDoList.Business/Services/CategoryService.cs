@@ -3,6 +3,7 @@ using ToDoList.Buisness.SourceChanger;
 using ToDoList.Business.DTO_s.Category;
 using ToDoList.Business.Entities;
 using ToDoList.Business.Repositories;
+using ToDoList.Business.SourceChanger.Enums;
 
 namespace ToDoList.Business.Services
 {
@@ -10,9 +11,9 @@ namespace ToDoList.Business.Services
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IMapper mapper;
-        public CategoryService(CategoryRepositoryResolver categoryRepository, IMapper mapper)
+        public CategoryService(CategoryRepositoryResolver categoryRepository, IMapper mapper, StorageSources source)
         {
-            this.categoryRepository = categoryRepository(SourceStorage.CurrentSource);
+            this.categoryRepository = categoryRepository(source);
             this.mapper = mapper;
         }
         public CategoryDTO AddCategory(NewCategoryDTO newCategory)

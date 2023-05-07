@@ -6,7 +6,7 @@ namespace ToDoList.Business.Services
     public interface ITaskService
     {
         public TaskDTO AddTask(NewTaskDTO newTask);
-        public List<TaskDTO> GetTasks();
+        public IEnumerable<TaskDTO> GetTasks();
         public TaskDTO ToggleIsDone(int Id);
         public void DeleteTask(int Id);
     }

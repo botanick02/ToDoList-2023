@@ -66,7 +66,7 @@ namespace ToDoList.Server.Controllers
         private TaskIndexPageViewModel GetIndexPageViewModel()
         {
             var model = new TaskIndexPageViewModel();
-            model.TasksList = taskService.GetTasks();
+            model.TasksList = taskService.GetTasks().ToList();
             model.Categories = categoryService.GetCategories();
             return model;
         }

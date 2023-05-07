@@ -3,6 +3,7 @@ using ToDoList.Buisness.SourceChanger;
 using ToDoList.Business.DTO_s;
 using ToDoList.Business.Entities;
 using ToDoList.Business.Providers;
+using ToDoList.Business.SourceChanger.Enums;
 
 namespace ToDoList.Business.Services
 {
@@ -10,9 +11,9 @@ namespace ToDoList.Business.Services
     {
         private readonly ITaskRepository taskRepository;
         private readonly IMapper mapper;
-        public TaskService(TaskRepositoryResolver taskRepository, IMapper mapper) 
+        public TaskService(TaskRepositoryResolver taskRepository, IMapper mapper, StorageSources source) 
         {
-            this.taskRepository = taskRepository(SourceStorage.CurrentSource);
+            this.taskRepository = taskRepository(source);
             this.mapper = mapper;
         }
 
@@ -28,10 +29,10 @@ namespace ToDoList.Business.Services
             taskRepository.Delete(id);
         }
 
-        public List<TaskDTO> GetTasks()
+        public IEnumerable<TaskDTO> GetTasks()
         {
-            var tasks = mapper.Map<List<TaskDTO>>(taskRepository.GetTasks());
-            tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate).ToList();
+            var tasks = mapper.Map<IEnumerable<TaskDTO>>(taskRepository.GetTasks());
+            tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate);
             return tasks;
         }
 
