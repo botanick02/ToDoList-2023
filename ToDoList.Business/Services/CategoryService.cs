@@ -11,9 +11,9 @@ namespace ToDoList.Business.Services
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IMapper mapper;
-        public CategoryService(CategoryRepositoryResolver categoryRepository, IMapper mapper, StorageSources source)
+        public CategoryService(CategoryRepositoryResolver categoryRepository, IMapper mapper)
         {
-            this.categoryRepository = categoryRepository(source);
+            this.categoryRepository = categoryRepository(StorageSources.MsSQL);
             this.mapper = mapper;
         }
         public CategoryDTO AddCategory(NewCategoryDTO newCategory)

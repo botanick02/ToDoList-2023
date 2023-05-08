@@ -1,26 +1,31 @@
 using AutoMapper;
 using GraphQL;
-using Microsoft.AspNetCore.Hosting;
+using GraphQL.MicrosoftDI;
+using GraphQL.Types;
 using ToDoList;
 using ToDoList.DAL;
-using ToDoList.Server.GraphQL;
 using ToDoList.Server.GraphQL.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
+DALConfiguration.ConfigureDALServices(builder.Services, builder.Configuration);
+
+builder.Services.AddSingleton<ISchema, TasksSchema>(services => new TasksSchema(new SelfActivatingServiceProvider(services)));
 builder.Services.AddGraphQL(b => b
     .AddSchema<TasksSchema>()
     .AddAutoClrMappings()
     .AddSystemTextJson());
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
 var config = AutoMapperConfig.Configure();
 IMapper mapper = config.CreateMapper();
 builder.Services.AddSingleton<IMapper>(mapper);
-
-DALConfiguration.ConfigureDALServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 

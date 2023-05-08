@@ -6,7 +6,7 @@ namespace ToDoList.Server.GraphQL.Tasks
     {
         public TasksSchema(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            Query = new AutoRegisteringObjectGraphType<Query>();
+            Query = serviceProvider.GetRequiredService<Query>();
             //Mutation = new AutoRegisteringObjectGraphType<Mutation>();
         }
     }

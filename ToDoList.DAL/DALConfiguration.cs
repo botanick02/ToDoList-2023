@@ -14,13 +14,14 @@ namespace ToDoList.DAL
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddSingleton(configuration);
-            services.AddScoped<ITaskService, TaskService>();
-            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddTransient<ITaskService, TaskService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<MsSQLTaskRepository>(provider => new MsSQLTaskRepository(connectionString));
             services.AddTransient<MsSQLCategoryRepository>(provider => new MsSQLCategoryRepository(connectionString));
             services.AddTransient<XMLTaskRepository>();
             services.AddTransient<XMLCategoryRepository>();
             services.AddTransient<StorageSourcesProvider>();
+
 
             services.AddTransient<CategoryRepositoryResolver>(CategoryRepositoryProvider => key =>
             {

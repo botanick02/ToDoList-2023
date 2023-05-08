@@ -4,6 +4,7 @@ using System.Diagnostics;
 using ToDoList.Buisness.SourceChanger;
 using ToDoList.Business.DTO_s;
 using ToDoList.Business.Services;
+using ToDoList.Business.SourceChanger.Enums;
 using ToDoList.Server.Models;
 using ToDoList.Server.Models.Inputs;
 
@@ -14,14 +15,12 @@ namespace ToDoList.Server.Controllers
         private readonly ITaskService taskService;
         private readonly ICategoryService categoryService;
         private readonly IMapper mapper;
-        private readonly StorageSourcesProvider storageSourcesProvider;
 
         public TaskController(ILogger<TaskController> logger, ITaskService taskService, ICategoryService categoryService, IMapper mapper)
         {
             this.taskService = taskService;
             this.categoryService = categoryService;
             this.mapper = mapper;
-            this.storageSourcesProvider = storageSourcesProvider;
         }
 
         public IActionResult Index()
@@ -35,7 +34,7 @@ namespace ToDoList.Server.Controllers
             if (ModelState.IsValid)
             {
                 var newTaskDTO = mapper.Map<NewTaskDTO>(newTask);
-                taskService.AddTask(newTaskDTO);
+                //taskService.AddTask(newTaskDTO);
             }
 
             return View("Index", GetIndexPageViewModel());
@@ -44,7 +43,7 @@ namespace ToDoList.Server.Controllers
         [HttpPost]
         public IActionResult ToggleTask(int Id)
         {
-            taskService.ToggleIsDone(Id);
+            //taskService.ToggleIsDone(Id);
 
             return View("Index", GetIndexPageViewModel());
         }
@@ -52,7 +51,7 @@ namespace ToDoList.Server.Controllers
         [HttpPost]
         public IActionResult DeleteTask(int Id)
         {
-            taskService.DeleteTask(Id);
+            //taskService.DeleteTask(Id);
 
             return View("Index", GetIndexPageViewModel());
         }
@@ -66,7 +65,7 @@ namespace ToDoList.Server.Controllers
         private TaskIndexPageViewModel GetIndexPageViewModel()
         {
             var model = new TaskIndexPageViewModel();
-            model.TasksList = taskService.GetTasks().ToList();
+            model.TasksList = taskService.GetTasks(StorageSources.XML).ToList();
             model.Categories = categoryService.GetCategories();
             return model;
         }

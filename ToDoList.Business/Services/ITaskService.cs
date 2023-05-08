@@ -1,13 +1,13 @@
 ﻿using ToDoList.Business.DTO_s;
-using ToDoList.Business.Entities;
+using ToDoList.Business.SourceChanger.Enums;
 
 namespace ToDoList.Business.Services
 {
     public interface ITaskService
     {
-        public TaskDTO AddTask(NewTaskDTO newTask);
-        public IEnumerable<TaskDTO> GetTasks();
-        public TaskDTO ToggleIsDone(int Id);
-        public void DeleteTask(int Id);
+        public TaskDTO AddTask(NewTaskDTO newTask, StorageSources source);
+        public IEnumerable<TaskDTO> GetTasks(StorageSources source);
+        public TaskDTO ToggleIsDone(int Id, StorageSources source);
+        public void DeleteTask(int Id, StorageSources source);
     }
 }

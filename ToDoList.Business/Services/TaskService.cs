@@ -9,40 +9,40 @@ namespace ToDoList.Business.Services
 {
     public class TaskService : ITaskService
     {
-        private readonly ITaskRepository taskRepository;
+        private readonly TaskRepositoryResolver taskRepository;
         private readonly IMapper mapper;
-        public TaskService(TaskRepositoryResolver taskRepository, IMapper mapper, StorageSources source) 
+        public TaskService(TaskRepositoryResolver taskRepository, IMapper mapper) 
         {
-            this.taskRepository = taskRepository(source);
+            this.taskRepository = taskRepository;
             this.mapper = mapper;
         }
 
-        public TaskDTO AddTask(NewTaskDTO newTask)
+        public TaskDTO AddTask(NewTaskDTO newTask, StorageSources source)
         {
             var task = mapper.Map<TaskEntity>(newTask);
 
-            return mapper.Map<TaskDTO>(taskRepository.AddTask(task));
+            return mapper.Map<TaskDTO>(taskRepository(source).AddTask(task));
         }
 
-        public void DeleteTask(int id)
+        public void DeleteTask(int id, StorageSources source)
         {
-            taskRepository.Delete(id);
+            taskRepository(source).Delete(id);
         }
 
-        public IEnumerable<TaskDTO> GetTasks()
+        public IEnumerable<TaskDTO> GetTasks(StorageSources source)
         {
-            var tasks = mapper.Map<IEnumerable<TaskDTO>>(taskRepository.GetTasks());
+            var tasks = mapper.Map<IEnumerable<TaskDTO>>(taskRepository(source).GetTasks());
             tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate);
             return tasks;
         }
 
-        public TaskDTO ToggleIsDone(int id)
+        public TaskDTO ToggleIsDone(int id, StorageSources source)
         {
-            var task = taskRepository.GetTaskById(id);
+            var task = taskRepository(source).GetTaskById(id);
 
             task.IsDone = !task.IsDone;
 
-            return mapper.Map<TaskDTO>(taskRepository.Update(task));
+            return mapper.Map<TaskDTO>(taskRepository(source).Update(task));
         }
     }
 }
