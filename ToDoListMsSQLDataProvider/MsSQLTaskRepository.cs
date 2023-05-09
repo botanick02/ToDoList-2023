@@ -31,8 +31,8 @@ namespace ToDoListMsSQLDataProvider
 
                 using (var conn = new SqlConnection(connectionString))
                 {
-                    var addedTask = conn.QueryFirst<TaskEntity>(sqlQuery, parameters);
-                    return addedTask;
+                    var addedTaskId = conn.QueryFirst<int>(sqlQuery, parameters);
+                    return GetTaskById(addedTaskId);
                 }
             }
             catch (Exception e)

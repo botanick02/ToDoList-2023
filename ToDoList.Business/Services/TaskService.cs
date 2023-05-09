@@ -33,6 +33,7 @@ namespace ToDoList.Business.Services
         {
             var tasks = mapper.Map<IEnumerable<TaskDTO>>(taskRepository(source).GetTasks());
             tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate);
+            tasks = tasks.OrderBy(task => task.IsDone);
             return tasks;
         }
 

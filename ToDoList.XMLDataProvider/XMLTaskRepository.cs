@@ -55,6 +55,7 @@ namespace ToDoList.XMLDataProvider
                 new XAttribute("Id", (string)c.Attribute("Id")),
                 new XAttribute("Title", (string)c.Attribute("Title")),
                 new XAttribute("CategoryId", (string)c.Attribute("CategoryId")),
+                new XAttribute("IsDone", (string)c.Attribute("IsDone")),
                 new XAttribute("DueDate", (string)c.Attribute("DueDate"))
                 )
                 );
@@ -63,6 +64,7 @@ namespace ToDoList.XMLDataProvider
                 Id = XmlConvert.ToInt32(t.Attribute("Id").Value),
                 Title = t.Attribute("Title").Value,
                 CategoryId = XmlConvert.ToInt32(t.Attribute("CategoryId").Value),
+                IsDone = bool.Parse(t.Attribute("IsDone").Value),
                 DueDate = t.Attribute("DueDate").Value != "" ? (DateTime?)DateTime.Parse(t.Attribute("DueDate").Value) : null,
             }).First();
 
@@ -78,6 +80,7 @@ namespace ToDoList.XMLDataProvider
                 new XAttribute("Id", (string)c.Attribute("Id")),
                 new XAttribute("Title", (string)c.Attribute("Title")),
                 new XAttribute("CategoryId", (string)c.Attribute("CategoryId")),
+                new XAttribute("IsDone", (string)c.Attribute("IsDone")),
                 new XAttribute("DueDate", (string)c.Attribute("DueDate"))
                 )
                 );
@@ -90,6 +93,7 @@ namespace ToDoList.XMLDataProvider
                 Id = XmlConvert.ToInt32(t.Attribute("Id").Value),
                 Title = t.Attribute("Title").Value,
                 CategoryId = XmlConvert.ToInt32(t.Attribute("CategoryId").Value),
+                IsDone = bool.Parse(t.Attribute("IsDone").Value),
                 DueDate = t.Attribute("DueDate").Value != "" ? (DateTime?)DateTime.Parse(t.Attribute("DueDate").Value) : null,
             }).ToList();
 

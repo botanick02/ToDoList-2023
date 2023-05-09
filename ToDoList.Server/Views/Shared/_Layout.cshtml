@@ -1,8 +1,6 @@
 ﻿@using ToDoList.Buisness.SourceChanger;
 @using ToDoList.Business.SourceChanger.Enums;
-@{
-    var currentSource = SourceStorage.CurrentSource;
-}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +17,7 @@
             <select name="source">
                 @foreach (string source in Enum.GetNames(typeof(StorageSources)))
                 {
-                    <option selected="@(Enum.GetName(currentSource) == source)" calue="@source">@(source)</option>
+                    <option value="@source">@(source)</option>
                 }
             </select>
             <input type="hidden" name="controller" value="@ViewContext.RouteData.Values["Controller"]" />

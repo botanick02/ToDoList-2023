@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
   <Tasks>
-    <Task Id="0" Title="first xml task" CategoryId="1" IsDone="False" DueDate="" />
+    <Task Id="0" Title="first xml task" CategoryId="1" IsDone="True" DueDate="" />
     <Task Id="1" Title="second xml task" CategoryId="2" IsDone="False" DueDate="" />
     <Task Id="2" Title="first xml task with date" CategoryId="1" IsDone="False" DueDate="4/25/2023 1:30:00 AM" />
-    <Task Id="3" Title="second xml task with date" CategoryId="1" IsDone="False" DueDate="4/26/2023 1:30:00 AM" />
+    <Task Id="3" Title="second xml task with date" CategoryId="1" IsDone="True" DueDate="4/26/2023 1:30:00 AM" />
   </Tasks>
   <Categories>
     <Category Id="1" Name="Uncategorized" />

@@ -16,8 +16,8 @@ namespace ToDoList.DAL
             services.AddSingleton(configuration);
             services.AddTransient<ITaskService, TaskService>();
             services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<MsSQLTaskRepository>(provider => new MsSQLTaskRepository(connectionString));
-            services.AddTransient<MsSQLCategoryRepository>(provider => new MsSQLCategoryRepository(connectionString));
+            services.AddTransient(provider => new MsSQLTaskRepository(connectionString));
+            services.AddTransient(provider => new MsSQLCategoryRepository(connectionString));
             services.AddTransient<XMLTaskRepository>();
             services.AddTransient<XMLCategoryRepository>();
             services.AddTransient<StorageSourcesProvider>();

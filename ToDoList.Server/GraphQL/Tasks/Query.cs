@@ -5,6 +5,8 @@ using System.Security.Claims;
 using ToDoList.Business.DTO_s;
 using ToDoList.Business.Services;
 using ToDoList.Business.SourceChanger.Enums;
+using ToDoList.Server.GraphQL.Tasks.Types;
+using ToDoList.Server.HttpContextHelpers;
 
 namespace ToDoList.Server.GraphQL.Tasks
 {
@@ -15,11 +17,7 @@ namespace ToDoList.Server.GraphQL.Tasks
             Field<ListGraphType<TaskType>>("GetTasks")
                 .Resolve(context =>
                 {
-                    var httpContext = context.RequestServices.GetService<IHttpContextAccessor>().HttpContext;
-                    var sourceString = httpContext.Request.Headers["Source"];
-                    StorageSources source;
-                    Enum.TryParse(sourceString, out source);
-
+                    var source = HeaderSourceProviderParser.ParseContextHeaderSource(context);
                     return taskService.GetTasks(source);
                 });
         }

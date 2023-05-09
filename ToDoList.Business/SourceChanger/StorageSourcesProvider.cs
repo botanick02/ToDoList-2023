@@ -4,10 +4,6 @@ namespace ToDoList.Buisness.SourceChanger
 {
     public class StorageSourcesProvider
     {
-        public string GetCurrentSourceName()
-        {
-            return SourceStorage.CurrentSource.ToString();
-        }
         public List<string> GetStorageSourcesNames()
         {
             var sources = new List<String>();
