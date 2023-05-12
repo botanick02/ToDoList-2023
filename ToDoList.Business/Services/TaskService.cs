@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using ToDoList.Buisness.SourceChanger;
-using ToDoList.Business.DTO_s;
-using ToDoList.Business.Entities;
-using ToDoList.Business.Providers;
-using ToDoList.Business.SourceChanger.Enums;
+using ToDoList.BLL.Services.IServices;
+using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.SourceChanger.Enums;
+using ToDoList.RepositoryAbstractions.Entities;
 
-namespace ToDoList.Business.Services
+namespace ToDoList.BLL.Services
 {
     public class TaskService : ITaskService
     {

@@ -1,7 +1,8 @@
-﻿using ToDoList.Business.DTO_s;
-using ToDoList.Business.SourceChanger.Enums;
+﻿
+using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.SourceChanger.Enums;
 
-namespace ToDoList.Business.Services
+namespace ToDoList.BLL.Services.IServices
 {
     public interface ITaskService
     {

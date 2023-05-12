@@ -1,6 +1,6 @@
-﻿using ToDoList.Business.SourceChanger.Enums;
+﻿using ToDoList.DAL.SourceChanger.Enums;
 
-namespace ToDoList.Buisness.SourceChanger
+namespace ToDoList.DAL.SourceChanger
 {
     public class StorageSourcesProvider
     {

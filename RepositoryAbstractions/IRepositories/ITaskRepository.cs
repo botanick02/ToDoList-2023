@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDoList.Business.Entities;
+﻿using ToDoList.RepositoryAbstractions.Entities;
 
-namespace ToDoList.Business.Providers
+namespace ToDoList.RepositoryAbstractions.IRepositories
 {
     public interface ITaskRepository
     {
         public TaskEntity? AddTask(TaskEntity task);
+
         public List<TaskEntity> GetTasks();
+
         public TaskEntity? GetTaskById(int id);
+
         public TaskEntity? Update(TaskEntity task);
+
         public void Delete(int id);
 
     }

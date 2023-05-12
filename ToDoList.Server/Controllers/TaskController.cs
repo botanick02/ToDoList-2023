@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using ToDoList.Buisness.SourceChanger;
-using ToDoList.Business.DTO_s;
-using ToDoList.Business.Services;
-using ToDoList.Business.SourceChanger.Enums;
+using ToDoList.BLL.Services.IServices;
+using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.SourceChanger.Enums;
 using ToDoList.Server.Models;
 using ToDoList.Server.Models.Inputs;
 
@@ -66,7 +65,7 @@ namespace ToDoList.Server.Controllers
         {
             var model = new TaskIndexPageViewModel();
             model.TasksList = taskService.GetTasks(StorageSources.XML).ToList();
-            model.Categories = categoryService.GetCategories();
+            model.Categories = categoryService.GetCategories().ToList();
             return model;
         }
     }

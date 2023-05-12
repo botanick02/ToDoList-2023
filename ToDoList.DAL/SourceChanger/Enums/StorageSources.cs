@@ -1,9 +1,8 @@
-﻿namespace ToDoList.Business.SourceChanger.Enums
+﻿namespace ToDoList.DAL.SourceChanger.Enums
 {
     public enum StorageSources
     {
         MsSQL,
         XML
     }
-
 }

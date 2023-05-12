@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using ToDoList.Buisness.SourceChanger;
-using ToDoList.Business.DTO_s.Category;
-using ToDoList.Business.Entities;
-using ToDoList.Business.Repositories;
-using ToDoList.Business.SourceChanger.Enums;
+using ToDoList.BLL.Services.IServices;
+using ToDoList.DAL.DTO_s.Category;
+using ToDoList.DAL.SourceChanger.Enums;
+using ToDoList.RepositoryAbstractions.Entities;
+using ToDoList.RepositoryAbstractions.IRepositories;
 
-namespace ToDoList.Business.Services
+namespace ToDoList.BLL.Services
 {
     public class CategoryService : ICategoryService
     {
@@ -28,9 +28,9 @@ namespace ToDoList.Business.Services
             categoryRepository.DeleteCategory(id);
         }
 
-        public List<CategoryDTO> GetCategories()
+        public IEnumerable<CategoryDTO> GetCategories()
         {
-            return mapper.Map<List<CategoryDTO>>(categoryRepository.GetCategories());
+            return mapper.Map<IEnumerable<CategoryDTO>>(categoryRepository.GetCategories());
         }
     }
 }

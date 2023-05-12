@@ -1,8 +1,7 @@
 ﻿using GraphQL;
 using GraphQL.Types;
-using ToDoList.Business.DTO_s;
-using ToDoList.Business.Providers;
-using ToDoList.Business.Services;
+using ToDoList.BLL.Services.IServices;
+using ToDoList.DAL.DTO_s;
 using ToDoList.Server.GraphQL.Tasks.Types;
 using ToDoList.Server.GraphQL.Tasks.Types.Inputs;
 using ToDoList.Server.HttpContextHelpers;

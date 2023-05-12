@@ -1,6 +1,5 @@
 ﻿using GraphQL.Types;
-using System;
-using ToDoList.Business.DTO_s;
+using ToDoList.DAL.DTO_s;
 
 namespace ToDoList.Server.GraphQL.Tasks.Types
 {

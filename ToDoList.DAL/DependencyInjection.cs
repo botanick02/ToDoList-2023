@@ -1,27 +1,22 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ToDoList.Buisness.SourceChanger;
-using ToDoList.Business.Services;
-using ToDoList.Business.SourceChanger.Enums;
+using ToDoList.DAL.SourceChanger;
+using ToDoList.DAL.SourceChanger.Enums;
 using ToDoList.XMLDataProvider;
 using ToDoListMsSQLDataProvider;
 
 namespace ToDoList.DAL
 {
-    public static class DALConfiguration
+    public static class DependencyInjection
     {
-        public static IServiceCollection ConfigureDALServices(IServiceCollection services, IConfiguration configuration)
+        public static void RegisterDALDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            services.AddSingleton(configuration);
-            services.AddTransient<ITaskService, TaskService>();
-            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient(provider => new MsSQLTaskRepository(connectionString));
             services.AddTransient(provider => new MsSQLCategoryRepository(connectionString));
             services.AddTransient<XMLTaskRepository>();
             services.AddTransient<XMLCategoryRepository>();
             services.AddTransient<StorageSourcesProvider>();
-
 
             services.AddTransient<CategoryRepositoryResolver>(CategoryRepositoryProvider => key =>
             {
@@ -35,6 +30,7 @@ namespace ToDoList.DAL
                         throw new KeyNotFoundException();
                 }
             });
+
             services.AddTransient<TaskRepositoryResolver>(ToDoTaskRepositoryProvider => key =>
             {
                 switch (key)
@@ -47,8 +43,6 @@ namespace ToDoList.DAL
                         throw new KeyNotFoundException();
                 }
             });
-
-            return services;
         }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Diagnostics;
-using ToDoList.Business.Entities;
-using ToDoList.Business.Providers;
 using Dapper;
-using System.Threading.Tasks;
-using ToDoList.Business.Repositories;
+using ToDoList.RepositoryAbstractions.Entities;
+using ToDoList.RepositoryAbstractions.IRepositories;
 
 namespace ToDoListMsSQLDataProvider
 {

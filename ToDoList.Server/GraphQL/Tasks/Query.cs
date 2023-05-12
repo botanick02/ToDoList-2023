@@ -1,10 +1,5 @@
-﻿using GraphQL;
-using GraphQL.Execution;
-using GraphQL.Types;
-using System.Security.Claims;
-using ToDoList.Business.DTO_s;
-using ToDoList.Business.Services;
-using ToDoList.Business.SourceChanger.Enums;
+﻿using GraphQL.Types;
+using ToDoList.BLL.Services.IServices;
 using ToDoList.Server.GraphQL.Tasks.Types;
 using ToDoList.Server.HttpContextHelpers;
 

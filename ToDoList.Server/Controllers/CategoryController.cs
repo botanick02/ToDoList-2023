@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using ToDoList.Business.DTO_s;
-using ToDoList.Business.DTO_s.Category;
-using ToDoList.Business.Services;
+using ToDoList.BLL.Services.IServices;
+using ToDoList.DAL.DTO_s.Category;
 using ToDoList.Server.Models;
 using ToDoList.Server.Models.Inputs;
 
@@ -55,7 +54,7 @@ namespace ToDoList.Server.Controllers
         private CategoryIndexPageViewModel GetIndexPageViewModel()
         {
             var model = new CategoryIndexPageViewModel();
-            model.Categories = categoryService.GetCategories();
+            model.Categories = categoryService.GetCategories().ToList();
             return model;
         }
     }

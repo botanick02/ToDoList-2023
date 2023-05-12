@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 using System.Xml.Linq;
-using ToDoList.Business.Entities;
-using ToDoList.Business.Providers;
+using ToDoList.RepositoryAbstractions.Entities;
+using ToDoList.RepositoryAbstractions.IRepositories;
 
 namespace ToDoList.XMLDataProvider
 {

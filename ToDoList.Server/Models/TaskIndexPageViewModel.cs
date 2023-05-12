@@ -1,5 +1,5 @@
-﻿using ToDoList.Business.DTO_s;
-using ToDoList.Business.DTO_s.Category;
+﻿using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.DTO_s.Category;
 using ToDoList.Server.Models.Inputs;
 
 namespace ToDoList.Server.Models

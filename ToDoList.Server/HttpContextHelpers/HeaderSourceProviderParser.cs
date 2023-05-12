@@ -1,5 +1,5 @@
 ﻿using GraphQL;
-using ToDoList.Business.SourceChanger.Enums;
+using ToDoList.DAL.SourceChanger.Enums;
 
 namespace ToDoList.Server.HttpContextHelpers
 {
@@ -19,7 +19,6 @@ namespace ToDoList.Server.HttpContextHelpers
             {
                 throw new ArgumentOutOfRangeException($"'{sourceString}' is not a valid value of {nameof(StorageSources)}, whic was sent in request header.", nameof(sourceString));
             }
-
         }
     }
 }

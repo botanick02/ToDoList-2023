@@ -5,13 +5,15 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Server", "ToDoList.Server\ToDoList.Server.csproj", "{DE1F39F5-7A03-45EC-A30F-89DBA1306E5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Business", "ToDoList.Business\ToDoList.Business.csproj", "{6AB45071-9229-4C7D-9E56-81EC45CA901C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.BLL", "ToDoList.Business\ToDoList.BLL.csproj", "{6AB45071-9229-4C7D-9E56-81EC45CA901C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListMsSQLDataProvider", "ToDoListMsSQLDataProvider\ToDoListMsSQLDataProvider.csproj", "{E8737A69-1440-44BE-88DF-40F40CE42B88}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.DAL", "ToDoList.DAL\ToDoList.DAL.csproj", "{AC505549-B01E-4178-AEFE-7EC47BA9BAC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.XMLDataProvider", "ToDoList.XMLDataProvider\ToDoList.XMLDataProvider.csproj", "{699954FA-8D1F-4621-B013-FE5BE9D871D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.XMLDataProvider", "ToDoList.XMLDataProvider\ToDoList.XMLDataProvider.csproj", "{699954FA-8D1F-4621-B013-FE5BE9D871D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.DAL", "ToDoList.DAL\ToDoList.DAL.csproj", "{4A1CCF32-A0D0-4A11-BC45-4B8D91ECC5DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryAbstractions", "RepositoryAbstractions\RepositoryAbstractions.csproj", "{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +33,18 @@ Global
 		{E8737A69-1440-44BE-88DF-40F40CE42B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8737A69-1440-44BE-88DF-40F40CE42B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8737A69-1440-44BE-88DF-40F40CE42B88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC505549-B01E-4178-AEFE-7EC47BA9BAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC505549-B01E-4178-AEFE-7EC47BA9BAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC505549-B01E-4178-AEFE-7EC47BA9BAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC505549-B01E-4178-AEFE-7EC47BA9BAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{699954FA-8D1F-4621-B013-FE5BE9D871D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{699954FA-8D1F-4621-B013-FE5BE9D871D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{699954FA-8D1F-4621-B013-FE5BE9D871D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{699954FA-8D1F-4621-B013-FE5BE9D871D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1CCF32-A0D0-4A11-BC45-4B8D91ECC5DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A1CCF32-A0D0-4A11-BC45-4B8D91ECC5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1CCF32-A0D0-4A11-BC45-4B8D91ECC5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A1CCF32-A0D0-4A11-BC45-4B8D91ECC5DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
