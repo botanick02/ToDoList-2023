@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListMsSQLDataProvider",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.XMLDataProvider", "ToDoList.XMLDataProvider\ToDoList.XMLDataProvider.csproj", "{699954FA-8D1F-4621-B013-FE5BE9D871D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.DAL", "ToDoList.DAL\ToDoList.DAL.csproj", "{4A1CCF32-A0D0-4A11-BC45-4B8D91ECC5DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.DAL", "ToDoList.DAL\ToDoList.DAL.csproj", "{4A1CCF32-A0D0-4A11-BC45-4B8D91ECC5DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryAbstractions", "RepositoryAbstractions\RepositoryAbstractions.csproj", "{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryAbstractions", "RepositoryAbstractions\RepositoryAbstractions.csproj", "{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "todolist.client", "ToDoList.Client\todolist.client.esproj", "{39546F71-925F-429D-BDBE-36E08F02D349}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,12 @@ Global
 		{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CD8DB73-7C57-4EA3-9C35-955202BDA4C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39546F71-925F-429D-BDBE-36E08F02D349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39546F71-925F-429D-BDBE-36E08F02D349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39546F71-925F-429D-BDBE-36E08F02D349}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{39546F71-925F-429D-BDBE-36E08F02D349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39546F71-925F-429D-BDBE-36E08F02D349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39546F71-925F-429D-BDBE-36E08F02D349}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
