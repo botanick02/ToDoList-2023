@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToDoList.BLL.Services.IServices;
 using ToDoList.DAL.DTO_s.Category;
+using ToDoList.DAL.SourceChanger.Enums;
 using ToDoList.Server.Models;
 using ToDoList.Server.Models.Inputs;
 
@@ -24,26 +25,26 @@ namespace ToDoList.Server.Controllers
             return View(GetIndexPageViewModel());
         }
 
-        [HttpPost]
-        public IActionResult AddCategory(CategoryInputViewModel newCategory)
-        {
-            if (ModelState.IsValid)
-            {
-                var newCategoryDTO = mapper.Map<NewCategoryDTO>(newCategory);
-                categoryService.AddCategory(newCategoryDTO);
-            }
+        //[HttpPost]
+        //public IActionResult AddCategory(CategoryInputViewModel newCategory)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var newCategoryDTO = mapper.Map<NewCategoryDTO>(newCategory);
+        //        categoryService.AddCategory(newCategoryDTO);
+        //    }
 
-            return View("Index", GetIndexPageViewModel());
-        }
+        //    return View("Index", GetIndexPageViewModel());
+        //}
 
 
-        [HttpPost]
-        public IActionResult DeleteCategory(int Id)
-        {
-            categoryService.DeleteCategory(Id);
+        //[HttpPost]
+        //public IActionResult DeleteCategory(int Id)
+        //{
+        //    categoryService.DeleteCategory(Id);
 
-            return View("Index", GetIndexPageViewModel());
-        }
+        //    return View("Index", GetIndexPageViewModel());
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -54,7 +55,7 @@ namespace ToDoList.Server.Controllers
         private CategoryIndexPageViewModel GetIndexPageViewModel()
         {
             var model = new CategoryIndexPageViewModel();
-            model.Categories = categoryService.GetCategories().ToList();
+            model.Categories = categoryService.GetCategories(StorageSources.XML).ToList();
             return model;
         }
     }

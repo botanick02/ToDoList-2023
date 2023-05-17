@@ -65,7 +65,7 @@ namespace ToDoList.Server.Controllers
         {
             var model = new TaskIndexPageViewModel();
             model.TasksList = taskService.GetTasks(StorageSources.XML).ToList();
-            model.Categories = categoryService.GetCategories().ToList();
+            model.Categories = categoryService.GetCategories(StorageSources.XML).ToList();
             return model;
         }
     }

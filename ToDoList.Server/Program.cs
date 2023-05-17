@@ -1,10 +1,13 @@
 using GraphQL;
 using GraphQL.MicrosoftDI;
 using GraphQL.Types;
+using Microsoft.Extensions.Options;
 using ToDoList.BLL;
 using ToDoList.DAL;
 using ToDoList.Server;
-using ToDoList.Server.GraphQL.Tasks;
+using ToDoList.Server.GraphQL;
+using ToDoList.Server.GraphQL.Categories;
+using ToDoList.Server.HttpContextHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +17,16 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.RegisterDALDependencies(builder.Configuration);
 builder.Services.RegisterBLLDependencies();
+builder.Services.AddSingleton<HeaderSourceProviderParser>();
 
-builder.Services.AddSingleton<ISchema, TasksSchema>(services => new TasksSchema(new SelfActivatingServiceProvider(services)));
+//builder.Services.AddSingleton<ISchema, CategoriesSchema>(services => new CategoriesSchema(new SelfActivatingServiceProvider(services)));
+//builder.Services.AddSingleton<ISchema, TasksSchema>(services => new TasksSchema(new SelfActivatingServiceProvider(services)));
+//builder.Services.AddSelfActivatingSchema<>();
+
+
 builder.Services.AddGraphQL(b => b
-    .AddSchema<TasksSchema>()
+    .AddSchema<ToDoListSchema>()
+    .AddGraphTypes(typeof(ToDoListSchema).Assembly)
     .AddAutoClrMappings()
     .AddSystemTextJson());
 

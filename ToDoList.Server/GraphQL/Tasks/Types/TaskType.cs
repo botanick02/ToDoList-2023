@@ -8,9 +8,13 @@ namespace ToDoList.Server.GraphQL.Tasks.Types
         public TaskType()
         {
             Field(t => t.Title, nullable: false);
+
             Field(t => t.Id, nullable: false);
+
             Field(t => t.IsDone, nullable: false);
+
             Field(t => t.CategoryId, nullable: false);
+
             Field(t => t.DueDate, nullable: true);
         }
     }

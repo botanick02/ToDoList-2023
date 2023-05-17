@@ -7,9 +7,11 @@ namespace ToDoList.Server.GraphQL.Tasks.Types.Inputs
     {
         public NewTaskInputType()
         {
-            Field(d => d.Title, nullable: false);
-            Field(d => d.CategoryId, nullable: false);
-            Field(d => d.DueDate, nullable: true);
+            Field(t => t.Title, nullable: false);
+
+            Field(t => t.CategoryId, nullable: false);
+
+            Field(t => t.DueDate, nullable: true);
         }
     }
 }

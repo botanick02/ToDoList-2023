@@ -3,9 +3,9 @@ using ToDoList.DAL.SourceChanger.Enums;
 
 namespace ToDoList.Server.HttpContextHelpers
 {
-    public static class HeaderSourceProviderParser
+    public class HeaderSourceProviderParser
     {
-        public static StorageSources ParseContextHeaderSource(IResolveFieldContext context)
+        public StorageSources ParseContextHeaderSource(IResolveFieldContext context)
         {
             var httpContext = context.RequestServices.GetService<IHttpContextAccessor>().HttpContext;
             var sourceString = httpContext.Request.Headers["Source"];

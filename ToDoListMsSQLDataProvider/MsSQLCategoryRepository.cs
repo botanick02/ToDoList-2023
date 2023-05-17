@@ -27,12 +27,8 @@ namespace ToDoListMsSQLDataProvider
 
                     string sqlQuery = $"INSERT INTO Categories ([Name])" +
                         $" VALUES(@Name); SELECT SCOPE_IDENTITY() AS [Id];";
-                    var addedCat = conn.QueryFirst<CategoryEntity>(sqlQuery, parameters);
-                    return addedCat;
-                    if (addedCat != null)
-                    {
-                        return GetCategoryById(addedCat.Id);
-                    }
+                    var addedCatId = conn.QueryFirst<int>(sqlQuery, parameters);
+                    return GetCategoryById(addedCatId);
                 }
             }
             catch (Exception e)
@@ -52,7 +48,7 @@ namespace ToDoListMsSQLDataProvider
                     {
                         Id = id
                     };
-                    string sqlQuery = $"SELECT [Name] FROM Categories WHERE Categories.Id = @Id";
+                    string sqlQuery = $"SELECT * FROM Categories WHERE Categories.Id = @Id";
                     var category = conn.QueryFirst<CategoryEntity>(sqlQuery, parameters);
                     return category;
                 }

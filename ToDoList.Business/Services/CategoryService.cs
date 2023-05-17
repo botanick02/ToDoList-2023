@@ -9,28 +9,28 @@ namespace ToDoList.BLL.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository categoryRepository;
+        private readonly CategoryRepositoryResolver categoryRepository;
         private readonly IMapper mapper;
         public CategoryService(CategoryRepositoryResolver categoryRepository, IMapper mapper)
         {
-            this.categoryRepository = categoryRepository(StorageSources.MsSQL);
+            this.categoryRepository = categoryRepository;
             this.mapper = mapper;
         }
-        public CategoryDTO AddCategory(NewCategoryDTO newCategory)
+        public CategoryDTO AddCategory(NewCategoryDTO newCategory, StorageSources source)
         {
             var category = mapper.Map<CategoryEntity>(newCategory);
 
-            return mapper.Map<CategoryDTO>(categoryRepository.AddCategory(category));
+            return mapper.Map<CategoryDTO>(categoryRepository(source).AddCategory(category));
         }
 
-        public void DeleteCategory(int id)
+        public void DeleteCategory(int id, StorageSources source)
         {
-            categoryRepository.DeleteCategory(id);
+            categoryRepository(source).DeleteCategory(id);
         }
 
-        public IEnumerable<CategoryDTO> GetCategories()
+        public IEnumerable<CategoryDTO> GetCategories(StorageSources source)
         {
-            return mapper.Map<IEnumerable<CategoryDTO>>(categoryRepository.GetCategories());
+            return mapper.Map<IEnumerable<CategoryDTO>>(categoryRepository(source).GetCategories());
         }
     }
 }

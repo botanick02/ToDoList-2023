@@ -5,14 +5,14 @@ using ToDoList.Server.HttpContextHelpers;
 
 namespace ToDoList.Server.GraphQL.Tasks
 {
-    public class Query : ObjectGraphType
+    public class TasksQuery : ObjectGraphType
     {
-        public Query(ITaskService taskService)
+        public TasksQuery(ITaskService taskService, HeaderSourceProviderParser headerAccessor)
         {
             Field<ListGraphType<TaskType>>("GetTasks")
                 .Resolve(context =>
                 {
-                    var source = HeaderSourceProviderParser.ParseContextHeaderSource(context);
+                    var source = headerAccessor.ParseContextHeaderSource(context);
                     return taskService.GetTasks(source);
                 });
         }
