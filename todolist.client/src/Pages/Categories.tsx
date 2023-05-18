@@ -1,9 +1,5 @@
-
-
 const Categories = () => {
-    return(<>
-    Categories list
-    </>)
-}
+  return <>Categories list</>;
+};
 
 export default Categories;
