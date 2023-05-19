@@ -5,10 +5,28 @@ import useForm from "../hooks/useForm";
 import { TaskInputType } from "../features/tasks/types";
 
 const ToDoTasks = () => {
-  const tasksList = useAppSelector((state) => state.tasks.tasksList);
+  var tasksList = useAppSelector((state) => state.tasks.tasksList);
+  var tasksListSorted  = [...tasksList].sort(
+    (task1, task2) => {
+      if(task1.isDone){
+        return 1;
+      }
+      if(task2.isDone){
+        return -1;
+      }
+      if(task1.dueDate === ""){
+        return 1;
+      }
+      if(task2.dueDate === ""){
+        return -1;
+      }
+      return Date.parse(task1.dueDate) - Date.parse(task2.dueDate);
+    }
+  );
   const categoriesList = useAppSelector(
     (state) => state.categories.categoriesList
   );
+
   const dispatch = useAppDispatch();
 
   const { formData, handleInputChange } = useForm<TaskInputType>({
@@ -78,10 +96,17 @@ const ToDoTasks = () => {
                 <span className="w-50">Deadline</span>
                 <span className="w-25">Category</span>
               </ListGroup.Item>
-              {tasksList.map((task) => (
+              {tasksListSorted.map((task) => (
                 <ListGroup.Item key={task.id} className="d-flex w-100">
-                  <input type="checkbox" onClick={() => dispatch(toggleTask(task.id))} checked={task.isDone} className="form-check-input me-2"/>
-                  <div className={`d-flex w-100 ${task.isDone ? "strike" : ""}`} >
+                  <input
+                    type="checkbox"
+                    onClick={() => dispatch(toggleTask(task.id))}
+                    defaultChecked={task.isDone}
+                    className="form-check-input me-2"
+                  />
+                  <div
+                    className={`d-flex w-100 ${task.isDone ? "strike" : ""}`}
+                  >
                     <span className="w-50">{task.title}</span>
                     <span className="w-50">{task.dueDate}</span>
                     <span className="w-25">{task.categoryId}</span>

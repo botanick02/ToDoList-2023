@@ -10,7 +10,14 @@ const initialState: TasksSlice = {
     {
       id: 1,
       title: "Complete assignment",
-      dueDate: "2023-05-20:15:30Z",
+      dueDate: "2023-05-20T15:30Z",
+      categoryId: 2,
+      isDone: false,
+    },
+    {
+      id: 234234,
+      title: "Complete assignment",
+      dueDate: "2023-05-20T13:30Z",
       categoryId: 2,
       isDone: false,
     },
