@@ -41,12 +41,18 @@ const tasksSlice = createSlice({
         title: action.payload.title,
         dueDate: action.payload.dueDate,
         categoryId: +action.payload.categoryId,
-        isDone: false
+        isDone: false,
       };
       state.tasksList.push(newTask);
+    },
+    toggleTask: (state, action: PayloadAction<number>) => {
+      const task = state.tasksList.find((task) => task.id === action.payload);
+      if (task) {
+        task.isDone = !task.isDone;
+      }
     },
   },
 });
 
-export const { addTask } = tasksSlice.actions;
+export const { addTask, toggleTask } = tasksSlice.actions;
 export default tasksSlice.reducer;

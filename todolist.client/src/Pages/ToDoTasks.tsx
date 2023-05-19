@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { addTask } from "../features/tasks/tasks-slice";
+import { addTask, toggleTask } from "../features/tasks/tasks-slice";
 import ListGroup from "react-bootstrap/ListGroup";
 import useForm from "../hooks/useForm";
 import { TaskInputType } from "../features/tasks/types";
@@ -80,6 +80,7 @@ const ToDoTasks = () => {
               </ListGroup.Item>
               {tasksList.map((task) => (
                 <ListGroup.Item key={task.id} className="d-flex w-100">
+                  <input type="checkbox" onClick={() => dispatch(toggleTask(task.id))} checked={task.isDone} className="form-check-input me-2"/>
                   <div className={`d-flex w-100 ${task.isDone ? "strike" : ""}`} >
                     <span className="w-50">{task.title}</span>
                     <span className="w-50">{task.dueDate}</span>
