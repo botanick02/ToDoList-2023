@@ -80,9 +80,11 @@ const ToDoTasks = () => {
               </ListGroup.Item>
               {tasksList.map((task) => (
                 <ListGroup.Item key={task.id} className="d-flex w-100">
-                  <span className="w-50">{task.title}</span>
-                  <span className="w-50">{task.dueDate}</span>
-                  <span className="w-25">{task.categoryId}</span>
+                  <div className={`d-flex w-100 ${task.isDone ? "strike" : ""}`} >
+                    <span className="w-50">{task.title}</span>
+                    <span className="w-50">{task.dueDate}</span>
+                    <span className="w-25">{task.categoryId}</span>
+                  </div>
                 </ListGroup.Item>
               ))}
             </ListGroup>
