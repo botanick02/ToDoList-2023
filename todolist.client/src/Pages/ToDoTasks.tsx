@@ -109,7 +109,7 @@ const ToDoTasks = () => {
                   >
                     <span className="w-50">{task.title}</span>
                     <span className="w-50">{task.dueDate}</span>
-                    <span className="w-25">{task.categoryId}</span>
+                    <span className="w-25">{categoriesList.find(cat => cat.id === task.categoryId)?.name}</span>
                   </div>
                 </ListGroup.Item>
               ))}
