@@ -1,28 +1,26 @@
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { addTask, toggleTask } from "../features/tasks/tasks-slice";
+import { addTask, toggleTask, deleteTask } from "../features/tasks/tasks-slice";
 import ListGroup from "react-bootstrap/ListGroup";
 import useForm from "../hooks/useForm";
 import { TaskInputType } from "../features/tasks/types";
 
 const ToDoTasks = () => {
   var tasksList = useAppSelector((state) => state.tasks.tasksList);
-  var tasksListSorted  = [...tasksList].sort(
-    (task1, task2) => {
-      if(task1.isDone){
-        return 1;
-      }
-      if(task2.isDone){
-        return -1;
-      }
-      if(task1.dueDate === ""){
-        return 1;
-      }
-      if(task2.dueDate === ""){
-        return -1;
-      }
-      return Date.parse(task1.dueDate) - Date.parse(task2.dueDate);
+  var tasksListSorted = [...tasksList].sort((task1, task2) => {
+    if (task1.isDone) {
+      return 1;
     }
-  );
+    if (task2.isDone) {
+      return -1;
+    }
+    if (task1.dueDate === "") {
+      return 1;
+    }
+    if (task2.dueDate === "") {
+      return -1;
+    }
+    return Date.parse(task1.dueDate) - Date.parse(task2.dueDate);
+  });
   const categoriesList = useAppSelector(
     (state) => state.categories.categoriesList
   );
@@ -91,25 +89,49 @@ const ToDoTasks = () => {
               </button>
             </form>
             <ListGroup className="mt-4">
-              <ListGroup.Item className="d-flex w-100 fw-bold border-bottom border-primary">
-                <span className="w-50">Title</span>
-                <span className="w-50">Deadline</span>
-                <span className="w-25">Category</span>
+              <ListGroup.Item className="d-flex w-100">
+                <div className="d-flex align-items-center w-100">
+                  <div className="d-flex w-100">
+                    <span className="w-50">Title</span>
+                    <span className="w-50 px-3">Daeadline</span>
+                    <span className="w-25">Category</span>
+                    <span className="w-25"></span>
+                  </div>
+                </div>
               </ListGroup.Item>
               {tasksListSorted.map((task) => (
                 <ListGroup.Item key={task.id} className="d-flex w-100">
-                  <input
-                    type="checkbox"
-                    onClick={() => dispatch(toggleTask(task.id))}
-                    defaultChecked={task.isDone}
-                    className="form-check-input me-2"
-                  />
-                  <div
-                    className={`d-flex w-100 ${task.isDone ? "strike" : ""}`}
-                  >
-                    <span className="w-50">{task.title}</span>
-                    <span className="w-50">{task.dueDate}</span>
-                    <span className="w-25">{categoriesList.find(cat => cat.id === task.categoryId)?.name}</span>
+                  <div className="d-flex align-items-center w-100">
+                    <div className="d-flex w-100 align-items-center text-align-center">
+                      <span><input
+                        type="checkbox"
+                        onClick={() => dispatch(toggleTask(task.id))}
+                        defaultChecked={task.isDone}
+                        className="form-check-input me-2"
+                      /></span>
+                      
+                      <span className={`w-50 ${task.isDone ? "strike" : ""}`}>
+                        {task.title}
+                      </span>
+                      <span className={`w-50 ${task.isDone ? "strike" : ""}`}>
+                        {task.dueDate}
+                      </span>
+                      <span className={`w-25 ${task.isDone ? "strike" : ""}`}>
+                        {
+                          categoriesList.find(
+                            (cat) => cat.id === task.categoryId
+                          )?.name
+                        }
+                      </span>
+                      <span className="w-25 d-flex justify-content-end">
+                      <input
+                        type="button"
+                        value="&#10006;"
+                        className="btn btn-primary-outline shadow-none "
+                        onClick={() => dispatch(deleteTask(task.id))}
+                      /> 
+                      </span>
+                    </div>
                   </div>
                 </ListGroup.Item>
               ))}
