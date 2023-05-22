@@ -2,12 +2,12 @@ import { ICategory, ITask } from "../../../features/tasks/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import TaskTableItem from "./TasksTableItem";
 
-interface TaskTableProps {
+interface ITaskTableProps {
   tasksList: ITask[];
   categoriesList: ICategory[];
 }
 
-const TasksTable = (props: TaskTableProps) => {
+const TasksTable = (props: ITaskTableProps) => {
   const { tasksList, categoriesList } = props;
 
   var tasksListSorted = [...tasksList].sort((task1, task2) => {
@@ -39,6 +39,7 @@ const TasksTable = (props: TaskTableProps) => {
       </ListGroup.Item>
       {tasksListSorted.map((task) => (
         <TaskTableItem
+          key={task.id}
           task={task}
           category={categoriesList.find((cat) => cat.id === task.categoryId)}
         />
@@ -46,6 +47,5 @@ const TasksTable = (props: TaskTableProps) => {
     </ListGroup>
   );
 };
-
 
 export default TasksTable;

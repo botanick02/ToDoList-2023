@@ -9,15 +9,15 @@ const initialState: CategoriesSlice = {
   categoriesList: [
     {
       id: 0,
-      name: "Uncategorized"
+      name: "Uncategorized",
     },
     {
       id: 1,
-      name: "Work"
+      name: "Work",
     },
     {
       id: 2,
-      name: "Uni"
+      name: "Uni",
     },
   ],
 };

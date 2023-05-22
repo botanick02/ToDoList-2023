@@ -3,12 +3,12 @@ import { deleteTask, toggleTask } from "../../../features/tasks/tasks-slice";
 import { ICategory, ITask } from "../../../features/tasks/types";
 import ListGroup from "react-bootstrap/ListGroup";
 
-interface TaskTableItemProps {
+interface ITaskTableItemProps {
   task: ITask;
   category?: ICategory;
 }
 
-const TasksTableItem = (props: TaskTableItemProps) => {
+const TasksTableItem = (props: ITaskTableItemProps) => {
   const { task, category } = props;
   const dispatch = useAppDispatch();
   return (
