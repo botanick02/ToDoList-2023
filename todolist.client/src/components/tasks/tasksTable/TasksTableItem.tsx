@@ -8,11 +8,10 @@ interface ITaskTableItemProps {
   category?: ICategory;
 }
 
-const TasksTableItem = (props: ITaskTableItemProps) => {
-  const { task, category } = props;
+const TasksTableItem = ({ task, category }: ITaskTableItemProps) => {
   const dispatch = useAppDispatch();
   return (
-    <ListGroup.Item key={task.id} className="d-flex w-100">
+    <ListGroup.Item className="d-flex w-100">
       <div className="d-flex align-items-center w-100">
         <div className="d-flex w-100 align-items-center text-align-center">
           <span>
@@ -23,7 +22,6 @@ const TasksTableItem = (props: ITaskTableItemProps) => {
               className="form-check-input me-2"
             />
           </span>
-
           <span className={`w-50 ${task.isDone ? "strike" : ""}`}>
             {task.title}
           </span>

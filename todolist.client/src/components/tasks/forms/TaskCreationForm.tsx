@@ -17,7 +17,6 @@ const TaskCreationForm = ({ categoriesList }: ITaskCreationFormProps) => {
   } = useForm<ITaskInputType>();
 
   const onSubmit: SubmitHandler<ITaskInputType> = (data) => {
-    console.log(data);
     dispatch(addTask(data));
     reset();
   };

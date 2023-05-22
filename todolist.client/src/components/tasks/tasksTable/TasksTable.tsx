@@ -7,9 +7,7 @@ interface ITaskTableProps {
   categoriesList: ICategory[];
 }
 
-const TasksTable = (props: ITaskTableProps) => {
-  const { tasksList, categoriesList } = props;
-
+const TasksTable = ({ tasksList, categoriesList }: ITaskTableProps) => {
   var tasksListSorted = [...tasksList].sort((task1, task2) => {
     if (task1.isDone) {
       return 1;

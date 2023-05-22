@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICategory } from "./types";
+import { ICategory, ICategoryInputType } from "./types";
 
 interface CategoriesSlice {
   categoriesList: ICategory[];
@@ -26,11 +26,21 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    addCategory: (state, action: PayloadAction<ICategory>) => {
-      state.categoriesList.push(action.payload);
+    addCategory: (state, action: PayloadAction<ICategoryInputType>) => {
+      const newCategory: ICategory = {
+        id: Date.now(),
+        name: action.payload.name,
+      };
+      state.categoriesList.push(newCategory);
+    },
+    deleteCategory: (state, action: PayloadAction<number>) => {
+      const categoryId = action.payload;
+      state.categoriesList = state.categoriesList.filter(
+        (category) => category.id !== categoryId
+      );
     },
   },
 });
 
-export const { addCategory } = categoriesSlice.actions;
+export const { addCategory, deleteCategory } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
