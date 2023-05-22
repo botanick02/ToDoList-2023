@@ -1,10 +1,10 @@
-import { Category, Task } from "../../../features/tasks/types";
+import { ICategory, ITask } from "../../../features/tasks/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import TaskTableItem from "./TasksTableItem";
 
 interface TaskTableProps {
-  tasksList: Task[];
-  categoriesList: Category[];
+  tasksList: ITask[];
+  categoriesList: ICategory[];
 }
 
 const TasksTable = (props: TaskTableProps) => {

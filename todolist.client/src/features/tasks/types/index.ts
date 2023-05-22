@@ -1,4 +1,4 @@
-export interface Task {
+export interface ITask {
   id: number;
   title: string;
   dueDate: string;
@@ -6,13 +6,13 @@ export interface Task {
   isDone: boolean;
 }
 
-export interface TaskInputType {
+export interface ITaskInputType {
   title: string;
   dueDate: string;
   categoryId: number;
 }
 
-export interface Category {
+export interface ICategory {
   id: number;
   name: string;
 }

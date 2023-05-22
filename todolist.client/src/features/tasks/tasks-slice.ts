@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Task, TaskInputType } from "./types";
+import { ITask, ITaskInputType } from "./types";
 
 interface TasksSlice {
-  tasksList: Task[];
+  tasksList: ITask[];
 }
 
 const initialState: TasksSlice = {
@@ -42,8 +42,8 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<TaskInputType>) => {
-      const newTask: Task = {
+    addTask: (state, action: PayloadAction<ITaskInputType>) => {
+      const newTask: ITask = {
         id: Date.now(),
         title: action.payload.title,
         dueDate: action.payload.dueDate !== "" ? action.payload.dueDate + "Z" : "",

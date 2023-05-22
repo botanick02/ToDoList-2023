@@ -1,17 +1,22 @@
 import { useAppDispatch } from "../../../app/hooks";
 import { addTask } from "../../../features/tasks/tasks-slice";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Category, TaskInputType } from "../../../features/tasks/types";
+import { ICategory, ITaskInputType } from "../../../features/tasks/types";
 
-interface TaskCreationFormProps {
-  categoriesList: Category[];
+interface ITaskCreationFormProps {
+  categoriesList: ICategory[];
 }
 
-const TaskCreationForm = ({ categoriesList }: TaskCreationFormProps) => {
+const TaskCreationForm = ({ categoriesList }: ITaskCreationFormProps) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<TaskInputType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ITaskInputType>();
 
-  const onSubmit: SubmitHandler<TaskInputType> = (data) => {
+  const onSubmit: SubmitHandler<ITaskInputType> = (data) => {
     console.log(data);
     dispatch(addTask(data));
     reset();
