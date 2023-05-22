@@ -32,7 +32,7 @@ const initialState: TasksSlice = {
       id: 3,
       title: "Buy groceries",
       dueDate: "2023-05-21T10:00Z",
-      categoryId: 3,
+      categoryId: 0,
       isDone: true,
     },
   ],
