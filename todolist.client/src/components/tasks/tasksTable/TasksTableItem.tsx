@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../app/hooks";
-import { deleteTask, toggleTask } from "../../features/tasks/tasks-slice";
-import { Category, Task } from "../../features/tasks/types";
+import { useAppDispatch } from "../../../app/hooks";
+import { deleteTask, toggleTask } from "../../../features/tasks/tasks-slice";
+import { Category, Task } from "../../../features/tasks/types";
 import ListGroup from "react-bootstrap/ListGroup";
 
 interface TaskTableItemProps {
@@ -8,7 +8,7 @@ interface TaskTableItemProps {
   category?: Category;
 }
 
-const TaskTableItem = (props: TaskTableItemProps) => {
+const TasksTableItem = (props: TaskTableItemProps) => {
   const { task, category } = props;
   const dispatch = useAppDispatch();
   return (
@@ -47,4 +47,4 @@ const TaskTableItem = (props: TaskTableItemProps) => {
   );
 };
 
-export default TaskTableItem;
+export default TasksTableItem;

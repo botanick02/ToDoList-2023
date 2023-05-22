@@ -1,13 +1,13 @@
-import { Category, Task } from "../../features/tasks/types";
+import { Category, Task } from "../../../features/tasks/types";
 import ListGroup from "react-bootstrap/ListGroup";
-import TaskTableItem from "./TaskTableItem";
+import TaskTableItem from "./TasksTableItem";
 
 interface TaskTableProps {
   tasksList: Task[];
   categoriesList: Category[];
 }
 
-const TaskTable = (props: TaskTableProps) => {
+const TasksTable = (props: TaskTableProps) => {
   const { tasksList, categoriesList } = props;
 
   var tasksListSorted = [...tasksList].sort((task1, task2) => {
@@ -48,4 +48,4 @@ const TaskTable = (props: TaskTableProps) => {
 };
 
 
-export default TaskTable;
+export default TasksTable;

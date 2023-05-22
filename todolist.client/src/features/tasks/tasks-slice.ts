@@ -46,7 +46,7 @@ const tasksSlice = createSlice({
       const newTask: Task = {
         id: Date.now(),
         title: action.payload.title,
-        dueDate: action.payload.dueDate,
+        dueDate: action.payload.dueDate !== "" ? action.payload.dueDate + "Z" : "",
         categoryId: +action.payload.categoryId,
         isDone: false,
       };
