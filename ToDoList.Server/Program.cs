@@ -11,7 +11,8 @@ using ToDoList.Server.HttpContextHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 
@@ -19,9 +20,17 @@ builder.Services.RegisterDALDependencies(builder.Configuration);
 builder.Services.RegisterBLLDependencies();
 builder.Services.AddSingleton<HeaderSourceProviderParser>();
 
-//builder.Services.AddSingleton<ISchema, CategoriesSchema>(services => new CategoriesSchema(new SelfActivatingServiceProvider(services)));
-//builder.Services.AddSingleton<ISchema, TasksSchema>(services => new TasksSchema(new SelfActivatingServiceProvider(services)));
-//builder.Services.AddSelfActivatingSchema<>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DefaultPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+               .WithMethods("POST", "OPTIONS")
+               .WithOrigins("http://localhost:3000")
+               .AllowCredentials();
+    });
+});
+
 
 
 builder.Services.AddGraphQL(b => b
@@ -30,10 +39,12 @@ builder.Services.AddGraphQL(b => b
     .AddAutoClrMappings()
     .AddSystemTextJson());
 
+
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 var app = builder.Build();
 
+app.UseCors("DefaultPolicy");
 app.UseGraphQL("/graphql");
 app.UseGraphQLAltair();
 

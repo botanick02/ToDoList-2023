@@ -1,4 +1,4 @@
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../redux/hooks";
 import TaskCreationForm from "../components/tasks/forms/TaskCreationForm";
 import TaskTable from "../components/tasks/tasksTable/TasksTable";
 

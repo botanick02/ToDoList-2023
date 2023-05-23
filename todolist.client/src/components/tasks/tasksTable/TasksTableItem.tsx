@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../../app/hooks";
-import { deleteTask, toggleTask } from "../../../features/tasks/tasks-slice";
-import { ICategory, ITask } from "../../../features/tasks/types";
+import { useAppDispatch } from "../../../redux/hooks";
+import { deleteTask, toggleTask } from "../../../redux/slices/tasks-slice";
+import { ICategory, ITask } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 
 interface ITaskTableItemProps {

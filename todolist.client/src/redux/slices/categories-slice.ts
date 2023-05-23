@@ -1,25 +1,12 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICategory, ICategoryInputType } from "./types";
+import { PayloadAction, createAction, createSlice } from "@reduxjs/toolkit";
+import { ICategory, ICategoryInputType } from "../types";
 
 interface CategoriesSlice {
   categoriesList: ICategory[];
 }
 
 const initialState: CategoriesSlice = {
-  categoriesList: [
-    {
-      id: 0,
-      name: "Uncategorized",
-    },
-    {
-      id: 1,
-      name: "Work",
-    },
-    {
-      id: 2,
-      name: "Uni",
-    },
-  ],
+  categoriesList: [],
 };
 
 const categoriesSlice = createSlice({
@@ -33,6 +20,9 @@ const categoriesSlice = createSlice({
       };
       state.categoriesList.push(newCategory);
     },
+    categoriesFetched: (state, action: PayloadAction<ICategory[]>) => {
+      state.categoriesList = action.payload;
+    },
     deleteCategory: (state, action: PayloadAction<number>) => {
       const categoryId = action.payload;
       state.categoriesList = state.categoriesList.filter(
@@ -42,5 +32,7 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { addCategory, deleteCategory } = categoriesSlice.actions;
+export const { addCategory, deleteCategory, categoriesFetched } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
+
+export const fetchCategories = createAction("fetchCategories");

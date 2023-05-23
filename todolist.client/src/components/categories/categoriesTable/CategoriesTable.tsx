@@ -1,4 +1,4 @@
-import { ICategory } from "../../../features/tasks/types";
+import { ICategory } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import CategoriesTableItem from "./CategoriesTableItem";
 
@@ -16,7 +16,7 @@ const CategoriesTable = ({ categoriesList }: ITaskTableProps) => {
           </div>
         </div>
       </ListGroup.Item>
-      {categoriesList.filter(cat => cat.id !== 0).map((category) => (
+      {categoriesList.filter(cat => cat.id !== 1).map((category) => (
         <CategoriesTableItem key={category.id} category={category}/>
       ))}
     </ListGroup>

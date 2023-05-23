@@ -56,7 +56,6 @@
                                     <input type="hidden" name="Id" value="@task.Id"/>
                                     <input type="checkbox" name="isDone" onchange="this.form.submit()" class="form-check-input me-2" @(task.IsDone ? "checked" : "")/>
                                 </form>
-
                                 <div class="d-flex w-100 @(task.IsDone ? "strike" : "")">
                                     <span class="w-50">@task.Title</span>
                                     <span class="w-50">@task.DueDate</span>

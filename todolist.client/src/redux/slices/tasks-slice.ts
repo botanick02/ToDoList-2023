@@ -1,41 +1,12 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ITask, ITaskInputType } from "./types";
+import { PayloadAction, createAction, createSlice } from "@reduxjs/toolkit";
+import { ITask, ITaskInputType } from "../types";
 
 interface TasksSlice {
   tasksList: ITask[];
 }
 
 const initialState: TasksSlice = {
-  tasksList: [
-    {
-      id: 1,
-      title: "Complete assignment",
-      dueDate: "2023-05-20T15:30Z",
-      categoryId: 2,
-      isDone: false,
-    },
-    {
-      id: 234234,
-      title: "Complete assignment",
-      dueDate: "2023-05-20T13:30Z",
-      categoryId: 2,
-      isDone: false,
-    },
-    {
-      id: 2,
-      title: "Read a book",
-      dueDate: "",
-      categoryId: 1,
-      isDone: false,
-    },
-    {
-      id: 3,
-      title: "Buy groceries",
-      dueDate: "2023-05-21T10:00Z",
-      categoryId: 0,
-      isDone: true,
-    },
-  ],
+  tasksList: [],
 };
 
 const tasksSlice = createSlice({
@@ -53,6 +24,9 @@ const tasksSlice = createSlice({
       };
       state.tasksList.push(newTask);
     },
+    tasksFetched: (state, action: PayloadAction<ITask[]>) => {
+      state.tasksList = action.payload;
+    },
     toggleTask: (state, action: PayloadAction<number>) => {
       const taskId = action.payload;
       const task = state.tasksList.find((task) => task.id === taskId);
@@ -67,5 +41,8 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { addTask, toggleTask, deleteTask } = tasksSlice.actions;
+export const { addTask, toggleTask, deleteTask, tasksFetched } = tasksSlice.actions;
 export default tasksSlice.reducer;
+
+
+export const fetchTasks = createAction("fetchTasks");

@@ -1,7 +1,7 @@
-import { useAppDispatch } from "../../../app/hooks";
-import { addTask } from "../../../features/tasks/tasks-slice";
+import { useAppDispatch } from "../../../redux/hooks";
+import { addTask } from "../../../redux/slices/tasks-slice";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ICategory, ITaskInputType } from "../../../features/tasks/types";
+import { ICategory, ITaskInputType } from "../../../redux/types";
 
 interface ITaskCreationFormProps {
   categoriesList: ICategory[];

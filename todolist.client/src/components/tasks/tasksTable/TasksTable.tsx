@@ -1,4 +1,4 @@
-import { ICategory, ITask } from "../../../features/tasks/types";
+import { ICategory, ITask } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import TaskTableItem from "./TasksTableItem";
 
@@ -8,6 +8,7 @@ interface ITaskTableProps {
 }
 
 const TasksTable = ({ tasksList, categoriesList }: ITaskTableProps) => {
+
   var tasksListSorted = [...tasksList].sort((task1, task2) => {
     if (task1.isDone) {
       return 1;

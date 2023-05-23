@@ -1,4 +1,4 @@
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../redux/hooks";
 import CategoriesTable from "../components/categories/categoriesTable/CategoriesTable";
 import CategoryCreationForm from "../components/categories/forms/CategoryCreationForm";
 

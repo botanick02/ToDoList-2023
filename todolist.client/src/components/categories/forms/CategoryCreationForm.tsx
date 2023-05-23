@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../../app/hooks";
-import { addCategory } from "../../../features/tasks/categories-slice";
-import { ICategoryInputType } from "../../../features/tasks/types";
+import { useAppDispatch } from "../../../redux/hooks";
+import { addCategory } from "../../../redux/slices/categories-slice";
+import { ICategoryInputType } from "../../../redux/types";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const CategoryCreationForm = () => {

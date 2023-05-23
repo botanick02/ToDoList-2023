@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../../app/hooks";
-import { deleteCategory } from "../../../features/tasks/categories-slice";
-import { ICategory } from "../../../features/tasks/types";
+import { useAppDispatch } from "../../../redux/hooks";
+import { deleteCategory } from "../../../redux/slices/categories-slice";
+import { ICategory } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 
 interface ICategoriesTableItemProps{
