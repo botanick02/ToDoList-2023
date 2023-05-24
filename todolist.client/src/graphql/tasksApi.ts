@@ -1,8 +1,6 @@
 import { graphQLFetch } from "./api";
 import { FetchTasksResponse } from "./types/task";
 
-const API_URL = "https://localhost:7182/graphql";
-
 const getTasksQuery = `
 query GetAllTasks{
   tasks{

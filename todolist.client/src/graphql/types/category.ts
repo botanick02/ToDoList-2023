@@ -6,3 +6,9 @@ export type FetchCategoriesResponse = GraphQlResponse<{
     allCategories: ICategory[];
   };
 }>;
+
+export type AddCategoryResponse = GraphQlResponse<{
+  categories: {
+    createCategory: ICategory;
+  };
+}>;

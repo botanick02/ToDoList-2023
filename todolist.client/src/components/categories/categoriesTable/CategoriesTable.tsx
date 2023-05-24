@@ -16,9 +16,11 @@ const CategoriesTable = ({ categoriesList }: ITaskTableProps) => {
           </div>
         </div>
       </ListGroup.Item>
-      {categoriesList.filter(cat => cat.id !== 1).map((category) => (
-        <CategoriesTableItem key={category.id} category={category}/>
-      ))}
+      {categoriesList
+        .filter((cat) => cat.id !== 1)
+        .map((category) => (
+          <CategoriesTableItem key={category.id} category={category} />
+        ))}
     </ListGroup>
   );
 };

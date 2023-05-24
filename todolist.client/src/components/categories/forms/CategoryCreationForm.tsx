@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../redux/hooks";
-import { addCategory } from "../../../redux/reducers/categories-slice";
+import { createCategory } from "../../../redux/reducers/categories-slice";
 import { ICategoryInputType } from "../../../redux/types";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -13,7 +13,7 @@ const CategoryCreationForm = () => {
   } = useForm<ICategoryInputType>();
 
   const onSubmit: SubmitHandler<ICategoryInputType> = (data) => {
-    dispatch(addCategory(data));
+    dispatch(createCategory(data));
     reset();
   };
 

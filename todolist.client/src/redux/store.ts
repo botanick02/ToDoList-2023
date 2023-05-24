@@ -1,18 +1,17 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import tasksReducer from "./reducers/tasks-slice";
 import categoriesReducer from "./reducers/categories-slice";
 import { createEpicMiddleware } from "redux-observable";
 import { rootEpic } from "./epics/rootEpic";
 
 const epicMiddleware = createEpicMiddleware();
-const middleware = [...getDefaultMiddleware(), epicMiddleware];
 
 export const store = configureStore({
   reducer: {
     tasks: tasksReducer,
     categories: categoriesReducer,
   },
-  middleware: middleware,
+  middleware: [epicMiddleware],
 });
 
 epicMiddleware.run(rootEpic);
