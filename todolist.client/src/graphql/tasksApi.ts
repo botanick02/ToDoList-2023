@@ -1,11 +1,12 @@
-import { ITasksFetchData } from "./types/task";
+import { graphQLFetch } from "./api";
+import { FetchTasksResponse } from "./types/task";
 
 const API_URL = "https://localhost:7182/graphql";
 
 const getTasksQuery = `
 query GetAllTasks{
   tasks{
-    getTasks{
+    allTasks{
       id
       title
       categoryId
@@ -16,25 +17,11 @@ query GetAllTasks{
 }
 `;
 
-export const getTasks = async () => {
+export const fetchTasksApi = async () => {
   try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Source: "MsSQL",
-      },
-      body: JSON.stringify({
-        query: getTasksQuery,
-      }),
-    });
-
-    const data: ITasksFetchData = await response.json();
-    return data;
+    return await graphQLFetch<FetchTasksResponse>(getTasksQuery);
   } catch (error) {
-    console.error("Error fetching tasks:", error);
+    console.error("Error fetching categories:", error);
     throw error;
   }
 };

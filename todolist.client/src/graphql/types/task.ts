@@ -1,12 +1,8 @@
 import { ITask } from "../../redux/types";
+import { GraphQlResponse } from "./graphqlReponse";
 
-export interface ITasksFetchData {
-  data: ITasksFetch;
-}
-
-interface ITasksFetch{
-    tasks: IGetTasks;
-}
-interface IGetTasks {
-  getTasks: ITask[];
-}
+export type FetchTasksResponse = GraphQlResponse<{
+  categories: {
+    allCategories: ITask[];
+  };
+}>;

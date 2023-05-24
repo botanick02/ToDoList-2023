@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../redux/hooks";
-import { addCategory } from "../../../redux/slices/categories-slice";
+import { addCategory } from "../../../redux/reducers/categories-slice";
 import { ICategoryInputType } from "../../../redux/types";
 import { SubmitHandler, useForm } from "react-hook-form";
 

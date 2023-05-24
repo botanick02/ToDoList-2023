@@ -1,5 +1,4 @@
 import { useAppDispatch } from "../../../redux/hooks";
-import { addTask } from "../../../redux/slices/tasks-slice";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ICategory, ITaskInputType } from "../../../redux/types";
 
@@ -17,7 +16,6 @@ const TaskCreationForm = ({ categoriesList }: ITaskCreationFormProps) => {
   } = useForm<ITaskInputType>();
 
   const onSubmit: SubmitHandler<ITaskInputType> = (data) => {
-    dispatch(addTask(data));
     reset();
   };
 

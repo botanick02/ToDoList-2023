@@ -1,5 +1,4 @@
 import { useAppDispatch } from "../../../redux/hooks";
-import { deleteTask, toggleTask } from "../../../redux/slices/tasks-slice";
 import { ICategory, ITask } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 
@@ -17,7 +16,7 @@ const TasksTableItem = ({ task, category }: ITaskTableItemProps) => {
           <span>
             <input
               type="checkbox"
-              onClick={() => dispatch(toggleTask(task.id))}
+              // onClick={() => dispatch(toggleTask(task.id))}
               defaultChecked={task.isDone}
               className="form-check-input me-2"
             />
@@ -36,7 +35,7 @@ const TasksTableItem = ({ task, category }: ITaskTableItemProps) => {
               type="button"
               value="&#10006;"
               className="btn btn-primary-outline shadow-none "
-              onClick={() => dispatch(deleteTask(task.id))}
+              // onClick={() => dispatch(deleteTask(task.id))}
             />
           </span>
         </div>

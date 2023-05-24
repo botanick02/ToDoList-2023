@@ -1,11 +1,8 @@
 import { ICategory } from "../../redux/types";
+import { GraphQlResponse } from "./graphqlReponse";
 
-export interface ICategoriesFetchData {
-  data: ICategoriesFetch;
-}
-interface ICategoriesFetch {
-  categories: IGetCategories;
-}
-interface IGetCategories {
-  getCategories: ICategory[];
-}
+export type FetchCategoriesResponse = GraphQlResponse<{
+  categories: {
+    allCategories: ICategory[];
+  };
+}>;

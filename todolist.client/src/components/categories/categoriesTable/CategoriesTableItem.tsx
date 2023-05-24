@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../redux/hooks";
-import { deleteCategory } from "../../../redux/slices/categories-slice";
+import { deleteCategory } from "../../../redux/reducers/categories-slice";
 import { ICategory } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 
@@ -9,7 +9,7 @@ interface ICategoriesTableItemProps{
 
 const CategoriesTableItem = ({category}: ICategoriesTableItemProps) => {
     const dispatch = useAppDispatch();
-
+  
     return(
         <ListGroup.Item className="d-flex w-100">
       <div className="d-flex align-items-center w-100">
@@ -30,6 +30,5 @@ const CategoriesTableItem = ({category}: ICategoriesTableItemProps) => {
     </ListGroup.Item>
     )
 }
-
 
 export default CategoriesTableItem;

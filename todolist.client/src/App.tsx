@@ -5,8 +5,8 @@ import NotFound from "./pages/NotFound";
 import Categories from "./pages/Categories";
 import { useAppDispatch } from "./redux/hooks";
 import { useEffect } from "react";
-import { fetchTasks } from "./redux/slices/tasks-slice";
-import { fetchCategories } from "./redux/slices/categories-slice";
+import { fetchTasks } from "./redux/reducers/tasks-slice";
+import { fetchCategories } from "./redux/reducers/categories-slice";
 
 function App() {
   const dispatch = useAppDispatch();

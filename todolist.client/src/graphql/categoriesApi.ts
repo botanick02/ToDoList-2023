@@ -1,11 +1,11 @@
-import { ICategoriesFetchData } from "./types/category";
-
-const API_URL = "https://localhost:7182/graphql";
+import { graphQLFetch } from "./api";
+import { FetchCategoriesResponse } from "./types/category";
+import { GraphQlData, GraphQlResponse } from "./types/graphqlReponse";
 
 const getCategoriesQuery = `
 query GetCategories{
     categories{
-      getCategories{
+      allCategories{
         id
         name
       }
@@ -15,22 +15,9 @@ query GetCategories{
 
 export const getCategories = async () => {
   try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Source: "MsSQL",
-      },
-      body: JSON.stringify({
-        query: getCategoriesQuery,
-      }),
-    });
-    const data: ICategoriesFetchData = await response.json();
-    return data;
+    return await graphQLFetch<FetchCategoriesResponse>(getCategoriesQuery);
   } catch (error) {
-    console.error("Error fetching categories:", error);
+    console.error("Error in graphql request processing:", error);
     throw error;
   }
 };

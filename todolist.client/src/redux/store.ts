@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import tasksReducer from "./slices/tasks-slice";
-import categoriesReducer from "./slices/categories-slice";
+import tasksReducer from "./reducers/tasks-slice";
+import categoriesReducer from "./reducers/categories-slice";
 import { createEpicMiddleware } from "redux-observable";
 import { rootEpic } from "./epics/rootEpic";
 
