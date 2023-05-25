@@ -9,7 +9,7 @@ namespace ToDoList.Server.GraphQL.Tasks
     {
         public TasksQuery(ITaskService taskService, HeaderSourceProviderParser headerAccessor)
         {
-            Field<ListGraphType<TaskType>>("GetTasks")
+            Field<ListGraphType<TaskType>>("AllTasks")
                 .Resolve(context =>
                 {
                     var source = headerAccessor.ParseContextHeaderSource(context);

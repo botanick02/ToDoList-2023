@@ -3,6 +3,6 @@ export const stringToFormattedDateString = (utcDate: string) => {
         return "";
     }
     let date = new Date(utcDate);
-    let stringDate = date.toLocaleString();
+    let stringDate = date.toLocaleTimeString();
     return stringDate === 'Invalid Date' ? '' : stringDate;
 }

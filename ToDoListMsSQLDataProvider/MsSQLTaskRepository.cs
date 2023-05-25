@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Dapper;
 using ToDoList.RepositoryAbstractions.IRepositories;
 using ToDoList.RepositoryAbstractions.Entities;
+using System.Threading.Tasks;
 
 namespace ToDoListMsSQLDataProvider
 {
@@ -53,6 +54,11 @@ namespace ToDoListMsSQLDataProvider
                 using (var conn = new SqlConnection(connectionString))
                 {
                     var task = conn.QueryFirst<TaskEntity>(sqlQuery, parameters);
+                    if (task != null && task.DueDate != null)
+                    {
+                        DateTime dueDate = (DateTime)task.DueDate;
+                        task.DueDate = DateTime.SpecifyKind(dueDate, DateTimeKind.Utc);
+                    }
                     return task;
                 }
             }
@@ -68,13 +74,20 @@ namespace ToDoListMsSQLDataProvider
             try
             {
                 
-                string sqlQuery = $"SELECT Tasks.*, Categories.[Name] AS CategoryName FROM Tasks INNER JOIN Categories ON " +
-                    $"Tasks.CategoryId = Categories.Id";
+                string sqlQuery = $"SELECT * FROM Tasks";
 
                 using (var conn = new SqlConnection(connectionString))
                 {
-                    var task = conn.Query<TaskEntity>(sqlQuery).ToList();
-                    return task;
+                    var tasks = conn.Query<TaskEntity>(sqlQuery).ToList();
+                    foreach (var task in tasks)
+                    {
+                        if (task != null && task.DueDate != null)
+                        {
+                            DateTime dueDate = (DateTime)task.DueDate;
+                            task.DueDate = DateTime.SpecifyKind(dueDate, DateTimeKind.Utc);
+                        }
+                    }
+                    return tasks;
                 }
             }
             catch (Exception e)

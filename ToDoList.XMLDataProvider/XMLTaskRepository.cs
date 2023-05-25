@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using Microsoft.VisualBasic;
+using System.Xml;
 using System.Xml.Linq;
 using ToDoList.RepositoryAbstractions.Entities;
 using ToDoList.RepositoryAbstractions.IRepositories;
@@ -65,7 +66,7 @@ namespace ToDoList.XMLDataProvider
                 Title = t.Attribute("Title").Value,
                 CategoryId = XmlConvert.ToInt32(t.Attribute("CategoryId").Value),
                 IsDone = bool.Parse(t.Attribute("IsDone").Value),
-                DueDate = t.Attribute("DueDate").Value != "" ? (DateTime?)DateTime.Parse(t.Attribute("DueDate").Value) : null,
+                DueDate = t.Attribute("DueDate")?.Value != "" ? DateTime.SpecifyKind(DateTime.Parse(t.Attribute("DueDate")!.Value), DateTimeKind.Utc) : null,
             }).First();
 
             return task;
@@ -94,7 +95,7 @@ namespace ToDoList.XMLDataProvider
                 Title = t.Attribute("Title").Value,
                 CategoryId = XmlConvert.ToInt32(t.Attribute("CategoryId").Value),
                 IsDone = bool.Parse(t.Attribute("IsDone").Value),
-                DueDate = t.Attribute("DueDate").Value != "" ? (DateTime?)DateTime.Parse(t.Attribute("DueDate").Value) : null,
+                DueDate = t.Attribute("DueDate").Value != "" ? DateTime.SpecifyKind(DateTime.Parse(t.Attribute("DueDate")!.Value), DateTimeKind.Utc) : null,
             }).ToList();
 
             return tasks;

@@ -10,7 +10,7 @@ namespace ToDoList.Server.GraphQL.Categories
     {
         public CategoriesQuery(ICategoryService categoryService, HeaderSourceProviderParser headerAccessor)
         {
-            Field<ListGraphType<CategoryType>>("GetCategories")
+            Field<ListGraphType<CategoryType>>("AllCategories")
                 .Resolve(context =>
                 {
                     var source = headerAccessor.ParseContextHeaderSource(context);
