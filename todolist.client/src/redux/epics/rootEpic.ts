@@ -1,5 +1,5 @@
 import { combineEpics } from "redux-observable";
-import { fetchTasksEpic } from "./tasksEpic";
+import { createTaskEpic, deleteTaskEpic, fetchTasksEpic, toggleTaskEpic } from "./tasksEpic";
 import {
   createCategoryEpic,
   deleteCategoryEpic,
@@ -10,5 +10,8 @@ export const rootEpic = combineEpics(
   createCategoryEpic,
   fetchTasksEpic,
   fetchCategoriesEpic,
-  deleteCategoryEpic
+  deleteCategoryEpic,
+  createTaskEpic,
+  deleteTaskEpic,
+  toggleTaskEpic
 );

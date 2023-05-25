@@ -2,6 +2,7 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { ICategory, ITask } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import { stringToFormattedDateString } from "../../../utils/dateUtils";
+import { deleteTask, toggleTask } from "../../../redux/reducers/tasks-slice";
 
 interface ITaskTableItemProps {
   task: ITask;
@@ -17,7 +18,7 @@ const TasksTableItem = ({ task, category }: ITaskTableItemProps) => {
           <span>
             <input
               type="checkbox"
-              // onClick={() => dispatch(toggleTask(task.id))}
+              onClick={() => dispatch(toggleTask({taskId: task.id}))}
               defaultChecked={task.isDone}
               className="form-check-input me-2"
             />
@@ -36,7 +37,7 @@ const TasksTableItem = ({ task, category }: ITaskTableItemProps) => {
               type="button"
               value="&#10006;"
               className="btn btn-primary-outline shadow-none "
-              // onClick={() => dispatch(deleteTask(task.id))}
+              onClick={() => dispatch(deleteTask({taskId: task.id}))}
             />
           </span>
         </div>

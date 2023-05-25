@@ -6,3 +6,15 @@ export type FetchTasksResponse = GraphQlResponse<{
     allCategories: ITask[];
   };
 }>;
+
+export type AddTaskResponse = GraphQlResponse<{
+  tasks: {
+    createTask: ITask;
+  };
+}>;
+
+export type ToggleTaskResponse = GraphQlResponse<{
+  tasks: {
+    toggleIsDone: ITask;
+  };
+}>;

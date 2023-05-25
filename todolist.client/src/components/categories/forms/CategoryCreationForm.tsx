@@ -1,7 +1,7 @@
 import { useAppDispatch } from "../../../redux/hooks";
 import { createCategory } from "../../../redux/reducers/categories-slice";
-import { ICategoryInputType } from "../../../redux/types";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { NewCategoryInputType } from "../../../redux/types";
 
 const CategoryCreationForm = () => {
   const dispatch = useAppDispatch();
@@ -10,9 +10,9 @@ const CategoryCreationForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ICategoryInputType>();
+  } = useForm<NewCategoryInputType>();
 
-  const onSubmit: SubmitHandler<ICategoryInputType> = (data) => {
+  const onSubmit: SubmitHandler<NewCategoryInputType> = (data) => {
     dispatch(createCategory(data));
     reset();
   };

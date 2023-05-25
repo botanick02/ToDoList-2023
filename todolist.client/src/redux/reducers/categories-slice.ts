@@ -17,7 +17,7 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    categoryAdded: (state, action: PayloadAction<ICategory>) => {
+    categoryCreated: (state, action: PayloadAction<ICategory>) => {
       console.log(
         "Category" + action.payload.name + " was successfully added!"
       );
@@ -31,7 +31,7 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { categoryAdded, categoryDeleted, categoriesFetched } =
+export const { categoryCreated, categoryDeleted, categoriesFetched } =
   categoriesSlice.actions;
 export default categoriesSlice.reducer;
 

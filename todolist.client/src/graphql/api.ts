@@ -7,7 +7,7 @@ export async function graphQLFetch<T extends GraphQlData>(
 ): Promise<T> {
   const res = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Source: "MsSQL" },
+    headers: { "Content-Type": "application/json", "Source": "MsSQL" },
     body: JSON.stringify({ query, variables }),
   });
 

@@ -6,17 +6,26 @@ export interface ITask {
   isDone: boolean;
 }
 
-export interface ITaskInputType {
+
+export type NewTaskInputType = {
   title: string;
   dueDate: string;
+  categoryId: string;
+};
+
+export type NewTaskType = {
+  title: string;
+  dueDate?: Date;
   categoryId: number;
-}
+};
 
 export interface ICategory {
   id: number;
   name: string;
 }
 
-export interface ICategoryInputType {
+export type NewCategoryInputType = {
   name: string;
-}
+};
+
+

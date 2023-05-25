@@ -7,7 +7,7 @@ import {
   getCategoriesApi,
 } from "../../graphql/categoriesApi";
 import {
-  categoryAdded,
+  categoryCreated,
   categoriesFetched,
   createCategory,
   fetchCategories,
@@ -31,7 +31,7 @@ export const createCategoryEpic: Epic = (action$) =>
     mergeMap((action) =>
       from(createCategoryApi(action.payload)).pipe(
         mergeMap((response) => [
-          categoryAdded(response.categories.createCategory),
+          categoryCreated(response.categories.createCategory),
           fetchCategories(),
         ])
       )

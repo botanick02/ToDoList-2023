@@ -1,6 +1,7 @@
 import { useAppDispatch } from "../../../redux/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ICategory, ITaskInputType } from "../../../redux/types";
+import { ICategory, NewTaskInputType, NewTaskType } from "../../../redux/types";
+import { createTask } from "../../../redux/reducers/tasks-slice";
 
 interface ITaskCreationFormProps {
   categoriesList: ICategory[];
@@ -13,9 +14,21 @@ const TaskCreationForm = ({ categoriesList }: ITaskCreationFormProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ITaskInputType>();
+  } = useForm<NewTaskInputType>({
+    defaultValues: {
+      title: '',
+      dueDate: '',
+      categoryId: '1'
+    }
+  });
 
-  const onSubmit: SubmitHandler<ITaskInputType> = (data) => {
+  const onSubmit: SubmitHandler<NewTaskInputType> = (data) => {
+    const newTask: NewTaskType = {
+      title: data.title,
+      dueDate: data.dueDate === "" ? undefined : new Date(data.dueDate),
+      categoryId: +data.categoryId ?? 1,
+    }
+    dispatch(createTask(newTask))
     reset();
   };
 
