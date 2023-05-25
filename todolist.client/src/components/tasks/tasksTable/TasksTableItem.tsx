@@ -1,6 +1,7 @@
 import { useAppDispatch } from "../../../redux/hooks";
 import { ICategory, ITask } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
+import { stringToFormattedDateString } from "../../../utils/dateUtils";
 
 interface ITaskTableItemProps {
   task: ITask;
@@ -25,7 +26,7 @@ const TasksTableItem = ({ task, category }: ITaskTableItemProps) => {
             {task.title}
           </span>
           <span className={`w-50 ${task.isDone ? "strike" : ""}`}>
-            {task.dueDate}
+            {stringToFormattedDateString(task.dueDate)}
           </span>
           <span className={`w-25 ${task.isDone ? "strike" : ""}`}>
             {category?.name || "N/A"}

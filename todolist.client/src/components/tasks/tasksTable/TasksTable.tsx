@@ -29,9 +29,9 @@ const TasksTable = ({ tasksList, categoriesList }: ITaskTableProps) => {
       <ListGroup.Item className="d-flex w-100">
         <div className="d-flex align-items-center w-100">
           <div className="d-flex w-100">
-            <span className="w-50">Title</span>
-            <span className="w-50 px-3">Daeadline</span>
-            <span className="w-25">Category</span>
+            <span className="w-50 text-center">Title</span>
+            <span className="w-50 px-3 text-center">Daeadline</span>
+            <span className="w-25 text-center">Category</span>
             <span className="w-25"></span>
           </div>
         </div>
