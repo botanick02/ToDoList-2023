@@ -1,9 +1,8 @@
 import { PayloadAction, createAction, createSlice } from "@reduxjs/toolkit";
-import { ITask, NewTaskInputType, NewTaskType } from "../types";
-import { DeleteTaskInputType, ToggleTaskInputType } from "../../graphql/tasksApi";
+import { Task, NewTask, ToggleTaskInputType, DeleteTaskInputType } from "../types/task";
 
 interface TasksSlice {
-  tasksList: ITask[];
+  tasksList: Task[];
 }
 
 const initialState: TasksSlice = {
@@ -14,16 +13,16 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    taskCreated: (state, action: PayloadAction<ITask>) => {
+    taskCreated: (state, action: PayloadAction<Task>) => {
       console.log("Task with title " + action.payload.title + " was successfully created!");
     },
     taskDeleted: (state) => {
       console.log("Task was successfully deleted!");
     },
-    taskToggled: (state, action: PayloadAction<ITask>) => {
+    taskToggled: (state, action: PayloadAction<Task>) => {
       console.log("Task with title " + action.payload.title + " was successfully toggled!");
     },
-    tasksFetched: (state, action: PayloadAction<ITask[]>) => {
+    tasksFetched: (state, action: PayloadAction<Task[]>) => {
       state.tasksList = action.payload;
     },
   },
@@ -33,6 +32,6 @@ export const { tasksFetched, taskCreated, taskDeleted, taskToggled } = tasksSlic
 export default tasksSlice.reducer;
 
 export const fetchTasks = createAction("fetchTasks");
-export const createTask = createAction<NewTaskType>("createTask");
+export const createTask = createAction<NewTask>("createTask");
 export const toggleTask = createAction<ToggleTaskInputType>("toggleTask");
 export const deleteTask = createAction<DeleteTaskInputType>("deleteTask");

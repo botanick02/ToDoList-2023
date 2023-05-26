@@ -1,4 +1,4 @@
-import { NewTaskInputType } from "../redux/types";
+import { NewTask, DeleteTaskInputType, ToggleTaskInputType } from "../redux/types/task";
 import { graphQLFetch } from "./api";
 import { AddTaskResponse, FetchTasksResponse, ToggleTaskResponse } from "./types/task";
 
@@ -41,10 +41,10 @@ const createTaskMutation = `
 
 
 type createTaskMutationVariables = {
-  task: NewTaskInputType;
+  task: NewTask;
 };
 
-export const createTaskApi = async (newTask: NewTaskInputType) => {
+export const createTaskApi = async (newTask: NewTask) => {
   try {
     const inputVariables: createTaskMutationVariables = {
       task: newTask,
@@ -68,9 +68,6 @@ const deleteTaskMutation = `
   }
 `;
 
-export type DeleteTaskInputType = {
-  taskId: number;
-};
 
 type deleteTaskMutationVariables = DeleteTaskInputType;
 
@@ -99,9 +96,6 @@ const toggleTaskMutation = `
   }
 `;
 
-export type ToggleTaskInputType = {
-  taskId: number;
-};
 
 type toggleTaskMutationVariables = ToggleTaskInputType;
 

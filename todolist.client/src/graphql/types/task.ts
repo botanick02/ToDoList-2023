@@ -1,20 +1,20 @@
-import { ITask } from "../../redux/types";
+import { Task } from "../../redux/types/task";
 import { GraphQlResponse } from "./graphqlReponse";
 
 export type FetchTasksResponse = GraphQlResponse<{
   categories: {
-    allCategories: ITask[];
+    allCategories: Task[];
   };
 }>;
 
 export type AddTaskResponse = GraphQlResponse<{
   tasks: {
-    createTask: ITask;
+    createTask: Task;
   };
 }>;
 
 export type ToggleTaskResponse = GraphQlResponse<{
   tasks: {
-    toggleIsDone: ITask;
+    toggleIsDone: Task;
   };
 }>;

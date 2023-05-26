@@ -1,14 +1,14 @@
-import { ICategory, ITask } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import TaskTableItem from "./TasksTableItem";
+import { Category } from "../../../redux/types/category";
+import { Task } from "../../../redux/types/task";
 
-interface ITaskTableProps {
-  tasksList: ITask[];
-  categoriesList: ICategory[];
-}
+type TaskTableProps = {
+  tasksList: Task[];
+  categoriesList: Category[];
+};
 
-const TasksTable = ({ tasksList, categoriesList }: ITaskTableProps) => {
-
+const TasksTable = ({ tasksList, categoriesList }: TaskTableProps) => {
   var tasksListSorted = [...tasksList].sort((task1, task2) => {
     if (task1.isDone) {
       return 1;

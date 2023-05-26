@@ -1,15 +1,16 @@
 import { useAppDispatch } from "../../../redux/hooks";
-import { ICategory, ITask } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import { stringToFormattedDateString } from "../../../utils/dateUtils";
 import { deleteTask, toggleTask } from "../../../redux/reducers/tasks-slice";
+import { Category } from "../../../redux/types/category";
+import { Task } from "../../../redux/types/task";
 
-interface ITaskTableItemProps {
-  task: ITask;
-  category?: ICategory;
+type TaskTableItemProps = {
+  task: Task;
+  category?: Category;
 }
 
-const TasksTableItem = ({ task, category }: ITaskTableItemProps) => {
+const TasksTableItem = ({ task, category }: TaskTableItemProps) => {
   const dispatch = useAppDispatch();
   return (
     <ListGroup.Item className="d-flex w-100">

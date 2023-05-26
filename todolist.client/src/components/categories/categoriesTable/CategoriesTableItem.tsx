@@ -1,13 +1,13 @@
 import { useAppDispatch } from "../../../redux/hooks";
 import { deleteCategory } from "../../../redux/reducers/categories-slice";
-import { ICategory } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
+import { Category } from "../../../redux/types/category";
 
-interface ICategoriesTableItemProps {
-  category: ICategory;
+type CategoriesTableItemProps = {
+  category: Category;
 }
 
-const CategoriesTableItem = ({ category }: ICategoriesTableItemProps) => {
+const CategoriesTableItem = ({ category }: CategoriesTableItemProps) => {
   const dispatch = useAppDispatch();
 
   return (

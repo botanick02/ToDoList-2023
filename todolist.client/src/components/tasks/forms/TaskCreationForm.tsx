@@ -1,34 +1,41 @@
 import { useAppDispatch } from "../../../redux/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ICategory, NewTaskInputType, NewTaskType } from "../../../redux/types";
 import { createTask } from "../../../redux/reducers/tasks-slice";
+import { Category } from "../../../redux/types/category";
+import { NewTask } from "../../../redux/types/task";
 
-interface ITaskCreationFormProps {
-  categoriesList: ICategory[];
-}
+type NewTaskInput = {
+  title: string;
+  dueDate: string;
+  categoryId: string;
+};
 
-const TaskCreationForm = ({ categoriesList }: ITaskCreationFormProps) => {
+type TaskCreationFormProps = {
+  categoriesList: Category[];
+};
+
+const TaskCreationForm = ({ categoriesList }: TaskCreationFormProps) => {
   const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<NewTaskInputType>({
+  } = useForm<NewTaskInput>({
     defaultValues: {
-      title: '',
-      dueDate: '',
-      categoryId: '1'
-    }
+      title: "",
+      dueDate: "",
+      categoryId: "1",
+    },
   });
 
-  const onSubmit: SubmitHandler<NewTaskInputType> = (data) => {
-    const newTask: NewTaskType = {
+  const onSubmit: SubmitHandler<NewTaskInput> = (data) => {
+    const newTask: NewTask = {
       title: data.title,
       dueDate: data.dueDate === "" ? undefined : new Date(data.dueDate),
       categoryId: +data.categoryId ?? 1,
-    }
-    dispatch(createTask(newTask))
+    };
+    dispatch(createTask(newTask));
     reset();
   };
 

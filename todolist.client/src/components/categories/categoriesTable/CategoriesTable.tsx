@@ -1,12 +1,12 @@
-import { ICategory } from "../../../redux/types";
 import ListGroup from "react-bootstrap/ListGroup";
 import CategoriesTableItem from "./CategoriesTableItem";
+import { Category } from "../../../redux/types/category";
 
-interface ITaskTableProps {
-  categoriesList: ICategory[];
+type CategoriesTableProps = {
+  categoriesList: Category[];
 }
 
-const CategoriesTable = ({ categoriesList }: ITaskTableProps) => {
+const CategoriesTable = ({ categoriesList }: CategoriesTableProps) => {
   return (
     <ListGroup className="mt-4">
       <ListGroup.Item className="d-flex w-100">

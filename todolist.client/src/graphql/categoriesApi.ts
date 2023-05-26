@@ -1,3 +1,4 @@
+import { NewCategory, DeleteCategoryInput } from "../redux/types/category";
 import { graphQLFetch } from "./api";
 import { AddCategoryResponse, FetchCategoriesResponse } from "./types/category";
 
@@ -32,15 +33,11 @@ const createCategoryMutation = `
   }
 `;
 
-export type NewCategoryInputType = {
-  name: string;
-};
-
 type createCategoryMutationVariables = {
-  category: NewCategoryInputType;
+  category: NewCategory;
 };
 
-export const createCategoryApi = async (newCategory: NewCategoryInputType) => {
+export const createCategoryApi = async (newCategory: NewCategory) => {
   try {
     const inputVariables: createCategoryMutationVariables = {
       category: newCategory,
@@ -63,13 +60,9 @@ const deleteCategoryMutation = `
   }
 `;
 
-export type DeleteCategoryInputType = {
-  id: number;
-};
+type deleteCategoryMutationVariables = DeleteCategoryInput;
 
-type deleteCategoryMutationVariables = DeleteCategoryInputType;
-
-export const deleteCategoryApi = async (input: DeleteCategoryInputType) => {
+export const deleteCategoryApi = async (input: DeleteCategoryInput) => {
   try {
     const inputVariables: deleteCategoryMutationVariables = {
       id: input.id,

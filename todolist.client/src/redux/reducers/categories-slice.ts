@@ -1,12 +1,8 @@
 import { PayloadAction, createAction, createSlice } from "@reduxjs/toolkit";
-import { ICategory } from "../types";
-import {
-  DeleteCategoryInputType,
-  NewCategoryInputType,
-} from "../../graphql/categoriesApi";
+import { Category, DeleteCategoryInput, NewCategory } from "../types/category";
 
 interface CategoriesSlice {
-  categoriesList: ICategory[];
+  categoriesList: Category[];
 }
 
 const initialState: CategoriesSlice = {
@@ -17,12 +13,12 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    categoryCreated: (state, action: PayloadAction<ICategory>) => {
+    categoryCreated: (state, action: PayloadAction<Category>) => {
       console.log(
         "Category" + action.payload.name + " was successfully added!"
       );
     },
-    categoriesFetched: (state, action: PayloadAction<ICategory[]>) => {
+    categoriesFetched: (state, action: PayloadAction<Category[]>) => {
       state.categoriesList = action.payload;
     },
     categoryDeleted: () => {
@@ -37,6 +33,6 @@ export default categoriesSlice.reducer;
 
 export const fetchCategories = createAction("fetchCategories");
 export const createCategory =
-  createAction<NewCategoryInputType>("createCategory");
+  createAction<NewCategory>("createCategory");
 export const deleteCategory =
-  createAction<DeleteCategoryInputType>("deleteCategory");
+  createAction<DeleteCategoryInput>("deleteCategory");

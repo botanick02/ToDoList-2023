@@ -1,14 +1,14 @@
-import { ICategory } from "../../redux/types";
+import { Category } from "../../redux/types/category";
 import { GraphQlResponse } from "./graphqlReponse";
 
 export type FetchCategoriesResponse = GraphQlResponse<{
   categories: {
-    allCategories: ICategory[];
+    allCategories: Category[];
   };
 }>;
 
 export type AddCategoryResponse = GraphQlResponse<{
   categories: {
-    createCategory: ICategory;
+    createCategory: Category;
   };
 }>;
