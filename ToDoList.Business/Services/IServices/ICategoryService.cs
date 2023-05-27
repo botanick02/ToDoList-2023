@@ -5,9 +5,9 @@ namespace ToDoList.BLL.Services.IServices
 {
     public interface ICategoryService
     { 
-        public CategoryDTO AddCategory(NewCategoryDTO newTask, StorageSources source);
+        public CategoryDto AddCategory(NewCategoryDto newCategory, StorageSources source);
 
-        public IEnumerable<CategoryDTO> GetCategories(StorageSources source);
+        public IEnumerable<CategoryDto> GetCategories(StorageSources source);
 
         public void DeleteCategory(int id, StorageSources source);
     }

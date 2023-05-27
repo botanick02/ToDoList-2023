@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ToDoListMsSQLDataProvider
 {
-    public class MsSQLTaskRepository : ITaskRepository
+    public class MsSqlTaskRepository : ITaskRepository
     {
         private readonly string connectionString;
-        public MsSQLTaskRepository(string connectionString)
+        public MsSqlTaskRepository(string connectionString)
         {
             this.connectionString = connectionString;
         }
@@ -21,9 +21,9 @@ namespace ToDoListMsSQLDataProvider
             {
                 var parameters = new
                 {
-                    Title = task.Title,
-                    CategoryId = task.CategoryId,
-                    DueDate = task.DueDate
+                    task.Title,
+                    task.CategoryId,
+                    task.DueDate
                 };
                 string sqlQuery = $"INSERT INTO Tasks (Title, CategoryId, DueDate)" +
                     $" VALUES(@Title, @CategoryId, @DueDate); SELECT SCOPE_IDENTITY() AS [Id];";
@@ -73,7 +73,6 @@ namespace ToDoListMsSQLDataProvider
         {
             try
             {
-                
                 string sqlQuery = $"SELECT * FROM Tasks";
 
                 using (var conn = new SqlConnection(connectionString))
@@ -102,11 +101,11 @@ namespace ToDoListMsSQLDataProvider
             
             var parameters = new
             {
-                Id = task.Id,
-                Title = task.Title,
-                DueDate = task.DueDate,
-                CategoryId = task.CategoryId,
-                IsDone = task.IsDone
+                task.Id,
+                task.Title,
+                task.DueDate,
+                task.CategoryId,
+                task.IsDone
             };
             var sqlQuery = "UPDATE Tasks SET Title = @Title, CategoryId = @CategoryId," +
                 " DueDate = @DueDate, IsDone = @IsDone WHERE Id = @Id";

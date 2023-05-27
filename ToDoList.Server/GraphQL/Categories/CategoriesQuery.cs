@@ -1,7 +1,6 @@
 ﻿using GraphQL.Types;
 using ToDoList.BLL.Services.IServices;
 using ToDoList.Server.GraphQL.Categories.Types;
-using ToDoList.Server.GraphQL.Tasks.Types;
 using ToDoList.Server.HttpContextHelpers;
 
 namespace ToDoList.Server.GraphQL.Categories

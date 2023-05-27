@@ -1,7 +1,7 @@
 ﻿namespace ToDoList.DAL.DTO_s.Category
 {
-    public class NewCategoryDTO
+    public class NewCategoryDto
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

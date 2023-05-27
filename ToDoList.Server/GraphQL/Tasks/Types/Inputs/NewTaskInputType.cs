@@ -3,7 +3,7 @@ using ToDoList.DAL.DTO_s;
 
 namespace ToDoList.Server.GraphQL.Tasks.Types.Inputs
 {
-    public class NewTaskInputType : InputObjectGraphType<NewTaskDTO>
+    public class NewTaskInputType : InputObjectGraphType<NewTaskDto>
     {
         public NewTaskInputType()
         {

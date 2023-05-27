@@ -6,11 +6,11 @@ using ToDoList.RepositoryAbstractions.IRepositories;
 
 namespace ToDoList.XMLDataProvider
 {
-    public class XMLTaskRepository : ITaskRepository
+    public class XmlTaskRepository : ITaskRepository
     {
         private readonly string xmlFilePath;
         private readonly XDocument xmlDocument;
-        public XMLTaskRepository()
+        public XmlTaskRepository()
         {
             xmlFilePath = @"..\ToDoList.XMLDataProvider\ToDoList.xml";
             xmlDocument = XDocument.Load(xmlFilePath);
@@ -30,7 +30,7 @@ namespace ToDoList.XMLDataProvider
 
             var newTask = new XElement("Task",
                 new XAttribute("Id", newId),
-                new XAttribute("Title", task.Title),
+                new XAttribute("Title", task.Title!),
                 new XAttribute("CategoryId", task.CategoryId),
                 new XAttribute("IsDone", "False"),
                 new XAttribute("DueDate", task.DueDate.ToString() ?? "")

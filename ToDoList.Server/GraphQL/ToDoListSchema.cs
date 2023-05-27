@@ -1,6 +1,4 @@
 ﻿using GraphQL.Types;
-using ToDoList.Server.GraphQL.Tasks;
-
 namespace ToDoList.Server.GraphQL
 {
     public class ToDoListSchema : Schema

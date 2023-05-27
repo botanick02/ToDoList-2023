@@ -2,7 +2,6 @@
 using GraphQL.Types;
 using ToDoList.BLL.Services.IServices;
 using ToDoList.DAL.DTO_s;
-using ToDoList.DAL.DTO_s.Category;
 using ToDoList.Server.GraphQL.Tasks.Types;
 using ToDoList.Server.GraphQL.Tasks.Types.Inputs;
 using ToDoList.Server.HttpContextHelpers;
@@ -18,7 +17,7 @@ namespace ToDoList.Server.GraphQL.Tasks
                .Resolve(context =>
                {
                    var source = headerAccessor.ParseContextHeaderSource(context);
-                   var toDoTaskCreateInput = context.GetArgument<NewTaskDTO>("NewTaskInputType");
+                   var toDoTaskCreateInput = context.GetArgument<NewTaskDto>("NewTaskInputType");
                    var res = taskService.AddTask(toDoTaskCreateInput, source);
                    return res;
                });

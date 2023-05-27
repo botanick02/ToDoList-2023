@@ -12,36 +12,36 @@ namespace ToDoList.DAL
         public static void RegisterDALDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            services.AddTransient(provider => new MsSQLTaskRepository(connectionString));
-            services.AddTransient(provider => new MsSQLCategoryRepository(connectionString));
-            services.AddTransient<XMLTaskRepository>();
-            services.AddTransient<XMLCategoryRepository>();
+
+            if (connectionString == null || connectionString == string.Empty)
+            {
+                throw new InvalidOperationException("Connection string was not found or empty");
+            }
+
+            services.AddTransient(provider => new MsSqlTaskRepository(connectionString));
+            services.AddTransient(provider => new MsSqlCategoryRepository(connectionString));
+            services.AddTransient<XmlTaskRepository>();
+            services.AddTransient<XmlCategoryRepository>();
             services.AddTransient<StorageSourcesProvider>();
 
             services.AddTransient<CategoryRepositoryResolver>(CategoryRepositoryProvider => key =>
             {
-                switch (key)
+                return key switch
                 {
-                    case StorageSources.MsSQL:
-                        return CategoryRepositoryProvider.GetService<MsSQLCategoryRepository>();
-                    case StorageSources.XML:
-                        return CategoryRepositoryProvider.GetService<XMLCategoryRepository>();
-                    default:
-                        throw new KeyNotFoundException();
-                }
+                    StorageSources.MsSQL => CategoryRepositoryProvider.GetService<MsSqlCategoryRepository>()!,
+                    StorageSources.XML => CategoryRepositoryProvider.GetService<XmlCategoryRepository>()!,
+                    _ => throw new KeyNotFoundException(),
+                };
             });
 
             services.AddTransient<TaskRepositoryResolver>(ToDoTaskRepositoryProvider => key =>
             {
-                switch (key)
+                return key switch
                 {
-                    case StorageSources.MsSQL:
-                        return ToDoTaskRepositoryProvider.GetService<MsSQLTaskRepository>();
-                    case StorageSources.XML:
-                        return ToDoTaskRepositoryProvider.GetService<XMLTaskRepository>();
-                    default:
-                        throw new KeyNotFoundException();
-                }
+                    StorageSources.MsSQL => ToDoTaskRepositoryProvider.GetService<MsSqlTaskRepository>()!,
+                    StorageSources.XML => ToDoTaskRepositoryProvider.GetService<XmlTaskRepository>()!,
+                    _ => throw new NotImplementedException(),
+                };
             });
         }
     }

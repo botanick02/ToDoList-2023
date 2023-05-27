@@ -5,11 +5,11 @@ using ToDoList.RepositoryAbstractions.IRepositories;
 
 namespace ToDoList.XMLDataProvider
 {
-    public class XMLCategoryRepository : ICategoryRepository
+    public class XmlCategoryRepository : ICategoryRepository
     {
         private readonly string xmlFilePath;
         private readonly XDocument xmlDocument;
-        public XMLCategoryRepository()
+        public XmlCategoryRepository()
         {
             xmlFilePath = @"..\ToDoList.XMLDataProvider\ToDoList.xml";
             xmlDocument = XDocument.Load(xmlFilePath);
@@ -29,7 +29,7 @@ namespace ToDoList.XMLDataProvider
 
             var newCategory = new XElement("Category",
             new XAttribute("Id", newId),
-                new XAttribute("Name", category.Name)
+                new XAttribute("Name", category.Name!)
                 );
 
             xmlDocument.Root!.Element("Categories")!.Add(newCategory);

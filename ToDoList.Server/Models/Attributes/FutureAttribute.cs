@@ -5,7 +5,7 @@ namespace ToDoList.Server.Models.Attributes
 {
     public class FutureAttribute : ValidationAttribute
     {
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
         {
             DateTime? dateValue = value as DateTime?;
             if (dateValue.HasValue)

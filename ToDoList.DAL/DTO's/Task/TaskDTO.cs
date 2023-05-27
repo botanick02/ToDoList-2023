@@ -1,10 +1,10 @@
 ﻿namespace ToDoList.DAL.DTO_s
 {
-    public class TaskDTO
+    public class TaskDto
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         public DateTime? DueDate { get; set; }
 

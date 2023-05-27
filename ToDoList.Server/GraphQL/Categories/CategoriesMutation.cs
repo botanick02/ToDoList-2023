@@ -17,7 +17,7 @@ namespace ToDoList.Server.GraphQL.Categories
                .Resolve(context =>
                {
                    var source = headerAccessor.ParseContextHeaderSource(context);
-                   var categoryCreateInput = context.GetArgument<NewCategoryDTO>("NewCategoryInputType");
+                   var categoryCreateInput = context.GetArgument<NewCategoryDto>("NewCategoryInputType");
                    var res = categoryService.AddCategory(categoryCreateInput, source);
                    return res;
                });

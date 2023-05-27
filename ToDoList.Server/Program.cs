@@ -1,17 +1,10 @@
 using GraphQL;
-using GraphQL.MicrosoftDI;
-using GraphQL.Types;
-using Microsoft.Extensions.Options;
 using ToDoList.BLL;
 using ToDoList.DAL;
-using ToDoList.Server;
 using ToDoList.Server.GraphQL;
-using ToDoList.Server.GraphQL.Categories;
 using ToDoList.Server.HttpContextHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
@@ -40,8 +33,6 @@ builder.Services.AddGraphQL(b => b
     .AddSystemTextJson());
 
 
-builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
-
 var app = builder.Build();
 
 app.UseCors("DefaultPolicy");
@@ -65,6 +56,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Task}/{action=Index}/{id?}");
+    pattern: "{controller=Index}/{action=Index}/{id?}");
 
 app.Run();

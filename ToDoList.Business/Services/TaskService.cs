@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.VisualBasic;
 using ToDoList.BLL.Services.IServices;
 using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.SourceChanger;
 using ToDoList.DAL.SourceChanger.Enums;
 using ToDoList.RepositoryAbstractions.Entities;
 
@@ -11,16 +11,16 @@ namespace ToDoList.BLL.Services
     {
         private readonly TaskRepositoryResolver taskRepository;
         private readonly IMapper mapper;
-        public TaskService(TaskRepositoryResolver taskRepository, IMapper mapper) 
+        public TaskService(TaskRepositoryResolver taskRepository, IMapper mapper)
         {
             this.taskRepository = taskRepository;
             this.mapper = mapper;
         }
 
-        public TaskDTO AddTask(NewTaskDTO newTask, StorageSources source)
+        public TaskDto AddTask(NewTaskDto newTask, StorageSources source)
         {
             var task = mapper.Map<TaskEntity>(newTask);
-            var addedTask = mapper.Map<TaskDTO>(taskRepository(source).AddTask(task));
+            var addedTask = mapper.Map<TaskDto>(taskRepository(source).AddTask(task));
             return addedTask;
         }
 
@@ -29,19 +29,19 @@ namespace ToDoList.BLL.Services
             taskRepository(source).Delete(id);
         }
 
-        public IEnumerable<TaskDTO> GetTasks(StorageSources source)
+        public IEnumerable<TaskDto> GetTasks(StorageSources source)
         {
-            var tasks = mapper.Map<IEnumerable<TaskDTO>>(taskRepository(source).GetTasks());
+            var tasks = mapper.Map<IEnumerable<TaskDto>>(taskRepository(source).GetTasks());
             tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate);
             tasks = tasks.OrderBy(task => task.IsDone);
             return tasks;
         }
 
-        public TaskDTO ToggleIsDone(int id, StorageSources source)
+        public TaskDto ToggleIsDone(int id, StorageSources source)
         {
-            var task = taskRepository(source).GetTaskById(id);
+            var task = taskRepository(source).GetTaskById(id) ?? throw new InvalidOperationException($"Task with Id {id} was not found");
             task.IsDone = !task.IsDone;
-            return mapper.Map<TaskDTO>(taskRepository(source).Update(task));
+            return mapper.Map<TaskDto>(taskRepository(source).Update(task));
         }
     }
 }

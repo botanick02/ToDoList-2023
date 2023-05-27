@@ -11,10 +11,10 @@ namespace ToDoList.BLL.Utilities.AutoMapperProfiles
         {
             public AutoMapperProfile()
             {
-                CreateMap<TaskEntity, NewTaskDTO>().ReverseMap();
-                CreateMap<TaskDTO, TaskEntity>().ReverseMap();
-                CreateMap<CategoryEntity, NewCategoryDTO>().ReverseMap();
-                CreateMap<CategoryDTO, CategoryEntity>().ReverseMap();
+                CreateMap<TaskEntity, NewTaskDto>().ReverseMap();
+                CreateMap<TaskDto, TaskEntity>().ReverseMap();
+                CreateMap<CategoryEntity, NewCategoryDto>().ReverseMap();
+                CreateMap<CategoryDto, CategoryEntity>().ReverseMap();
             }
         }
     }

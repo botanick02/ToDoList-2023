@@ -6,10 +6,10 @@ using ToDoList.RepositoryAbstractions.IRepositories;
 
 namespace ToDoListMsSQLDataProvider
 {
-    public class MsSQLCategoryRepository : ICategoryRepository
+    public class MsSqlCategoryRepository : ICategoryRepository
     {
         private readonly string connectionString;
-        public MsSQLCategoryRepository(string connectionString)
+        public MsSqlCategoryRepository(string connectionString)
         {
             this.connectionString = connectionString;
         }
@@ -22,7 +22,7 @@ namespace ToDoListMsSQLDataProvider
                 {
                     var parameters = new
                     {
-                        Name = category.Name,
+                        category.Name,
                     };
 
                     string sqlQuery = $"INSERT INTO Categories ([Name])" +

@@ -3,7 +3,7 @@ using ToDoList.DAL.DTO_s;
 
 namespace ToDoList.Server.GraphQL.Tasks.Types
 {
-    public class TaskType : ObjectGraphType<TaskDTO>
+    public class TaskType : ObjectGraphType<TaskDto>
     {
         public TaskType()
         {

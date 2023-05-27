@@ -6,9 +6,9 @@ namespace ToDoList.BLL.Services.IServices
 {
     public interface ITaskService
     {
-        public TaskDTO AddTask(NewTaskDTO newTask, StorageSources source);
-        public IEnumerable<TaskDTO> GetTasks(StorageSources source);
-        public TaskDTO ToggleIsDone(int Id, StorageSources source);
-        public void DeleteTask(int Id, StorageSources source);
+        public TaskDto AddTask(NewTaskDto newTask, StorageSources source);
+        public IEnumerable<TaskDto> GetTasks(StorageSources source);
+        public TaskDto ToggleIsDone(int id, StorageSources source);
+        public void DeleteTask(int id, StorageSources source);
     }
 }

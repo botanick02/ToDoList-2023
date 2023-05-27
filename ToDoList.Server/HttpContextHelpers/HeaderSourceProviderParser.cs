@@ -7,11 +7,10 @@ namespace ToDoList.Server.HttpContextHelpers
     {
         public StorageSources ParseContextHeaderSource(IResolveFieldContext context)
         {
-            var httpContext = context.RequestServices.GetService<IHttpContextAccessor>().HttpContext;
+            var httpContext = context.RequestServices!.GetService<IHttpContextAccessor>()!.HttpContext ?? throw new InvalidOperationException("HttpContext was not available");
             var sourceString = httpContext.Request.Headers["Source"];
-            StorageSources source;
 
-            if(Enum.TryParse(sourceString, out source))
+            if (Enum.TryParse(sourceString, out StorageSources source))
             {
                 return source;
             }

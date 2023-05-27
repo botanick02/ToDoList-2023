@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using ToDoList.BLL.Services.IServices;
 using ToDoList.DAL.DTO_s.Category;
+using ToDoList.DAL.SourceChanger;
 using ToDoList.DAL.SourceChanger.Enums;
 using ToDoList.RepositoryAbstractions.Entities;
-using ToDoList.RepositoryAbstractions.IRepositories;
 
 namespace ToDoList.BLL.Services
 {
@@ -16,11 +16,11 @@ namespace ToDoList.BLL.Services
             this.categoryRepository = categoryRepository;
             this.mapper = mapper;
         }
-        public CategoryDTO AddCategory(NewCategoryDTO newCategory, StorageSources source)
+        public CategoryDto AddCategory(NewCategoryDto newCategory, StorageSources source)
         {
             var category = mapper.Map<CategoryEntity>(newCategory);
 
-            return mapper.Map<CategoryDTO>(categoryRepository(source).AddCategory(category));
+            return mapper.Map<CategoryDto>(categoryRepository(source).AddCategory(category));
         }
 
         public void DeleteCategory(int id, StorageSources source)
@@ -28,9 +28,9 @@ namespace ToDoList.BLL.Services
             categoryRepository(source).DeleteCategory(id);
         }
 
-        public IEnumerable<CategoryDTO> GetCategories(StorageSources source)
+        public IEnumerable<CategoryDto> GetCategories(StorageSources source)
         {
-            return mapper.Map<IEnumerable<CategoryDTO>>(categoryRepository(source).GetCategories());
+            return mapper.Map<IEnumerable<CategoryDto>>(categoryRepository(source).GetCategories());
         }
     }
 }

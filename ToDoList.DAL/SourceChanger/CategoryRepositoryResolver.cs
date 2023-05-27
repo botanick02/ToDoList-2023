@@ -1,4 +1,7 @@
 ﻿using ToDoList.DAL.SourceChanger.Enums;
 using ToDoList.RepositoryAbstractions.IRepositories;
 
-public delegate ICategoryRepository CategoryRepositoryResolver(StorageSources key);
+namespace ToDoList.DAL.SourceChanger
+{
+    public delegate ICategoryRepository CategoryRepositoryResolver(StorageSources key);
+}

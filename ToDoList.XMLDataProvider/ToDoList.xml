@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
   <Tasks>
-    <Task Id="0" Title="first xml task" CategoryId="1" IsDone="True" DueDate="" />
     <Task Id="1" Title="second xml task" CategoryId="2" IsDone="True" DueDate="" />
     <Task Id="2" Title="first xml task with date" CategoryId="1" IsDone="False" DueDate="4/25/2023 1:30:00 AM" />
     <Task Id="3" Title="second xml task with date" CategoryId="1" IsDone="False" DueDate="4/26/2023 1:30:00 AM" />
     <Task Id="4" Title="xml task test" CategoryId="1" IsDone="False" DueDate="" />
     <Task Id="6" Title=" xml task test 3" CategoryId="2" IsDone="True" DueDate="5/27/2023 1:58:00 PM" />
-    <Task Id="7" Title="fghfgh" CategoryId="1" IsDone="False" DueDate="" />
   </Tasks>
   <Categories>
     <Category Id="1" Name="Uncategorized" />
     <Category Id="2" Name="family" />
-    <Category Id="3" Name="sdfsdf" />
+    <Category Id="3" Name="sdfdf" />
   </Categories>
 </Root>
