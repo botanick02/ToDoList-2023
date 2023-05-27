@@ -18,13 +18,13 @@ namespace ToDoList.XMLDataProvider
 
         public TaskEntity? AddTask(TaskEntity task)
         {
-            var tasks = xmlDocument.Descendants("Task").OrderByDescending(t => int.Parse(t.Attribute("Id").Value));
+            var tasks = xmlDocument.Descendants("Task").OrderByDescending(t => int.Parse(t.Attribute("Id")!.Value));
             var newId = 0;
             foreach (var t in tasks)
             {
-                if (int.Parse(t.Attribute("Id").Value) >= newId)
+                if (int.Parse(t.Attribute("Id")!.Value) >= newId)
                 {
-                    newId = int.Parse(t.Attribute("Id").Value) + 1;
+                    newId = int.Parse(t.Attribute("Id")!.Value) + 1;
                 }
             }
 
@@ -36,7 +36,7 @@ namespace ToDoList.XMLDataProvider
                 new XAttribute("DueDate", task.DueDate.ToString() ?? "")
                 );
 
-            xmlDocument.Root.Element("Tasks").Add(newTask);
+            xmlDocument.Root!.Element("Tasks")!.Add(newTask);
             xmlDocument.Save(xmlFilePath);
             return GetTaskById(newId);
         }

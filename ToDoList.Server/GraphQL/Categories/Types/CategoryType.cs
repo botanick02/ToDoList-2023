@@ -8,9 +8,9 @@ namespace ToDoList.Server.GraphQL.Categories.Types
     {
         public CategoryType()
         {
-            Field(c => c.Id, nullable: false);
+                Field(c => c.Id, nullable: false);
 
-            Field(c => c.Name, nullable: false);
+                Field(c => c.Name, nullable: false);
         }
     }
 }

@@ -17,12 +17,30 @@ namespace ToDoList.XMLDataProvider
 
         public CategoryEntity? AddCategory(CategoryEntity category)
         {
-            throw new NotImplementedException();
+            var categories = xmlDocument.Descendants("Category").OrderByDescending(c => int.Parse(c.Attribute("Id")!.Value));
+            var newId = 1;
+            foreach (var c in categories)
+            {
+                if (int.Parse(c.Attribute("Id")!.Value) >= newId)
+                {
+                    newId = int.Parse(c.Attribute("Id")!.Value) + 1;
+                }
+            }
+
+            var newCategory = new XElement("Category",
+            new XAttribute("Id", newId),
+                new XAttribute("Name", category.Name)
+                );
+
+            xmlDocument.Root!.Element("Categories")!.Add(newCategory);
+            xmlDocument.Save(xmlFilePath);
+            return GetCategoryById(newId);
         }
 
         public void DeleteCategory(int id)
         {
-            throw new NotImplementedException();
+            xmlDocument.Descendants("Category").Where(c => c.Attribute("Id")!.Value.Equals(id.ToString())).Remove();
+            xmlDocument.Save(xmlFilePath);
         }
 
         public List<CategoryEntity> GetCategories()
@@ -30,8 +48,8 @@ namespace ToDoList.XMLDataProvider
             var categories = xmlDocument.Descendants("Category")
               .Select(c => new CategoryEntity()
               {
-                  Id = XmlConvert.ToInt32(c.Attribute("Id").Value),
-                  Name = c.Attribute("Name").Value
+                  Id = XmlConvert.ToInt32(c.Attribute("Id")!.Value),
+                  Name = c.Attribute("Name")!.Value
               })
               .ToList();
             return categories;
@@ -39,7 +57,14 @@ namespace ToDoList.XMLDataProvider
 
         public CategoryEntity? GetCategoryById(int id)
         {
-            throw new NotImplementedException();
+            var category = xmlDocument.Descendants("Category")
+              .Select(c => new CategoryEntity()
+              {
+                  Id = XmlConvert.ToInt32(c.Attribute("Id")!.Value),
+                  Name = c.Attribute("Name")!.Value
+              })
+              .First();
+            return category;
         }
     }
 }
