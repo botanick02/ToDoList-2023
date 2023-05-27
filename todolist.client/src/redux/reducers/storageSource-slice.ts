@@ -17,13 +17,13 @@ const storageSource = createSlice({
     storageSourcesFetched: (state, action: PayloadAction<string[]>) => {
       state.storagesList = action.payload;
     },
-    setCurrentStorageSource: (state, action: PayloadAction<string>) => {
+    currentStorageSourceSet: (state, action: PayloadAction<string>) => {
       state.currentStorage = action.payload;
     },
   },
 });
 
-export const { storageSourcesFetched, setCurrentStorageSource } =
+export const { storageSourcesFetched, currentStorageSourceSet } =
   storageSource.actions;
 
 export default storageSource.reducer;

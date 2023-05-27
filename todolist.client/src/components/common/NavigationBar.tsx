@@ -1,17 +1,19 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { ChangeEvent } from "react";
-import { setCurrentStorageSource } from "../../redux/reducers/storageSource-slice";
+import { setCurrentStorageSource } from "../../utils/storageSourceCRUDUtils";
 
 const NavigationBar = () => {
   const storageSources = useAppSelector(
     (state) => state.storageSources.storagesList
   );
-  const dispatch = useAppDispatch();
+  const currentStorageSource = useAppSelector(
+    (state) => state.storageSources.currentStorage
+  );
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setCurrentStorageSource(event.target.value));
+    setCurrentStorageSource(event.target.value);
   };
 
   return (
@@ -28,6 +30,7 @@ const NavigationBar = () => {
           aria-label="Storage source"
           className="w-25"
           onChange={handleSelectChange}
+          value={currentStorageSource}
         >
           {storageSources.length > 0 &&
             storageSources.map((source) => (
