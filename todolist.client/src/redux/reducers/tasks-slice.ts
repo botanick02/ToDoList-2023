@@ -1,9 +1,14 @@
 import { PayloadAction, createAction, createSlice } from "@reduxjs/toolkit";
-import { Task, NewTask, ToggleTaskInputType, DeleteTaskInputType } from "../types/task";
+import {
+  Task,
+  NewTask,
+  ToggleTaskInputType,
+  DeleteTaskInputType,
+} from "../types/task";
 
-interface TasksSlice {
+type TasksSlice = {
   tasksList: Task[];
-}
+};
 
 const initialState: TasksSlice = {
   tasksList: [],
@@ -14,13 +19,17 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     taskCreated: (state, action: PayloadAction<Task>) => {
-      console.log("Task with title " + action.payload.title + " was successfully created!");
+      console.log(
+        "Task with title " + action.payload.title + " was successfully created!"
+      );
     },
     taskDeleted: (state) => {
       console.log("Task was successfully deleted!");
     },
     taskToggled: (state, action: PayloadAction<Task>) => {
-      console.log("Task with title " + action.payload.title + " was successfully toggled!");
+      console.log(
+        "Task with title " + action.payload.title + " was successfully toggled!"
+      );
     },
     tasksFetched: (state, action: PayloadAction<Task[]>) => {
       state.tasksList = action.payload;
@@ -28,7 +37,8 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { tasksFetched, taskCreated, taskDeleted, taskToggled } = tasksSlice.actions;
+export const { tasksFetched, taskCreated, taskDeleted, taskToggled } =
+  tasksSlice.actions;
 export default tasksSlice.reducer;
 
 export const fetchTasks = createAction("fetchTasks");

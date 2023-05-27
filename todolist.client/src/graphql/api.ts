@@ -1,3 +1,4 @@
+import { store } from "../redux/store";
 import { GraphQlData, GraphQlResponse } from "./types/graphqlReponse";
 const API_URL = "https://localhost:7182/graphql";
 
@@ -5,9 +6,17 @@ export async function graphQLFetch<T extends GraphQlData>(
   query: string,
   variables = {}
 ): Promise<T> {
+  const getSourceNameFromState = (): string => {
+    const state = store.getState();
+    return state.storageSources.currentStorage ?? "";
+  };
+
   const res = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json", "Source": "MsSQL" },
+    headers: {
+      "Content-Type": "application/json",
+      Source: getSourceNameFromState(),
+    },
     body: JSON.stringify({ query, variables }),
   });
 
@@ -20,6 +29,5 @@ export async function graphQLFetch<T extends GraphQlData>(
   if (graphQlRes.errors) {
     throw new Error(graphQlRes.errors.map((err) => err.message).join("\n"));
   }
-  console.log(graphQlRes);
   return graphQlRes.data;
 }

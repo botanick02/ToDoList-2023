@@ -1,6 +1,14 @@
-import { NewTask, DeleteTaskInputType, ToggleTaskInputType } from "../redux/types/task";
+import {
+  NewTask,
+  DeleteTaskInputType,
+  ToggleTaskInputType,
+} from "../redux/types/task";
 import { graphQLFetch } from "./api";
-import { AddTaskResponse, FetchTasksResponse, ToggleTaskResponse } from "./types/task";
+import {
+  AddTaskResponse,
+  FetchTasksResponse,
+  ToggleTaskResponse,
+} from "./types/task";
 
 const getTasksQuery = `
 query GetAllTasks{
@@ -38,8 +46,6 @@ const createTaskMutation = `
   }
 `;
 
-
-
 type createTaskMutationVariables = {
   task: NewTask;
 };
@@ -59,7 +65,6 @@ export const createTaskApi = async (newTask: NewTask) => {
   }
 };
 
-
 const deleteTaskMutation = `
   mutation DeleteTask($taskId: Int!){
     tasks{
@@ -67,7 +72,6 @@ const deleteTaskMutation = `
     }
   }
 `;
-
 
 type deleteTaskMutationVariables = DeleteTaskInputType;
 
@@ -96,7 +100,6 @@ const toggleTaskMutation = `
   }
 `;
 
-
 type toggleTaskMutationVariables = ToggleTaskInputType;
 
 export const toggleTaskApi = async (input: ToggleTaskInputType) => {
@@ -104,7 +107,10 @@ export const toggleTaskApi = async (input: ToggleTaskInputType) => {
     const inputVariables: toggleTaskMutationVariables = {
       taskId: input.taskId,
     };
-    return await graphQLFetch<ToggleTaskResponse>(toggleTaskMutation, inputVariables);
+    return await graphQLFetch<ToggleTaskResponse>(
+      toggleTaskMutation,
+      inputVariables
+    );
   } catch (error) {
     console.error("Error in graphql request processing:", error);
     throw error;

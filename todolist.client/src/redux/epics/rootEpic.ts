@@ -1,10 +1,16 @@
 import { combineEpics } from "redux-observable";
-import { createTaskEpic, deleteTaskEpic, fetchTasksEpic, toggleTaskEpic } from "./tasksEpic";
+import {
+  createTaskEpic,
+  deleteTaskEpic,
+  fetchTasksEpic,
+  toggleTaskEpic,
+} from "./tasksEpic";
 import {
   createCategoryEpic,
   deleteCategoryEpic,
   fetchCategoriesEpic,
 } from "./categoriesEpic";
+import { fetchStorageSourcesEpic } from "./storageSourcesEpic";
 
 export const rootEpic = combineEpics(
   createCategoryEpic,
@@ -13,5 +19,6 @@ export const rootEpic = combineEpics(
   deleteCategoryEpic,
   createTaskEpic,
   deleteTaskEpic,
-  toggleTaskEpic
+  toggleTaskEpic,
+  fetchStorageSourcesEpic
 );

@@ -5,4 +5,4 @@ export type GraphQlResponse<T extends GraphQlData> = {
   errors?: Array<{ message: string }>;
   [key: string]: any;
   [index: number]: never;
-}
+};

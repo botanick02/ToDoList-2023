@@ -3,18 +3,26 @@ import Layout from "./components/common/Layout";
 import ToDoTasks from "./pages/ToDoTasks";
 import NotFound from "./pages/NotFound";
 import Categories from "./pages/Categories";
-import { useAppDispatch } from "./redux/hooks";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { useEffect } from "react";
-import { fetchTasks } from "./redux/reducers/tasks-slice";
+import { fetchStorageSources } from "./redux/reducers/storageSource-slice";
 import { fetchCategories } from "./redux/reducers/categories-slice";
+import { fetchTasks } from "./redux/reducers/tasks-slice";
 
 function App() {
   const dispatch = useAppDispatch();
+  const source = useAppSelector((state) => state.storageSources.currentStorage);
 
   useEffect(() => {
-    dispatch(fetchTasks());
-    dispatch(fetchCategories());
-  });
+    dispatch(fetchStorageSources());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (source) {
+      dispatch(fetchCategories());
+      dispatch(fetchTasks());
+    }
+  }, [source, dispatch]);
 
   return (
     <div className="App">

@@ -1,9 +1,9 @@
 import { PayloadAction, createAction, createSlice } from "@reduxjs/toolkit";
 import { Category, DeleteCategoryInput, NewCategory } from "../types/category";
 
-interface CategoriesSlice {
+type CategoriesSlice = {
   categoriesList: Category[];
-}
+};
 
 const initialState: CategoriesSlice = {
   categoriesList: [],
@@ -32,7 +32,6 @@ export const { categoryCreated, categoryDeleted, categoriesFetched } =
 export default categoriesSlice.reducer;
 
 export const fetchCategories = createAction("fetchCategories");
-export const createCategory =
-  createAction<NewCategory>("createCategory");
+export const createCategory = createAction<NewCategory>("createCategory");
 export const deleteCategory =
   createAction<DeleteCategoryInput>("deleteCategory");

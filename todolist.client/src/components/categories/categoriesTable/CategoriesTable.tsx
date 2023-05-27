@@ -4,7 +4,7 @@ import { Category } from "../../../redux/types/category";
 
 type CategoriesTableProps = {
   categoriesList: Category[];
-}
+};
 
 const CategoriesTable = ({ categoriesList }: CategoriesTableProps) => {
   return (

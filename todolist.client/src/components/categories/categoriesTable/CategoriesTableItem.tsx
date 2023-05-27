@@ -5,7 +5,7 @@ import { Category } from "../../../redux/types/category";
 
 type CategoriesTableItemProps = {
   category: Category;
-}
+};
 
 const CategoriesTableItem = ({ category }: CategoriesTableItemProps) => {
   const dispatch = useAppDispatch();

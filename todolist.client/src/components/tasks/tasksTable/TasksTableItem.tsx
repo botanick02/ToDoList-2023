@@ -8,7 +8,7 @@ import { Task } from "../../../redux/types/task";
 type TaskTableItemProps = {
   task: Task;
   category?: Category;
-}
+};
 
 const TasksTableItem = ({ task, category }: TaskTableItemProps) => {
   const dispatch = useAppDispatch();
@@ -19,7 +19,7 @@ const TasksTableItem = ({ task, category }: TaskTableItemProps) => {
           <span>
             <input
               type="checkbox"
-              onClick={() => dispatch(toggleTask({taskId: task.id}))}
+              onClick={() => dispatch(toggleTask({ taskId: task.id }))}
               defaultChecked={task.isDone}
               className="form-check-input me-2"
             />
@@ -38,7 +38,7 @@ const TasksTableItem = ({ task, category }: TaskTableItemProps) => {
               type="button"
               value="&#10006;"
               className="btn btn-primary-outline shadow-none "
-              onClick={() => dispatch(deleteTask({taskId: task.id}))}
+              onClick={() => dispatch(deleteTask({ taskId: task.id }))}
             />
           </span>
         </div>
