@@ -47,7 +47,7 @@ export const deleteTaskEpic: Epic = (action$) =>
     ofType<Action<typeof deleteTask>, any, any>("deleteTask"),
     mergeMap((action) =>
       from(deleteTaskApi(action.payload)).pipe(
-        mergeMap(() => [taskDeleted(), fetchTasks()])
+        map((response) => taskDeleted(response.tasks.deleteTask))
       )
     )
   );

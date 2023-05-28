@@ -1,7 +1,11 @@
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import ListGroup from "react-bootstrap/ListGroup";
 import { stringToFormattedDateString } from "../../../utils/dateUtils";
-import { deleteTask, toggleTask } from "../../../redux/reducers/tasks-slice";
+import {
+  deleteTask,
+  setTaskOnDeletion,
+  toggleTask,
+} from "../../../redux/reducers/tasks-slice";
 import { Category } from "../../../redux/types/category";
 import { Task } from "../../../redux/types/task";
 
@@ -11,7 +15,23 @@ type TaskTableItemProps = {
 };
 
 const TasksTableItem = ({ task, category }: TaskTableItemProps) => {
+  const taskIdOnDeletion = useAppSelector(
+    (state) => state.tasks.taskIdOnDeletion
+  );
+
+  const handleTaskDeleteClick = () => {
+    if (taskIdOnDeletion) {
+      dispatch(deleteTask({ id: taskIdOnDeletion }));
+    }
+    dispatch(setTaskOnDeletion({ id: task.id }));
+  };
+
   const dispatch = useAppDispatch();
+
+  if (task.id === taskIdOnDeletion) {
+    return null;
+  }
+
   return (
     <ListGroup.Item className="d-flex w-100">
       <div className="d-flex align-items-center w-100">
@@ -19,7 +39,7 @@ const TasksTableItem = ({ task, category }: TaskTableItemProps) => {
           <span>
             <input
               type="checkbox"
-              onClick={() => dispatch(toggleTask({ taskId: task.id }))}
+              onClick={() => dispatch(toggleTask({ id: task.id }))}
               defaultChecked={task.isDone}
               className="form-check-input me-2"
             />
@@ -38,7 +58,7 @@ const TasksTableItem = ({ task, category }: TaskTableItemProps) => {
               type="button"
               value="&#10006;"
               className="btn btn-primary-outline shadow-none "
-              onClick={() => dispatch(deleteTask({ taskId: task.id }))}
+              onClick={handleTaskDeleteClick}
             />
           </span>
         </div>

@@ -2,6 +2,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import TaskTableItem from "./TasksTableItem";
 import { Category } from "../../../redux/types/category";
 import { Task } from "../../../redux/types/task";
+import UndoTaskDeletionNotification from "../UndoTaskDeletionNotification";
 
 type TaskTableProps = {
   tasksList: Task[];
@@ -25,25 +26,28 @@ const TasksTable = ({ tasksList, categoriesList }: TaskTableProps) => {
     return Date.parse(task1.dueDate) - Date.parse(task2.dueDate);
   });
   return (
-    <ListGroup className="mt-4">
-      <ListGroup.Item className="d-flex w-100">
-        <div className="d-flex align-items-center w-100">
-          <div className="d-flex w-100">
-            <span className="w-50 text-center">Title</span>
-            <span className="w-50 px-3 text-center">Daeadline</span>
-            <span className="w-25 text-center">Category</span>
-            <span className="w-25"></span>
+    <>
+      <ListGroup className="mt-4">
+        <ListGroup.Item className="d-flex w-100">
+          <div className="d-flex align-items-center w-100">
+            <div className="d-flex w-100">
+              <span className="w-50 text-center">Title</span>
+              <span className="w-50 px-3 text-center">Daeadline</span>
+              <span className="w-25 text-center">Category</span>
+              <span className="w-25"></span>
+            </div>
           </div>
-        </div>
-      </ListGroup.Item>
-      {tasksListSorted.map((task) => (
-        <TaskTableItem
-          key={task.id}
-          task={task}
-          category={categoriesList.find((cat) => cat.id === task.categoryId)}
-        />
-      ))}
-    </ListGroup>
+        </ListGroup.Item>
+        {tasksListSorted.map((task) => (
+          <TaskTableItem
+            key={task.id}
+            task={task}
+            category={categoriesList.find((cat) => cat.id === task.categoryId)}
+          />
+        ))}
+      </ListGroup>
+      <UndoTaskDeletionNotification />
+    </>
   );
 };
 

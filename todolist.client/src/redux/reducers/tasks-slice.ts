@@ -8,10 +8,12 @@ import {
 
 type TasksSlice = {
   tasksList: Task[];
+  taskIdOnDeletion?: number;
 };
 
 const initialState: TasksSlice = {
   tasksList: [],
+  taskIdOnDeletion: undefined,
 };
 
 const tasksSlice = createSlice({
@@ -23,7 +25,17 @@ const tasksSlice = createSlice({
         "Task with title " + action.payload.title + " was successfully created!"
       );
     },
-    taskDeleted: (state) => {
+    setTaskOnDeletion: (state, action: PayloadAction<DeleteTaskInputType>) => {
+      state.taskIdOnDeletion = action.payload.id;
+    },
+    cancelTaskDeletion: (state) => {
+      state.taskIdOnDeletion = undefined;
+    },
+    taskDeleted: (state, action: PayloadAction<number>) => {
+      state.tasksList = state.tasksList.filter((t) => t.id !== action.payload);
+      if (state.taskIdOnDeletion === action.payload) {
+        state.taskIdOnDeletion = undefined;
+      }
       console.log("Task was successfully deleted!");
     },
     taskToggled: (state, action: PayloadAction<Task>) => {
@@ -37,8 +49,14 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { tasksFetched, taskCreated, taskDeleted, taskToggled } =
-  tasksSlice.actions;
+export const {
+  tasksFetched,
+  taskCreated,
+  taskDeleted,
+  taskToggled,
+  cancelTaskDeletion,
+  setTaskOnDeletion,
+} = tasksSlice.actions;
 export default tasksSlice.reducer;
 
 export const fetchTasks = createAction("fetchTasks");

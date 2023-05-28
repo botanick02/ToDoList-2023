@@ -6,6 +6,7 @@ import {
 import { graphQLFetch } from "./api";
 import {
   AddTaskResponse,
+  DeleteTaskResponse,
   FetchTasksResponse,
   ToggleTaskResponse,
 } from "./types/task";
@@ -66,9 +67,9 @@ export const createTaskApi = async (newTask: NewTask) => {
 };
 
 const deleteTaskMutation = `
-  mutation DeleteTask($taskId: Int!){
+  mutation DeleteTask($id: Int!){
     tasks{
-      deleteTask(taskId: $taskId)
+      deleteTask(id: $id)
     }
   }
 `;
@@ -78,9 +79,12 @@ type deleteTaskMutationVariables = DeleteTaskInputType;
 export const deleteTaskApi = async (input: DeleteTaskInputType) => {
   try {
     const inputVariables: deleteTaskMutationVariables = {
-      taskId: input.taskId,
+      id: input.id,
     };
-    return await graphQLFetch(deleteTaskMutation, inputVariables);
+    return await graphQLFetch<DeleteTaskResponse>(
+      deleteTaskMutation,
+      inputVariables
+    );
   } catch (error) {
     console.error("Error in graphql request processing:", error);
     throw error;
@@ -88,9 +92,9 @@ export const deleteTaskApi = async (input: DeleteTaskInputType) => {
 };
 
 const toggleTaskMutation = `
-  mutation ToggleTask($taskId: Int!){
+  mutation ToggleTask($id: Int!){
     tasks{
-      toggleIsDone(taskId: $taskId){
+      toggleIsDone(id: $id){
         title
         dueDate
         id
@@ -105,7 +109,7 @@ type toggleTaskMutationVariables = ToggleTaskInputType;
 export const toggleTaskApi = async (input: ToggleTaskInputType) => {
   try {
     const inputVariables: toggleTaskMutationVariables = {
-      taskId: input.taskId,
+      id: input.id,
     };
     return await graphQLFetch<ToggleTaskResponse>(
       toggleTaskMutation,

@@ -10,7 +10,7 @@ export const setCurrentStorageSource = (source: string) => {
   writeToLocalStorage("Source", source);
 };
 
-export const setLocalOrDefaultStorageSource = (defaultSource: string) => {
+export const setLocalOrDefaultStorageSource = async (defaultSource: string) => {
   const source = writeDefaultIfEmptyLocalStorage("Source", defaultSource);
   store.dispatch(currentStorageSourceSet(source));
 };

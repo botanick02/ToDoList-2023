@@ -18,3 +18,9 @@ export type ToggleTaskResponse = GraphQlResponse<{
     toggleIsDone: Task;
   };
 }>;
+
+export type DeleteTaskResponse = GraphQlResponse<{
+  tasks: {
+    deleteTask: number;
+  };
+}>;

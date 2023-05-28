@@ -13,9 +13,9 @@ export type NewTask = {
 };
 
 export type DeleteTaskInputType = {
-  taskId: number;
+  id: number;
 };
 
 export type ToggleTaskInputType = {
-  taskId: number;
+  id: number;
 };
