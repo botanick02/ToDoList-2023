@@ -1,5 +1,5 @@
-import { useAppDispatch } from "../../../redux/hooks";
-import { deleteCategory } from "../../../redux/reducers/categories-slice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { deleteCategory, setCategoryOnDeletion } from "../../../redux/reducers/categories-slice";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Category } from "../../../redux/types/category";
 
@@ -8,7 +8,22 @@ type CategoriesTableItemProps = {
 };
 
 const CategoriesTableItem = ({ category }: CategoriesTableItemProps) => {
+  const taskIdOnDeletion = useAppSelector(
+    (state) => state.categories.categoryIdOnDeletion
+  );
+
+  const handleTaskDeleteClick = () => {
+    if (taskIdOnDeletion) {
+      dispatch(deleteCategory({ id: taskIdOnDeletion }));
+    }
+    dispatch(setCategoryOnDeletion({ id: category.id }));
+  };
+
   const dispatch = useAppDispatch();
+
+  if (category.id === taskIdOnDeletion) {
+    return null;
+  }
 
   return (
     <ListGroup.Item className="d-flex w-100">
@@ -20,7 +35,7 @@ const CategoriesTableItem = ({ category }: CategoriesTableItemProps) => {
               type="button"
               value="&#10006;"
               className="btn btn-primary-outline shadow-none "
-              onClick={() => dispatch(deleteCategory({ id: category.id }))}
+              onClick={handleTaskDeleteClick}
             />
           </span>
         </div>

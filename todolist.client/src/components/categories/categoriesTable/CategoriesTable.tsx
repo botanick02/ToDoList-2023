@@ -1,6 +1,7 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import CategoriesTableItem from "./CategoriesTableItem";
 import { Category } from "../../../redux/types/category";
+import UndoCategoryDeletionNotification from "../UndoCategoryDeletionNotification";
 
 type CategoriesTableProps = {
   categoriesList: Category[];
@@ -8,6 +9,7 @@ type CategoriesTableProps = {
 
 const CategoriesTable = ({ categoriesList }: CategoriesTableProps) => {
   return (
+    <>
     <ListGroup className="mt-4">
       <ListGroup.Item className="d-flex w-100">
         <div className="d-flex align-items-center w-100">
@@ -22,6 +24,8 @@ const CategoriesTable = ({ categoriesList }: CategoriesTableProps) => {
           <CategoriesTableItem key={category.id} category={category} />
         ))}
     </ListGroup>
+    <UndoCategoryDeletionNotification/>
+    </>
   );
 };
 

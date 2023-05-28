@@ -43,7 +43,7 @@ export const deleteCategoryEpic: Epic = (action$) =>
     ofType<Action<typeof deleteCategory>, any, any>("deleteCategory"),
     mergeMap((action) =>
       from(deleteCategoryApi(action.payload)).pipe(
-        mergeMap(() => [categoryDeleted(), fetchCategories()])
+        map((response) => categoryDeleted(response.categories.deleteCategory))
       )
     )
   );

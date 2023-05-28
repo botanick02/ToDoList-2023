@@ -12,3 +12,9 @@ export type AddCategoryResponse = GraphQlResponse<{
     createCategory: Category;
   };
 }>;
+
+export type DeleteCategoryResponse = GraphQlResponse<{
+  categories: {
+    deleteCategory: Category;
+  };
+}>;
