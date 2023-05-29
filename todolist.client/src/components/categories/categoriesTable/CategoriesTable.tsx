@@ -1,13 +1,21 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import CategoriesTableItem from "./CategoriesTableItem";
-import { Category } from "../../../redux/types/category";
 import UndoCategoryDeletionNotification from "../UndoCategoryDeletionNotification";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { fetchCategories } from "../../../redux/reducers/categories-slice";
 
-type CategoriesTableProps = {
-  categoriesList: Category[];
-};
 
-const CategoriesTable = ({ categoriesList }: CategoriesTableProps) => {
+const CategoriesTable = () => {
+  const source = useAppSelector((state) => state.storageSources.currentStorage);
+  const dispatch = useAppDispatch();
+  const categoriesList = useAppSelector(state => state.categories.categoriesList);
+  useEffect(() => {
+    if(source){
+    dispatch(fetchCategories())
+    }
+  }, [source, dispatch])
+
   return (
     <>
     <ListGroup className="mt-4">

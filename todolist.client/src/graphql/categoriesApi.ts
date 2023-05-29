@@ -1,6 +1,6 @@
 import { NewCategory, DeleteCategoryInput } from "../redux/types/category";
 import { graphQLFetch } from "./api";
-import { AddCategoryResponse, FetchCategoriesResponse } from "./types/category";
+import { AddCategoryResponse, DeleteCategoryResponse, FetchCategoriesResponse } from "./types/category";
 
 const getCategoriesQuery = `
 query GetCategories{
@@ -67,7 +67,7 @@ export const deleteCategoryApi = async (input: DeleteCategoryInput) => {
     const inputVariables: deleteCategoryMutationVariables = {
       id: input.id,
     };
-    return await graphQLFetch(deleteCategoryMutation, inputVariables);
+    return await graphQLFetch<DeleteCategoryResponse>(deleteCategoryMutation, inputVariables);
   } catch (error) {
     console.error("Error in graphql request processing:", error);
     throw error;

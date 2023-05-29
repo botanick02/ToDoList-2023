@@ -3,7 +3,6 @@ import { from, map, mergeMap } from "rxjs";
 import {
   createTask,
   deleteTask,
-  fetchTasks,
   taskCreated,
   taskDeleted,
   taskToggled,
@@ -21,9 +20,9 @@ import { Action } from "@reduxjs/toolkit";
 export const fetchTasksEpic: Epic = (action$) => {
   return action$.pipe(
     ofType("fetchTasks"),
-    mergeMap(() =>
-      from(fetchTasksApi()).pipe(
-        map((response) => tasksFetched(response.tasks.allTasks))
+    mergeMap((action) =>
+      from(fetchTasksApi(action.payload.pageNumber, action.payload.pageSize)).pipe(
+        map((response) => tasksFetched(response.tasks.getTasks))
       )
     )
   );
@@ -34,10 +33,9 @@ export const createTaskEpic: Epic = (action$) =>
     ofType<Action<typeof createTask>, any, any>("createTask"),
     mergeMap((action) =>
       from(createTaskApi(action.payload)).pipe(
-        mergeMap((response) => [
-          taskCreated(response.tasks.createTask),
-          fetchTasks(),
-        ])
+        map((response) => 
+          taskCreated(response.tasks.createTask)
+        )
       )
     )
   );
@@ -57,10 +55,9 @@ export const toggleTaskEpic: Epic = (action$) =>
     ofType<Action<typeof toggleTask>, any, any>("toggleTask"),
     mergeMap((action) =>
       from(toggleTaskApi(action.payload)).pipe(
-        mergeMap((response) => [
-          taskToggled(response.tasks.toggleIsDone),
-          fetchTasks(),
-        ])
+        map((response) => 
+          taskToggled(response.tasks.toggleIsDone)
+        )
       )
     )
   );

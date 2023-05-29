@@ -6,13 +6,15 @@ namespace ToDoList.RepositoryAbstractions.IRepositories
     {
         public TaskEntity? AddTask(TaskEntity task);
 
-        public List<TaskEntity> GetTasks();
+        public List<TaskEntity> GetTasks(int pageNumber, int pageSize);
+
+        public int GetTasksCount();
 
         public TaskEntity? GetTaskById(int id);
 
         public TaskEntity? Update(TaskEntity task);
 
-        public void Delete(int id);
+        public int Delete(int id);
 
     }
 }

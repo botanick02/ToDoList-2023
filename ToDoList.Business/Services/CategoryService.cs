@@ -23,9 +23,9 @@ namespace ToDoList.BLL.Services
             return mapper.Map<CategoryDto>(categoryRepository(source).AddCategory(category));
         }
 
-        public void DeleteCategory(int id, StorageSources source)
+        public int DeleteCategory(int id, StorageSources source)
         {
-            categoryRepository(source).DeleteCategory(id);
+            return categoryRepository(source).DeleteCategory(id);
         }
 
         public IEnumerable<CategoryDto> GetCategories(StorageSources source)

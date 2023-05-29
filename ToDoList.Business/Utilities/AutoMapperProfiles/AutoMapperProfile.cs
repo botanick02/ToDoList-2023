@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ToDoList.DAL.DTO_s;
 using ToDoList.DAL.DTO_s.Category;
+using ToDoList.DAL.DTO_s.Tasks;
 using ToDoList.RepositoryAbstractions.Entities;
 
 namespace ToDoList.BLL.Utilities.AutoMapperProfiles

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using ToDoList.RepositoryAbstractions.Entities;
@@ -41,10 +42,11 @@ namespace ToDoList.XMLDataProvider
             return GetTaskById(newId);
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             xmlDocument.Descendants("Task").Where(c => c.Attribute("Id")!.Value.Equals(id.ToString())).Remove();
             xmlDocument.Save(xmlFilePath);
+            return id;
         }
 
         public TaskEntity? GetTaskById(int id)
@@ -61,7 +63,7 @@ namespace ToDoList.XMLDataProvider
             return task;
         }
 
-        public List<TaskEntity> GetTasks()
+        public List<TaskEntity> GetTasks(int pageNumber, int pageSize)
         {
             var tasks = xmlDocument.Root!.Descendants("Task").Select(t => new TaskEntity()
             {
@@ -70,9 +72,29 @@ namespace ToDoList.XMLDataProvider
                 CategoryId = XmlConvert.ToInt32(t.Attribute("CategoryId")!.Value),
                 IsDone = bool.Parse(t.Attribute("IsDone")!.Value),
                 DueDate = t.Attribute("DueDate")!.Value != "" ? DateTime.SpecifyKind(DateTime.Parse(t.Attribute("DueDate")!.Value), DateTimeKind.Utc) : null,
-            }).ToList();
+            });
 
-            return tasks;
+            tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate);
+            var tasksOrdered = tasks.OrderBy(task => task.IsDone).ToList();
+
+
+            var rangeStart = pageNumber * pageSize - pageSize;
+
+            if (rangeStart > tasksOrdered.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(pageNumber), "Requested page with requested page size is out of tasks list range.");
+            }
+
+            pageSize = (rangeStart + pageSize) > tasksOrdered.Count ? (tasksOrdered.Count - rangeStart) : pageSize;
+
+            var tasksPaged = tasksOrdered.GetRange(rangeStart, pageSize);
+
+            return tasksPaged;
+        }
+
+        public int GetTasksCount()
+        {
+            return xmlDocument.Descendants("Task").Count();
         }
 
         public TaskEntity? Update(TaskEntity task)

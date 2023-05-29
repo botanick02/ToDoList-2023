@@ -1,5 +1,5 @@
 ﻿using GraphQL.Types;
-using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.DTO_s.Tasks;
 
 namespace ToDoList.Server.GraphQL.Tasks.Types.Inputs
 {

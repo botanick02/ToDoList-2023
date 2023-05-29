@@ -2,8 +2,11 @@ import { Task } from "../../redux/types/task";
 import { GraphQlResponse } from "./graphqlReponse";
 
 export type FetchTasksResponse = GraphQlResponse<{
-  categories: {
-    allCategories: Task[];
+  tasks: {
+    getTasks: {
+      tasks: Task[];
+      totalCount: number;
+    }
   };
 }>;
 

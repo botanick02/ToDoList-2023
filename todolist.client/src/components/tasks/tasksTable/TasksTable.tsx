@@ -1,30 +1,32 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import TaskTableItem from "./TasksTableItem";
 import { Category } from "../../../redux/types/category";
-import { Task } from "../../../redux/types/task";
 import UndoTaskDeletionNotification from "../UndoTaskDeletionNotification";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { fetchTasks } from "../../../redux/reducers/tasks-slice";
+import Paginator from "../../common/Paginator";
+import { fetchCategories } from "../../../redux/reducers/categories-slice";
 
 type TaskTableProps = {
-  tasksList: Task[];
   categoriesList: Category[];
 };
 
-const TasksTable = ({ tasksList, categoriesList }: TaskTableProps) => {
-  var tasksListSorted = [...tasksList].sort((task1, task2) => {
-    if (task1.isDone) {
-      return 1;
+const TasksTable = ({ categoriesList }: TaskTableProps) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalTasksCount = useAppSelector((state) => state.tasks.totalCount);
+  const source = useAppSelector((state) => state.storageSources.currentStorage);
+  const tasksList = useAppSelector((state) => state.tasks.tasksList);
+  const dispatch = useAppDispatch();
+  const pageSize = 5;
+
+  useEffect(() => {
+    if (source) {
+      dispatch(fetchTasks({ pageNumber: currentPage, pageSize: pageSize }));
+      dispatch(fetchCategories());
     }
-    if (task2.isDone) {
-      return -1;
-    }
-    if (task1.dueDate === "") {
-      return 1;
-    }
-    if (task2.dueDate === "") {
-      return -1;
-    }
-    return Date.parse(task1.dueDate) - Date.parse(task2.dueDate);
-  });
+  }, [currentPage, source, dispatch, tasksList]);
+
   return (
     <>
       <ListGroup className="mt-4">
@@ -38,7 +40,7 @@ const TasksTable = ({ tasksList, categoriesList }: TaskTableProps) => {
             </div>
           </div>
         </ListGroup.Item>
-        {tasksListSorted.map((task) => (
+        {tasksList.map((task) => (
           <TaskTableItem
             key={task.id}
             task={task}
@@ -46,6 +48,12 @@ const TasksTable = ({ tasksList, categoriesList }: TaskTableProps) => {
           />
         ))}
       </ListGroup>
+      <Paginator
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        pageSize={pageSize}
+        totalCount={totalTasksCount}
+      />
       <UndoTaskDeletionNotification />
     </>
   );

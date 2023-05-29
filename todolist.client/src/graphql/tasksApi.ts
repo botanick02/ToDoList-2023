@@ -12,22 +12,37 @@ import {
 } from "./types/task";
 
 const getTasksQuery = `
-query GetAllTasks{
+query GetAllTasks($pageNumber: Int!, $pageSize: Int!){
   tasks{
-    allTasks{
-      id
-      title
-      categoryId
-      dueDate
-      isDone
+    getTasks(pageNumber: $pageNumber, pageSize: $pageSize){
+      tasks{
+        id
+        title
+        categoryId
+        dueDate
+        isDone
+      }
+      totalCount
     }
   }
 }
 `;
 
-export const fetchTasksApi = async () => {
+type fetchTasksMutationVariables = {
+  pageNumber: number;
+  pageSize: number;
+};
+
+export const fetchTasksApi = async (pageNumber: number, pageSize: number) => {
   try {
-    return await graphQLFetch<FetchTasksResponse>(getTasksQuery);
+    const inputVariables: fetchTasksMutationVariables = {
+      pageNumber,
+      pageSize,
+    };
+    return await graphQLFetch<FetchTasksResponse>(
+      getTasksQuery,
+      inputVariables
+    );
   } catch (error) {
     console.error("Error fetching categories:", error);
     throw error;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ToDoList.BLL.Services.IServices;
-using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.DTO_s.Tasks;
 using ToDoList.DAL.SourceChanger;
 using ToDoList.DAL.SourceChanger.Enums;
 using ToDoList.RepositoryAbstractions.Entities;
@@ -24,17 +24,17 @@ namespace ToDoList.BLL.Services
             return addedTask;
         }
 
-        public void DeleteTask(int id, StorageSources source)
+        public int DeleteTask(int id, StorageSources source)
         {
-            taskRepository(source).Delete(id);
+            return taskRepository(source).Delete(id);
         }
 
-        public IEnumerable<TaskDto> GetTasks(StorageSources source)
+        public GetTasksDto GetTasks(StorageSources source, int pageNumber, int pageSize)
         {
-            var tasks = mapper.Map<IEnumerable<TaskDto>>(taskRepository(source).GetTasks());
-            tasks = tasks.OrderBy(task => task.DueDate == null ? DateTime.MaxValue : task.DueDate);
-            tasks = tasks.OrderBy(task => task.IsDone);
-            return tasks;
+            var res = new GetTasksDto();
+            res.Tasks = mapper.Map<IEnumerable<TaskDto>>(taskRepository(source).GetTasks(pageNumber, pageSize));
+            res.TotalCount = taskRepository(source).GetTasksCount();
+            return res;
         }
 
         public TaskDto ToggleIsDone(int id, StorageSources source)

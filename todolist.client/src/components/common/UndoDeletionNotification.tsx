@@ -37,7 +37,7 @@ const UndoDeletionNotification = ({
         show={show}
         delay={duration}
         autohide
-        className="btn btn-warning"
+        className="btn btn-secondary"
       >
         <Toast.Body onClick={handleCancelDeletion}>
           <span className="fs-6">Click here to cancel {message}</span>

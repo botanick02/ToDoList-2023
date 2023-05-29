@@ -69,15 +69,22 @@ namespace ToDoListMsSQLDataProvider
             return null;
         }
 
-        public List<TaskEntity> GetTasks()
+        public List<TaskEntity> GetTasks(int pageNumber, int pageSize)
         {
             try
             {
-                string sqlQuery = $"SELECT * FROM Tasks";
+                var parameters = new
+                {
+                    Offset = pageNumber * pageSize - pageSize,
+                    PageSize = pageSize
+                };
+                string sqlQuery = $"SELECT * FROM Tasks " +
+                    $"ORDER BY CASE WHEN DueDate IS NULL THEN '9999-12-31' ELSE DueDate END, IsDone " +
+                    $"OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
                 using (var conn = new SqlConnection(connectionString))
                 {
-                    var tasks = conn.Query<TaskEntity>(sqlQuery).ToList();
+                    var tasks = conn.Query<TaskEntity>(sqlQuery, parameters).ToList();
                     foreach (var task in tasks)
                     {
                         if (task != null && task.DueDate != null)
@@ -120,7 +127,7 @@ namespace ToDoListMsSQLDataProvider
                 return null;
             }
         }
-        public void Delete(int id)
+        public int Delete(int id)
         {
             try
             {
@@ -139,6 +146,25 @@ namespace ToDoListMsSQLDataProvider
             {
                 Debug.WriteLine(e);
             }
+            return id;
+        }
+
+        public int GetTasksCount()
+        {
+            try
+            {
+                var sqlQuery = "SELECT COUNT(*) AS Count FROM tasks;";
+
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    return conn.QueryFirst<int>(sqlQuery);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return 0;
         }
     }
 }

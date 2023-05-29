@@ -10,6 +10,6 @@ namespace ToDoList.RepositoryAbstractions.IRepositories
         
         public CategoryEntity? GetCategoryById(int id);
         
-        public void DeleteCategory(int id);
+        public int DeleteCategory(int id);
     }
 }

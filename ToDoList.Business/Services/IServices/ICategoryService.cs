@@ -9,6 +9,6 @@ namespace ToDoList.BLL.Services.IServices
 
         public IEnumerable<CategoryDto> GetCategories(StorageSources source);
 
-        public void DeleteCategory(int id, StorageSources source);
+        public int DeleteCategory(int id, StorageSources source);
     }
 }

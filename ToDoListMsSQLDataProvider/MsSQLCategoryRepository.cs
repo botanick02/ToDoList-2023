@@ -78,7 +78,7 @@ namespace ToDoListMsSQLDataProvider
             return new List<CategoryEntity>();
         }
 
-        public void DeleteCategory(int id)
+        public int DeleteCategory(int id)
         {
             try
             {
@@ -97,6 +97,7 @@ namespace ToDoListMsSQLDataProvider
             {
                 Debug.WriteLine(e);
             }
+            return id;
         }
     }
 }

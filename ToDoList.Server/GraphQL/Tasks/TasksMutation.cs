@@ -1,7 +1,7 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 using ToDoList.BLL.Services.IServices;
-using ToDoList.DAL.DTO_s;
+using ToDoList.DAL.DTO_s.Tasks;
 using ToDoList.Server.GraphQL.Tasks.Types;
 using ToDoList.Server.GraphQL.Tasks.Types.Inputs;
 using ToDoList.Server.HttpContextHelpers;
@@ -23,25 +23,25 @@ namespace ToDoList.Server.GraphQL.Tasks
                });
 
             Field<TaskType>("ToggleIsDone")
-               .Argument<IntGraphType>("TaskId", "Task id to be toggled")
+               .Argument<IntGraphType>("Id", "Task id to be toggled")
                .Resolve(context =>
                {
                    var source = headerAccessor.ParseContextHeaderSource(context);
 
-                   var taskId = context.GetArgument<int>("TaskId");
+                   var taskId = context.GetArgument<int>("Id");
                    var res = taskService.ToggleIsDone(taskId, source);
                    return res;
                });
 
-            Field<bool>("DeleteTask")
-               .Argument<IntGraphType>("TaskId", "Task id to be deleted")
+            Field<int>("DeleteTask")
+               .Argument<IntGraphType>("Id", "Task id to be deleted")
                .Resolve(context =>
                {
                    var source = headerAccessor.ParseContextHeaderSource(context);
 
-                   var taskId = context.GetArgument<int>("TaskId");
-                   taskService.DeleteTask(taskId, source);
-                   return true;
+                   var taskId = context.GetArgument<int>("Id");
+                   
+                   return taskService.DeleteTask(taskId, source);
                });
         }
     }

@@ -19,3 +19,9 @@ export type DeleteTaskInputType = {
 export type ToggleTaskInputType = {
   id: number;
 };
+
+export type FetchTasksInputType = {
+  pageNumber: number;
+  pageSize: number;
+};
+

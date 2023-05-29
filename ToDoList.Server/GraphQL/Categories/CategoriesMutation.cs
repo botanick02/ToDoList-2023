@@ -23,15 +23,14 @@ namespace ToDoList.Server.GraphQL.Categories
                });
 
 
-            Field<bool>("DeleteCategory")
+            Field<int>("DeleteCategory")
                .Argument<IntGraphType>("CategoryId", "Category id to be deleted")
                .Resolve(context =>
                {
                    var source = headerAccessor.ParseContextHeaderSource(context);
-
                    var categoryId = context.GetArgument<int>("CategoryId");
-                   categoryService.DeleteCategory(categoryId, source);
-                   return true;
+
+                   return categoryService.DeleteCategory(categoryId, source);
                });
         }
     }

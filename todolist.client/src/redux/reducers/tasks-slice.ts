@@ -4,16 +4,19 @@ import {
   NewTask,
   ToggleTaskInputType,
   DeleteTaskInputType,
+  FetchTasksInputType,
 } from "../types/task";
 
 type TasksSlice = {
   tasksList: Task[];
   taskIdOnDeletion?: number;
+  totalCount: number;
 };
 
 const initialState: TasksSlice = {
   tasksList: [],
   taskIdOnDeletion: undefined,
+  totalCount: 0,
 };
 
 const tasksSlice = createSlice({
@@ -43,8 +46,15 @@ const tasksSlice = createSlice({
         "Task with title " + action.payload.title + " was successfully toggled!"
       );
     },
-    tasksFetched: (state, action: PayloadAction<Task[]>) => {
-      state.tasksList = action.payload;
+    tasksFetched: (
+      state,
+      action: PayloadAction<{
+        tasks: Task[];
+        totalCount: number;
+      }>
+    ) => {
+      state.tasksList = action.payload.tasks;
+      state.totalCount = action.payload.totalCount;
     },
   },
 });
@@ -59,7 +69,7 @@ export const {
 } = tasksSlice.actions;
 export default tasksSlice.reducer;
 
-export const fetchTasks = createAction("fetchTasks");
+export const fetchTasks = createAction<FetchTasksInputType>("fetchTasks");
 export const createTask = createAction<NewTask>("createTask");
 export const toggleTask = createAction<ToggleTaskInputType>("toggleTask");
 export const deleteTask = createAction<DeleteTaskInputType>("deleteTask");

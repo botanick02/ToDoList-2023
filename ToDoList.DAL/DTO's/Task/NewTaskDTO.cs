@@ -1,4 +1,4 @@
-﻿namespace ToDoList.DAL.DTO_s
+﻿namespace ToDoList.DAL.DTO_s.Tasks
 {
     public class NewTaskDto
     {

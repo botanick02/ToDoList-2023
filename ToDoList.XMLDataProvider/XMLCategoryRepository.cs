@@ -37,10 +37,11 @@ namespace ToDoList.XMLDataProvider
             return GetCategoryById(newId);
         }
 
-        public void DeleteCategory(int id)
+        public int DeleteCategory(int id)
         {
             xmlDocument.Descendants("Category").Where(c => c.Attribute("Id")!.Value.Equals(id.ToString())).Remove();
             xmlDocument.Save(xmlFilePath);
+            return id;
         }
 
         public List<CategoryEntity> GetCategories()
