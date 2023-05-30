@@ -7,7 +7,7 @@ type PaginatorProps ={
     onPageChange: (page: number) => void;
 }
 
-const Paginator = ({currentPage, pageSize, totalCount, onPageChange}: PaginatorProps) => {
+const PaginationController = ({currentPage, pageSize, totalCount, onPageChange}: PaginatorProps) => {
     let items = [];
     
     var pagesCount = totalCount % pageSize > 0 ? totalCount / pageSize + 1 : totalCount / pageSize;
@@ -28,4 +28,4 @@ const Paginator = ({currentPage, pageSize, totalCount, onPageChange}: PaginatorP
 }
 
 
-export default Paginator;
+export default PaginationController;

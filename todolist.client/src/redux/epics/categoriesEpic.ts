@@ -4,7 +4,7 @@ import { Action } from "@reduxjs/toolkit";
 import {
   createCategoryApi,
   deleteCategoryApi,
-  getCategoriesApi,
+  fetchCategoriesApi,
 } from "../../graphql/categoriesApi";
 import {
   categoryCreated,
@@ -14,13 +14,14 @@ import {
   categoryDeleted,
   deleteCategory,
 } from "../reducers/categories-slice";
+import { fetchTasksPaged } from "../../utils/fetchHelper";
 
 export const fetchCategoriesEpic: Epic = (action$) =>
   action$.pipe(
     ofType<Action<typeof fetchCategories>, any, any>("fetchCategories"),
     mergeMap((action) =>
-      from(getCategoriesApi()).pipe(
-        map((response) => categoriesFetched(response.categories.allCategories))
+      from(fetchCategoriesApi(action.payload.pageNumber, action.payload.pageSize)).pipe(
+        map((response) => categoriesFetched(response.categories.getCategories))
       )
     )
   );
@@ -31,9 +32,9 @@ export const createCategoryEpic: Epic = (action$) =>
     mergeMap((action) =>
       from(createCategoryApi(action.payload)).pipe(
         mergeMap((response) => [
-          categoryCreated(response.categories.createCategory),
-          fetchCategories(),
-        ])
+          fetchCategories({pageNumber: 1, pageSize: 5}),
+          categoryCreated(response.categories.createCategory)]
+        )
       )
     )
   );
@@ -43,7 +44,9 @@ export const deleteCategoryEpic: Epic = (action$) =>
     ofType<Action<typeof deleteCategory>, any, any>("deleteCategory"),
     mergeMap((action) =>
       from(deleteCategoryApi(action.payload)).pipe(
-        map((response) => categoryDeleted(response.categories.deleteCategory))
+        map((response) => {
+          fetchTasksPaged();
+          return categoryDeleted(response.categories.deleteCategory)})
       )
     )
   );

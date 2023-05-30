@@ -3,6 +3,7 @@ import { from, map, mergeMap } from "rxjs";
 import {
   createTask,
   deleteTask,
+  fetchTasks,
   taskCreated,
   taskDeleted,
   taskToggled,
@@ -16,14 +17,15 @@ import {
   toggleTaskApi,
 } from "../../graphql/tasksApi";
 import { Action } from "@reduxjs/toolkit";
+import { fetchTasksPaged } from "../../utils/fetchHelper";
 
 export const fetchTasksEpic: Epic = (action$) => {
   return action$.pipe(
     ofType("fetchTasks"),
     mergeMap((action) =>
-      from(fetchTasksApi(action.payload.pageNumber, action.payload.pageSize)).pipe(
-        map((response) => tasksFetched(response.tasks.getTasks))
-      )
+      from(
+        fetchTasksApi(action.payload.pageNumber, action.payload.pageSize)
+      ).pipe(map((response) => tasksFetched(response.tasks.getTasks)))
     )
   );
 };
@@ -33,9 +35,9 @@ export const createTaskEpic: Epic = (action$) =>
     ofType<Action<typeof createTask>, any, any>("createTask"),
     mergeMap((action) =>
       from(createTaskApi(action.payload)).pipe(
-        map((response) => 
-          taskCreated(response.tasks.createTask)
-        )
+        mergeMap((response) => [
+          fetchTasks({pageNumber: 1, pageSize: 5}),
+          taskCreated(response.tasks.createTask)])
       )
     )
   );
@@ -45,7 +47,10 @@ export const deleteTaskEpic: Epic = (action$) =>
     ofType<Action<typeof deleteTask>, any, any>("deleteTask"),
     mergeMap((action) =>
       from(deleteTaskApi(action.payload)).pipe(
-        map((response) => taskDeleted(response.tasks.deleteTask))
+        map((response) => {
+          fetchTasksPaged();
+          return taskDeleted(response.tasks.deleteTask)
+        })
       )
     )
   );
@@ -55,9 +60,10 @@ export const toggleTaskEpic: Epic = (action$) =>
     ofType<Action<typeof toggleTask>, any, any>("toggleTask"),
     mergeMap((action) =>
       from(toggleTaskApi(action.payload)).pipe(
-        map((response) => 
-          taskToggled(response.tasks.toggleIsDone)
-        )
+        map((response) => {
+          fetchTasksPaged();
+          return taskToggled(response.tasks.toggleIsDone)
+        })
       )
     )
   );

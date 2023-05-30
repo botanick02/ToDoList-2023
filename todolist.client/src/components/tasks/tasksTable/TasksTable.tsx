@@ -2,10 +2,10 @@ import ListGroup from "react-bootstrap/ListGroup";
 import TaskTableItem from "./TasksTableItem";
 import { Category } from "../../../redux/types/category";
 import UndoTaskDeletionNotification from "../UndoTaskDeletionNotification";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { fetchTasks } from "../../../redux/reducers/tasks-slice";
-import Paginator from "../../common/Paginator";
+import { fetchTasks, setPage } from "../../../redux/reducers/tasks-slice";
+import PaginationController from "../../common/Pagination";
 import { fetchCategories } from "../../../redux/reducers/categories-slice";
 
 type TaskTableProps = {
@@ -13,7 +13,7 @@ type TaskTableProps = {
 };
 
 const TasksTable = ({ categoriesList }: TaskTableProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useAppSelector(state => state.tasks.currentPage);
   const totalTasksCount = useAppSelector((state) => state.tasks.totalCount);
   const source = useAppSelector((state) => state.storageSources.currentStorage);
   const tasksList = useAppSelector((state) => state.tasks.tasksList);
@@ -23,9 +23,9 @@ const TasksTable = ({ categoriesList }: TaskTableProps) => {
   useEffect(() => {
     if (source) {
       dispatch(fetchTasks({ pageNumber: currentPage, pageSize: pageSize }));
-      dispatch(fetchCategories());
+      dispatch(fetchCategories({pageNumber: 1, pageSize: 1000}));
     }
-  }, [currentPage, source, dispatch, tasksList]);
+  }, [currentPage, source, dispatch]);
 
   return (
     <>
@@ -48,9 +48,9 @@ const TasksTable = ({ categoriesList }: TaskTableProps) => {
           />
         ))}
       </ListGroup>
-      <Paginator
+      <PaginationController
         currentPage={currentPage}
-        onPageChange={setCurrentPage}
+        onPageChange={(page: number) => dispatch(setPage(page))}
         pageSize={pageSize}
         totalCount={totalTasksCount}
       />

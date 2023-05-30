@@ -3,7 +3,8 @@ import { GraphQlResponse } from "./graphqlReponse";
 
 export type FetchCategoriesResponse = GraphQlResponse<{
   categories: {
-    allCategories: Category[];
+    categories: Category[];
+    totalCount: number;
   };
 }>;
 

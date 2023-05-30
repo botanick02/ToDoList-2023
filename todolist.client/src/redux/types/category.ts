@@ -10,3 +10,8 @@ export type NewCategory = {
 export type DeleteCategoryInput = {
   id: number;
 };
+
+export type FetchCategoriesInputType = {
+  pageNumber: number;
+  pageSize: number;
+};

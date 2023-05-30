@@ -11,12 +11,14 @@ type TasksSlice = {
   tasksList: Task[];
   taskIdOnDeletion?: number;
   totalCount: number;
+  currentPage: number;
 };
 
 const initialState: TasksSlice = {
   tasksList: [],
   taskIdOnDeletion: undefined,
   totalCount: 0,
+  currentPage:  1,
 };
 
 const tasksSlice = createSlice({
@@ -56,6 +58,9 @@ const tasksSlice = createSlice({
       state.tasksList = action.payload.tasks;
       state.totalCount = action.payload.totalCount;
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    }
   },
 });
 
@@ -66,6 +71,7 @@ export const {
   taskToggled,
   cancelTaskDeletion,
   setTaskOnDeletion,
+  setPage
 } = tasksSlice.actions;
 export default tasksSlice.reducer;
 

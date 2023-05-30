@@ -1,21 +1,43 @@
 import { NewCategory, DeleteCategoryInput } from "../redux/types/category";
 import { graphQLFetch } from "./api";
-import { AddCategoryResponse, DeleteCategoryResponse, FetchCategoriesResponse } from "./types/category";
+import {
+  AddCategoryResponse,
+  DeleteCategoryResponse,
+  FetchCategoriesResponse,
+} from "./types/category";
 
 const getCategoriesQuery = `
-query GetCategories{
+query GetCategories($pageNumber: Int!, $pageSize: Int!){
     categories{
-      allCategories{
-        id
-        name
+      getCategories(pageNumber: $pageNumber, pageSize: $pageSize){
+        categories{
+          id
+          name
+        }
+        totalCount
       }
     }
   }
 `;
 
-export const getCategoriesApi = async () => {
+type fetchTasksMutationVariables = {
+  pageNumber: number;
+  pageSize: number;
+};
+
+export const fetchCategoriesApi = async (
+  pageNumber: number,
+  pageSize: number
+) => {
   try {
-    return await graphQLFetch<FetchCategoriesResponse>(getCategoriesQuery);
+    const inputVariables: fetchTasksMutationVariables = {
+      pageNumber,
+      pageSize,
+    };
+    return await graphQLFetch<FetchCategoriesResponse>(
+      getCategoriesQuery,
+      inputVariables
+    );
   } catch (error) {
     console.error("Error in graphql request processing:", error);
     throw error;
@@ -67,7 +89,10 @@ export const deleteCategoryApi = async (input: DeleteCategoryInput) => {
     const inputVariables: deleteCategoryMutationVariables = {
       id: input.id,
     };
-    return await graphQLFetch<DeleteCategoryResponse>(deleteCategoryMutation, inputVariables);
+    return await graphQLFetch<DeleteCategoryResponse>(
+      deleteCategoryMutation,
+      inputVariables
+    );
   } catch (error) {
     console.error("Error in graphql request processing:", error);
     throw error;
