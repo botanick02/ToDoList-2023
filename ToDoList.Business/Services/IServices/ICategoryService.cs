@@ -7,7 +7,7 @@ namespace ToDoList.BLL.Services.IServices
     { 
         public CategoryDto AddCategory(NewCategoryDto newCategory, StorageSources source);
 
-        public IEnumerable<CategoryDto> GetCategories(StorageSources source);
+        public GetCategoriesDto GetCategories(StorageSources source, int pageNumber, int pageSize);
 
         public int DeleteCategory(int id, StorageSources source);
     }

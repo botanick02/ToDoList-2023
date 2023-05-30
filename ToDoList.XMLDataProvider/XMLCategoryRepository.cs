@@ -44,16 +44,32 @@ namespace ToDoList.XMLDataProvider
             return id;
         }
 
-        public List<CategoryEntity> GetCategories()
+        public List<CategoryEntity> GetCategories(int pageNumber, int pageSize)
         {
             var categories = xmlDocument.Descendants("Category")
               .Select(c => new CategoryEntity()
               {
                   Id = XmlConvert.ToInt32(c.Attribute("Id")!.Value),
                   Name = c.Attribute("Name")!.Value
-              })
-              .ToList();
-            return categories;
+              }).ToList();
+
+            var rangeStart = pageNumber * pageSize - pageSize;
+
+            if (rangeStart > categories.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(pageNumber), "Requested page with requested page size is out of categories list range.");
+            }
+
+            pageSize = (rangeStart + pageSize) > categories.Count ? (categories.Count - rangeStart) : pageSize;
+
+            var categoriesPaged = categories.GetRange(rangeStart, pageSize);
+
+            return categoriesPaged;
+        }
+
+        public int GetCategoriesCount()
+        {
+            return xmlDocument.Descendants("Category").Count();
         }
 
         public CategoryEntity? GetCategoryById(int id)

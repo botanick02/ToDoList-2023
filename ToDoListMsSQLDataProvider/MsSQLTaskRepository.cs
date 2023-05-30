@@ -79,7 +79,7 @@ namespace ToDoListMsSQLDataProvider
                     PageSize = pageSize
                 };
                 string sqlQuery = $"SELECT * FROM Tasks " +
-                    $"ORDER BY CASE WHEN DueDate IS NULL THEN '9999-12-31' ELSE DueDate END, IsDone " +
+                    $"ORDER BY IsDone, CASE WHEN DueDate IS NULL THEN 1 ELSE 0 END, DueDate ASC " +
                     $"OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
                 using (var conn = new SqlConnection(connectionString))

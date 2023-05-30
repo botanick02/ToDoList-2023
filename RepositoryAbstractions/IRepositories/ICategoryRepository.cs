@@ -6,7 +6,9 @@ namespace ToDoList.RepositoryAbstractions.IRepositories
     {
         public CategoryEntity? AddCategory(CategoryEntity category);
 
-        public List<CategoryEntity> GetCategories();
+        public List<CategoryEntity> GetCategories(int pageNumber, int pageSize);
+
+        public int GetCategoriesCount();
         
         public CategoryEntity? GetCategoryById(int id);
         

@@ -28,9 +28,12 @@ namespace ToDoList.BLL.Services
             return categoryRepository(source).DeleteCategory(id);
         }
 
-        public IEnumerable<CategoryDto> GetCategories(StorageSources source)
+        public GetCategoriesDto GetCategories(StorageSources source, int pageNumber, int pageSize)
         {
-            return mapper.Map<IEnumerable<CategoryDto>>(categoryRepository(source).GetCategories());
+            var res = new GetCategoriesDto();
+            res.Categories = mapper.Map<IEnumerable<CategoryDto>>(categoryRepository(source).GetCategories(pageNumber, pageSize));
+            res.TotalCount = categoryRepository(source).GetCategoriesCount();
+            return res;
         }
     }
 }

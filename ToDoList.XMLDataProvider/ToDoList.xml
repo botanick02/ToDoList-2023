@@ -2,8 +2,8 @@
 <Root>
   <Tasks>
     <Task Id="1" Title="second xml task" CategoryId="2" IsDone="True" DueDate="" />
-    <Task Id="2" Title="first xml task with date" CategoryId="1" IsDone="True" DueDate="4/25/2023 1:30:00 AM" />
-    <Task Id="3" Title="second xml task with date" CategoryId="1" IsDone="True" DueDate="4/26/2023 1:30:00 AM" />
+    <Task Id="2" Title="first xml task with date" CategoryId="1" IsDone="False" DueDate="4/25/2023 1:30:00 AM" />
+    <Task Id="3" Title="second xml task with date" CategoryId="1" IsDone="False" DueDate="4/26/2023 1:30:00 AM" />
     <Task Id="4" Title="sql task 1" CategoryId="1" IsDone="True" DueDate="" />
     <Task Id="5" Title="sql task 2" CategoryId="1" IsDone="True" DueDate="" />
     <Task Id="6" Title="sql task 3" CategoryId="1" IsDone="False" DueDate="" />

@@ -60,14 +60,22 @@ namespace ToDoListMsSQLDataProvider
             return null;
         }
 
-        public List<CategoryEntity> GetCategories()
+        public List<CategoryEntity> GetCategories(int pageNumber, int pageSize)
         {
             try
             {
                 using (var conn = new SqlConnection(connectionString))
                 {
-                    string sqlQuery = $"SELECT * FROM Categories";
-                    var category = conn.Query<CategoryEntity>(sqlQuery).ToList();
+                    var parameters = new
+                    {
+                        Offset = pageNumber * pageSize - pageSize,
+                        PageSize = pageSize
+                    };
+                    string sqlQuery = $"SELECT * FROM Categories " +
+                        $"ORDER BY Id " +
+                        $"OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+
+                    var category = conn.Query<CategoryEntity>(sqlQuery, parameters).ToList();
                     return category;
                 }
             }
@@ -98,6 +106,24 @@ namespace ToDoListMsSQLDataProvider
                 Debug.WriteLine(e);
             }
             return id;
+        }
+
+        public int GetCategoriesCount()
+        {
+            try
+            {
+                var sqlQuery = "SELECT COUNT(*) AS Count FROM Categories";
+
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    return conn.QueryFirst<int>(sqlQuery);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return 0;
         }
     }
 }
