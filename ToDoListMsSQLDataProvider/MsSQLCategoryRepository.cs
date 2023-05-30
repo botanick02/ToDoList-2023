@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
-using System.Diagnostics;
 using Dapper;
 using ToDoList.RepositoryAbstractions.Entities;
 using ToDoList.RepositoryAbstractions.IRepositories;
+using ToDoListMsSQLDataProvider.Exceptions;
 
 namespace ToDoListMsSQLDataProvider
 {
@@ -33,9 +33,8 @@ namespace ToDoListMsSQLDataProvider
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                throw new SqlQueryException(e.Message);
             }
-            return null;
         }
 
         public CategoryEntity? GetCategoryById(int id)
@@ -55,9 +54,8 @@ namespace ToDoListMsSQLDataProvider
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                throw new SqlQueryException(e.Message);
             }
-            return null;
         }
 
         public List<CategoryEntity> GetCategories(int pageNumber, int pageSize)
@@ -81,9 +79,8 @@ namespace ToDoListMsSQLDataProvider
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                throw new SqlQueryException(e.Message);
             }
-            return new List<CategoryEntity>();
         }
 
         public int DeleteCategory(int id)
@@ -100,12 +97,12 @@ namespace ToDoListMsSQLDataProvider
                 {
                     conn.Execute(sqlQuery, parameters);
                 }
+                return id;
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                throw new SqlQueryException(e.Message);
             }
-            return id;
         }
 
         public int GetCategoriesCount()
@@ -121,9 +118,8 @@ namespace ToDoListMsSQLDataProvider
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                throw new SqlQueryException(e.Message);
             }
-            return 0;
         }
     }
 }
