@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/common/Layout";
-import ToDoTasks from "./pages/ToDoTasks";
-import NotFound from "./pages/NotFound";
-import Categories from "./pages/Categories";
 import { useAppDispatch } from "./redux/hooks";
 import { useEffect } from "react";
 import { fetchStorageSources } from "./redux/reducers/storageSource-slice";
+import ToDoTasks from "./Pages/ToDoTasks";
+import Categories from "./Pages/Categories";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   const dispatch = useAppDispatch();
