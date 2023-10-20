@@ -17,15 +17,8 @@ namespace ToDoList.XMLDataProvider
 
         public CategoryEntity? AddCategory(CategoryEntity category)
         {
-            var categories = xmlDocument.Descendants("Category").OrderByDescending(c => int.Parse(c.Attribute("Id")!.Value));
-            var newId = 1;
-            foreach (var c in categories)
-            {
-                if (int.Parse(c.Attribute("Id")!.Value) >= newId)
-                {
-                    newId = int.Parse(c.Attribute("Id")!.Value) + 1;
-                }
-            }
+            var highestCatId = int.Parse(xmlDocument.Descendants("Category").OrderByDescending(t => int.Parse(t.Attribute("Id")!.Value)).FirstOrDefault()!.Attribute("Id")!.Value);
+            var newId = highestCatId + 1;
 
             var newCategory = new XElement("Category",
             new XAttribute("Id", newId),

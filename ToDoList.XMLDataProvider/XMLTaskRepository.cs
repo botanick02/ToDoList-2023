@@ -19,15 +19,8 @@ namespace ToDoList.XMLDataProvider
 
         public TaskEntity? AddTask(TaskEntity task)
         {
-            var tasks = xmlDocument.Descendants("Task").OrderByDescending(t => int.Parse(t.Attribute("Id")!.Value));
-            var newId = 0;
-            foreach (var t in tasks)
-            {
-                if (int.Parse(t.Attribute("Id")!.Value) >= newId)
-                {
-                    newId = int.Parse(t.Attribute("Id")!.Value) + 1;
-                }
-            }
+            var highestTaskId = int.Parse(xmlDocument.Descendants("Task").OrderByDescending(t => int.Parse(t.Attribute("Id")!.Value)).FirstOrDefault()!.Attribute("Id")!.Value);
+            var newId = highestTaskId + 1;
 
             var newTask = new XElement("Task",
                 new XAttribute("Id", newId),

@@ -14,6 +14,7 @@
   </Tasks>
   <Categories>
     <Category Id="1" Name="Uncategorized" />
-    <Category Id="2" Name="family" />
+    <Category Id="3" Name="F" />
+    <Category Id="4" Name="f" />
   </Categories>
 </Root>
