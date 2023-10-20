@@ -67,14 +67,15 @@ namespace ToDoList.XMLDataProvider
 
         public CategoryEntity? GetCategoryById(int id)
         {
-            var category = xmlDocument.Descendants("Category")
-              .Select(c => new CategoryEntity()
-              {
-                  Id = XmlConvert.ToInt32(c.Attribute("Id")!.Value),
-                  Name = c.Attribute("Name")!.Value
-              })
-              .First();
-            return category;
+            var category = xmlDocument.Descendants("Category").FirstOrDefault(c => int.Parse(c.Attribute("Id")!.Value) == id);
+
+            var categoryEntity = new CategoryEntity()
+            {
+                Id = XmlConvert.ToInt32(category.Attribute("Id")!.Value),
+                Name = category.Attribute("Name")!.Value
+            };
+
+            return categoryEntity;
         }
     }
 }

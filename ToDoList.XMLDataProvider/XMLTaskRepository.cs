@@ -44,16 +44,18 @@ namespace ToDoList.XMLDataProvider
 
         public TaskEntity? GetTaskById(int id)
         {
-            var task = xmlDocument.Root!.Descendants("Task").Where(t => t.Attribute("Id")!.Value.Equals(id.ToString())).Select(t => new TaskEntity()
+            var task = xmlDocument.Root!.Descendants("Task").FirstOrDefault(c => int.Parse(c.Attribute("Id")!.Value) == id);
+            
+            var taskEntity = new TaskEntity()
             {
-                Id = XmlConvert.ToInt32(t.Attribute("Id")!.Value),
-                Title = t.Attribute("Title")!.Value,
-                CategoryId = XmlConvert.ToInt32(t.Attribute("CategoryId")!.Value),
-                IsDone = bool.Parse(t.Attribute("IsDone")!.Value),
-                DueDate = t.Attribute("DueDate")?.Value != "" ? DateTime.SpecifyKind(DateTime.Parse(t.Attribute("DueDate")!.Value), DateTimeKind.Utc) : null,
-            }).First();
+                Id = XmlConvert.ToInt32(task.Attribute("Id")!.Value),
+                Title = task.Attribute("Title")!.Value,
+                CategoryId = XmlConvert.ToInt32(task.Attribute("CategoryId")!.Value),
+                IsDone = bool.Parse(task.Attribute("IsDone")!.Value),
+                DueDate = task.Attribute("DueDate")?.Value != "" ? DateTime.SpecifyKind(DateTime.Parse(task.Attribute("DueDate")!.Value), DateTimeKind.Utc) : null,
+            };
 
-            return task;
+            return taskEntity;
         }
 
         public List<TaskEntity> GetTasks(int pageNumber, int pageSize)
